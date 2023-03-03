@@ -97,10 +97,6 @@ def builderdash():
         acc = cursor.fetchone()
         return render_template('builderdash.html',name = acc[1], comp=acc[5])
 
-@app.route('/off')
-def off():
-    return render_template('dashboard.html')
-
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
