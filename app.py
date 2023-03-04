@@ -1,4 +1,4 @@
-from flask import Flask, render_template, render_template_string, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import hashlib, secrets
 import MySQLdb.cursors
