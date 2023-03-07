@@ -81,13 +81,13 @@ body.dark .sidebar .logo-details .logo_name {
 
 
 .sidebar .nav-list {
-    margin-top: 40px;
+    margin-top: 50px;
     height: 100%;
 }
 
 .sidebar li {
     position: relative;
-    margin: 18px 0px;
+    margin: 38px 0px;
     list-style: none;
 }
 
@@ -419,6 +419,23 @@ body.dark .bars .fa-bars:hover{
     width: 60px;
     /* background-color: #08146b; */
     padding-top: 08px;
+}
+.sidebar .nav-list .mode .sun-moon .moon{
+    /* background-color: red; */
+    opacity: 1;
+}
+.sidebar .nav-list .mode .sun-moon .sun{
+    /* background-color: rgb(0, 255, 81); */
+    opacity: 0;
+    top: 15%;
+    left: 0%;
+    position: absolute;
+}
+body.dark .sidebar .nav-list .mode .sun-moon .moon{
+    opacity: 0;
+}
+body.dark .sidebar .nav-list .mode .sun-moon .sun{
+    opacity: 1;
 }
 .dark .sidebar{
     background-color: #171718;
