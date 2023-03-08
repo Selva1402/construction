@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/swiper-bundle.min.css">
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
     <link
       rel="stylesheet"
@@ -28,6 +29,8 @@
     </div>
     
     <div class="about">
+        <!-- Responsive card slider -->
+        {% include 'slider.html' %}
 
     </div>
 
@@ -63,6 +66,7 @@
                         </div>
                     </div>
                 </div>
+            <!-- SOCIAL MEDIA -->
                 <div class="socialmedia">
                     
                 </div>
@@ -95,4 +99,8 @@
 
     
 </body>
+<script src="/js/script.js"></script>
+
+    <!-- JavaScript -->
+    <script src="/js/swiper-bundle.min.js"></script>
 </html>
