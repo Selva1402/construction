@@ -269,6 +269,8 @@ body{
   background-color: #15e5e5;
 }
 
+ /* PROFILE SECTION */
+
 
 .about{
   background: linear-gradient(10deg, #15e5e5 0%, #1123e6 100%);
@@ -306,7 +308,7 @@ body{
   position: absolute;
   height: 40%;
   width: 100%;
-  background: #7d2ae8;
+  background: #e85d2a;
   border-radius: 20px 20px 0 0;
 }
 
@@ -324,7 +326,7 @@ body{
   width: 140px;
   border-radius: 50%;
   padding: 3px;
-  background: #7d2ae8;
+  background: #e85d2a;
 }
 
 .about section .card .image img{
@@ -383,7 +385,7 @@ body{
 .about .card .rating i{
   font-size: 18px;
   margin: 0 2px;
-  color: #7d2ae8;
+  color: #e85d2a;;
 }
 
 .about .card .button{
@@ -394,7 +396,7 @@ body{
 }
 
 .about .card .button button{
-  background: #7d2ae8;
+  background: #e85d2a;
   outline: none;
   border: none;
   color: #fff;
@@ -406,7 +408,7 @@ body{
 }
 
 .about .button button:hover{
-  background: #6616d0;
+  background: #e85d2a;
 }
 
 .about .swiper-pagination{
@@ -417,15 +419,16 @@ body{
   height: 7px;
   width: 26px;
   border-radius: 25px;
-  background: #7d2ae8;
+  background: #e85d2a;
 }
 
-.about .swiper-button-next, .swiper-button-prev{
+.about .swiper-button-next, .about .swiper-button-prev{
+  
   opacity: 0.7;
-  color: #7d2ae8;
+  color:  #e85d2a;;
   transition: all 0.3s ease;
 }
-.about .swiper-button-next:hover, .swiper-button-prev:hover{
+.about .swiper-button-next:hover,.swiper-button-prev:hover{
   opacity: 1;
-  color: #7d2ae8;
+  color: #e85d2a;
 }
