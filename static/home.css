@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 *{
     padding: 0%;
     margin: 0%;
@@ -275,126 +278,22 @@ body{
   position: relative;
 }
 
-/* .main {
-  border: 10px solid red;
-  height: 80%;
-  width: 100%;
-  position: absolute;
-  top: 10%;
-}
-.wrapper,
-.slide {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.slide {
-  overflow: hidden;
-}
-.slide::before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 10;
-}
-.slide .image {
-  height: 100%;
-  width: 100%;
-  object-fit: fit;
-}
-.slide .image-data {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 100%;
-  z-index: 100;
-}
-.image-data span.text {
-  font-size: 14px;
-  font-weight: 400;
-  color: #fff;
-}
-.image-data h2 {
-  font-size: 45px;
-  font-weight: 600;
-  color: #fff;
-}
-a.button {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 25px;
-  color: #333;
-  background: #fff;
-  text-decoration: none;
-  margin-top: 25px;
-  transition: all 0.3s ease;
-}
-a.button:hover {
-  color: #fff;
-  background-color: #c87e4f;
-}
 
-/* swiper button css */
-/* .nav-btn {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-}
-.nav-btn:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-.swiper-button-next {
-  right: 50px;
-}
-.swiper-button-prev {
-  left: 50px;
-}
-.nav-btn::before,
-.nav-btn::after {
-  font-size: 25px;
-  color: #fff;
-}
-.swiper-pagination-bullet {
-  opacity: 1;
-  height: 12px;
-  width: 12px;
-  background-color: #fff;
-  visibility: hidden;
-}
-.swiper-pagination-bullet-active {
-  border: 2px solid #fff;
-  background-color: #c87e4f;
-}
-
-@media screen and (max-width: 768px) {
-  .nav-btn {
-    visibility: hidden;
-  }
-  .swiper-pagination-bullet {
-    visibility: visible;
-  }
-} */ 
-/* === Google Font Import - Poppins === */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-section{
+.about section{
   position: relative;  
   height: 450px;
   width: 1075px;
+  justify-content: center;
+  margin-left: 280px;
   display: flex;
   align-items: center;
 }
 
-.swiper{
+.about .swiper{
   width: 950px;
 }
 
-.card{
+.about .card{
   position: relative;
   background: #fff;
   border-radius: 20px;
@@ -402,7 +301,7 @@ section{
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.card::before{
+.about .card::before{
   content: "";
   position: absolute;
   height: 40%;
@@ -411,7 +310,7 @@ section{
   border-radius: 20px 20px 0 0;
 }
 
-.card .card-content{
+.about .card .card-content{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -420,7 +319,7 @@ section{
   z-index: 100;
 }
 
-section .card .image{
+.about section .card .image{
   height: 140px;
   width: 140px;
   border-radius: 50%;
@@ -428,7 +327,7 @@ section .card .image{
   background: #7d2ae8;
 }
 
-section .card .image img{
+.about section .card .image img{
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -436,7 +335,7 @@ section .card .image img{
   border: 3px solid #fff;
 }
 
-.card .media-icons{
+.about .card .media-icons{
   position: absolute;
   top: 10px;
   right: 20px;
@@ -445,7 +344,7 @@ section .card .image img{
   align-items: center;
 }
 
-.card .media-icons i{
+.about .card .media-icons i{
   color: #fff;
   opacity: 0.6;
   margin-top: 10px;
@@ -453,11 +352,11 @@ section .card .image img{
   cursor: pointer;
 }
 
-.card .media-icons i:hover{
+.about .card .media-icons i:hover{
   opacity: 1;
 }
 
-.card .name-profession{
+.about .card .name-profession{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -465,36 +364,36 @@ section .card .image img{
   color: black;
 } 
 
-.name-profession .name{
+.about .name-profession .name{
   font-size: 20px;
   font-weight: 600;
 }
 
-.name-profession .profession{
+.about .name-profession .profession{
   font-size:15px;
   font-weight: 500;
 }
 
-.card .rating{
+.about .card .rating{
   display: flex;
   align-items: center;
   margin-top: 18px;
 }
 
-.card .rating i{
+.about .card .rating i{
   font-size: 18px;
   margin: 0 2px;
   color: #7d2ae8;
 }
 
-.card .button{
+.about .card .button{
   width: 100%;
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
 }
 
-.card .button button{
+.about .card .button button{
   background: #7d2ae8;
   outline: none;
   border: none;
@@ -506,27 +405,27 @@ section .card .image img{
   cursor: pointer;
 }
 
-.button button:hover{
+.about .button button:hover{
   background: #6616d0;
 }
 
-.swiper-pagination{
+.about .swiper-pagination{
   position: absolute;
 }
 
-.swiper-pagination-bullet{
+.about .swiper-pagination-bullet{
   height: 7px;
   width: 26px;
   border-radius: 25px;
   background: #7d2ae8;
 }
 
-.swiper-button-next, .swiper-button-prev{
+.about .swiper-button-next, .swiper-button-prev{
   opacity: 0.7;
   color: #7d2ae8;
   transition: all 0.3s ease;
 }
-.swiper-button-next:hover, .swiper-button-prev:hover{
+.about .swiper-button-next:hover, .swiper-button-prev:hover{
   opacity: 1;
   color: #7d2ae8;
 }
