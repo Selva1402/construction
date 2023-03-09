@@ -210,13 +210,79 @@ def userinfo():
             cursor.execute('SELECT * FROM users WHERE email = %s AND hashed_password = % s', (username, hashpass))
             account = cursor.fetchone()
             if account:
-                session['loggedin'] = True
-                session['username'] = username
-                msg = "Login successful"
-                return render_template('dashboard.html',name = username)
+                session['id'] = account['id']
+                userid =  account['id']
+                session['username'] = account['username']
+                return redirect(url_for('userdash'))
             else:
                 msg = "Invalid Credentials"
         return render_template('userlogin.html',msg = msg)
+    
+@app.route('/forgotuser', methods=['GET', 'POST'])
+def forgotuser():
+    if request.method == 'POST' and 'email' in request.form:
+        email = request.form['email']
+
+        cursor = mysql.connection.cursor()
+
+        cursor.execute('SELECT * FROM users WHERE email=%s', (email,))
+        account = cursor.fetchone()
+
+        if account:
+            otp = random.randint(100000, 999999)
+            cursor.execute('UPDATE users SET reset_otp=%s WHERE email=%s', (otp, email))
+            mysql.connection.commit()
+            msg = Message('Reset Password OTP', sender = 'customercare.in2022@gmail.com', recipients = [email])
+            msg.body = f'Your OTP for resetting password is {otp}'
+            mail.send(msg)
+            return redirect(url_for('resetuser', email=email))
+        else:
+            flash('Email does not exist')
+            return redirect(url_for('forgotuser'))
+
+    return render_template('forgot.html')
+
+@app.route('/resetuser/<string:email>', methods=['GET', 'POST'])
+def resetuser(email):
+    cursor = mysql.connection.cursor()
+
+    cursor.execute('SELECT * FROM users WHERE email=%s', (email,))
+    account = cursor.fetchone()
+
+    if account:
+        if request.method == 'POST':
+            otp = request.form['otp']
+            password = request.form['password']
+            hashpass = hashlib.sha256(password.encode()).hexdigest()
+            confirm_password = request.form['confirm_password']
+            hashconpass = hashlib.sha256(confirm_password.encode()).hexdigest()
+
+            if str(account[7]) == str(otp):
+                if password == confirm_password:
+                    cursor.execute('UPDATE users SET hashed_password =%s, hashed_conpassword =%s, reset_otp=NULL WHERE email=%s', (hashpass, hashconpass, email))
+                    mysql.connection.commit()
+                    msg = 'Password Reset successfully'
+                    return render_template('userlogin.html',msg = msg)
+                else:
+                    flash('Passwords do not match')
+                    return redirect(url_for('resetuser', email=email))
+            else:
+                flash('Invalid OTP')
+                return redirect(url_for('resetuser', email=email))
+
+        return render_template('reset.html', email=email)
+    flash('Email does not exist')
+    return redirect(url_for('forgotuser'))
+
+@app.route('/userdash', methods=["POST","GET"])    
+def userdash():
+    if 'id' in session:
+        uid = session['id']
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
+        cursor.connection.commit()
+        acc = cursor.fetchone()
+        return render_template('userdash.html',name = acc[1], email=acc[2])
         
 
 @app.route('/logout')
