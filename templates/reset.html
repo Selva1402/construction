@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+  </head>
+  <body>
+      <h1>Reset Password</h1>
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <ul>
+                  {% for message in messages %}
+                      <li>{{ message }}</li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      {% endwith %}
+      <form method="POST" action="{{ url_for('resetuser', email=email) }}">
+          <p>Enter OTP:</p>
+          <input type="text" name="otp" id="otp" required>
+          <br>
+          <br>
+          <p>Enter Password:</p>
+          <input type="password" name="password" id="password" required>
+          <p>Enter Confirm Password:</p>
+          <input type="password" name="confirm_password" id="confirm_password" required>
+          <button type="submit">Submit</button>
+      </form>
+  </body>
+  </html>
+
+
+
