@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 import hashlib, secrets
 import MySQLdb.cursors
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from flask_mail import Mail, Message
+
 import random
 
 import re
@@ -20,6 +19,14 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'customercare.in2022@gmail.com'
+app.config['MAIL_PASSWORD'] = 'abcdefghijk'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -92,67 +99,61 @@ def builderinfo():
         else:
             return render_template("builderlogin.html")
 
-@app.route("/forgot", methods = ['GET', 'POST'])
+@app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'POST' and 'email' in request.form:
         email = request.form['email']
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute("SELECT * FROM builder WHERE email = %s", (email,))
-        user = cursor.fetchone()
-        if user:
-            otp = generate_otp()
-            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute("UPDATE builder SET reset_otp = %s WHERE id = %s", (otp, user['id']))
-            mysql.connection.commit()
-            send_reset_email(email, otp)
-            return render_template('reset.html', message='An OTP has been sent to your email with instructions to reset your password.')
-        else:
-            return render_template('forgot.html', message='No user with that email address was found.')
-    return render_template('forgot.html')
 
-def generate_otp():
-    return random.randint(100000, 999999)
-
-def send_reset_email(email, otp):
-    msg = MIMEMultipart()
-    msg['From'] = 'customercare.in2022@gmail.com'
-    msg['To'] = email
-    msg['Subject'] = 'Reset Password OTP'
-    body = f"Your OTP to reset your password is: {otp}"
-    msg.attach(MIMEText(body, 'plain'))
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login('customercare.in2022@gmail.com', 'rktrsphkqdpltzge')
-    text = msg.as_string()
-    server.sendmail(msg['From'], msg['To'], text)
-    server.quit()
-
-@app.route("/reset_password", methods = ['GET', 'POST'])
-def reset_password():
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM builder WHERE id = %s", (id,))
-        mysql.connection.commit()
-        user = cursor.fetchone()
-        # otp = user[9]
-        # user1 = user['reset_otp']
-        # print(user1)
-        # return render_template("reset.html")
-        # if not user:
-        #     return render_template('reset.html',message = "Invalid or expired reset link.")
+
+        cursor.execute('SELECT * FROM builder WHERE email=%s', (email,))
+        account = cursor.fetchone()
+
+        if account:
+            otp = random.randint(100000, 999999)
+            cursor.execute('UPDATE builder SET reset_otp=%s WHERE email=%s', (otp, email))
+            mysql.connection.commit()
+            msg = Message('Reset Password OTP', sender = 'customercare.in2022@gmail.com', recipients = [email])
+            msg.body = f'Your OTP for resetting password is {otp}'
+            mail.send(msg)
+            return redirect(url_for('reset_password', email=email))
+        else:
+            flash('Email does not exist')
+            return redirect(url_for('forgot_password'))
+
+    return render_template('forgot_password.html')
+
+@app.route('/reset_password/<string:email>', methods=['GET', 'POST'])
+def reset_password(email):
+    cursor = mysql.connection.cursor()
+
+    cursor.execute('SELECT * FROM builder WHERE email=%s', (email,))
+    account = cursor.fetchone()
+
+    if account:
         if request.method == 'POST':
             otp = request.form['otp']
             password = request.form['password']
-            conpassword = request.form['conpassword']
             hashpass = hashlib.sha256(password.encode()).hexdigest()
-            hashconpassword = hashlib.sha256(conpassword.encode()).hexdigest()
-            if otp != str(otp):
-                return render_template('reset.html', message='Incorrect OTP. Please try again.')
-            cursor = mysql.connection.cursor()
-            cursor.execute("UPDATE builder SET hashed_password = %s, hashed_conpassword = %s WHERE id = %s", (hashpass, hashconpassword, id))
-            mysql.connection.commit()
-        return render_template('builderlogin.html', msg='Your password has been reset.')
-    # return render_template('builderlogin.html')
+            confirm_password = request.form['confirm_password']
+            hashconpass = hashlib.sha256(confirm_password.encode()).hexdigest()
 
+            if str(account[9]) == str(otp):
+                if password == confirm_password:
+                    cursor.execute('UPDATE builder SET hashed_password =%s, hashed_conpassword =%s, reset_otp=NULL WHERE email=%s', (hashpass, hashconpass, email))
+                    mysql.connection.commit()
+                    msg = 'Password Reset successfully'
+                    return render_template('builderlogin.html',msg = msg)
+                else:
+                    flash('Passwords do not match')
+                    return redirect(url_for('reset_password', email=email))
+            else:
+                flash('Invalid OTP')
+                return redirect(url_for('reset_password', email=email))
+
+        return render_template('reset_password.html', email=email)
+    flash('Email does not exist')
+    return redirect(url_for('forgot_password'))
     
 @app.route('/builderdash', methods=["POST","GET"])    
 def builderdash():

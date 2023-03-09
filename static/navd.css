@@ -409,8 +409,9 @@ body.dark .bars .fa-bars:hover{
 
 .sidebar .nav-list .mode{
     border-radius: 6px;
+
     /* background-color: var(--primary-color-light); */
-    position: relative;
+    position: relative; left: 0px;top: -35px;
     transition: var(--tran-05);
 }
 
