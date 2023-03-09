@@ -36,7 +36,7 @@
     position: relative;
     height: 100px;
     width: 100%;
-    background-image: linear-gradient(to right, #be4625, #542D0C);
+    background-image: linear-gradient(to right, #111110, #151312);
 }
 
 #navbar ul {
@@ -54,10 +54,10 @@
     line-height: 50px;
 }
 
-#navbar ul li a {
+#navbar ul li a{
     position: relative;
-    color: aliceblue;
-    text-shadow: 1px -2px 6px rgb(235, 9, 9);
+    color: rgb(183, 184, 184);
+    text-shadow: 1px -2px 6px rgb(9, 216, 235);
     text-decoration: none;
     border-radius: 5px;
     font-family: 'Source Serif Pro', serif;
@@ -70,8 +70,7 @@
 #navbar ul li::after {
     content: "";
     display: block;
-    background-color: orangered;
-    margin-top: 5px;
+    background-color: #34a7a9;
     height: 2px;
     transform: scaleX(0);
     transition: transform 300ms;
@@ -82,21 +81,23 @@
 }
 
 #navbar ul li a:hover {
-    color: rgb(255, 153, 0);
+    color: #34a7a9;
 }
 
 #navbar ul li a:hover:after {
 
     width: 100%;
 }
-
-#navbar ul li:nth-child(4) {
-    color: aliceblue;
+#navbar ul li a:nth-child(4){
+    color: #111110;
+}
+#navbar ul li:nth-child(4){
+    color: rgb(29, 64, 168);
     text-decoration: none;
     border-radius: 5px;
     line-height: 50px;
     font-family: 'Source Serif Pro', serif;
-    background-color: orangered;
+    background-color: #34a7a9;
     font-size: 16px;
     padding: 0px 10px;
     text-transform: uppercase;
@@ -104,9 +105,8 @@
 }
 
 #navbar ul li:nth-child(4):hover {
-    box-shadow: 0px 0.1em 0.2em rgba(123, 43, 16, 0), 0px 0.4em 0.7em -0.1em rgba(184, 141, 12, 0.825);
+    box-shadow: 0px 0.1em 0.2em rgba(16, 119, 123, 0), 0px 0.4em 0.7em -0.1em rgba(12, 184, 127, 0.825);
     transform: translateY(-0.1em);
-
 }
 
 .list {
