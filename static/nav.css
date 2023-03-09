@@ -88,26 +88,7 @@
 
     width: 100%;
 }
-#navbar ul li a:nth-child(4){
-    color: #111110;
-}
-#navbar ul li:nth-child(4){
-    color: rgb(29, 64, 168);
-    text-decoration: none;
-    border-radius: 5px;
-    line-height: 50px;
-    font-family: 'Source Serif Pro', serif;
-    background-color: #34a7a9;
-    font-size: 16px;
-    padding: 0px 10px;
-    text-transform: uppercase;
 
-}
-
-#navbar ul li:nth-child(4):hover {
-    box-shadow: 0px 0.1em 0.2em rgba(16, 119, 123, 0), 0px 0.4em 0.7em -0.1em rgba(12, 184, 127, 0.825);
-    transform: translateY(-0.1em);
-}
 
 .list {
     position: absolute;
