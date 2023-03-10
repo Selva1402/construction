@@ -43,7 +43,7 @@ font-family: 'Sono', sans-serif; */
 
 
 .b .box {
-  position: relative;
+  position: relative; top: 120px;
   width: fit-content;
   height: fit-content;
   display: flex;
