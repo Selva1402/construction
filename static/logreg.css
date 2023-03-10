@@ -60,6 +60,7 @@ font-family: 'Sono', sans-serif; */
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
   border: 3px solid rgb(218, 103, 32);
+  
 }
 
 .b .box h5{
