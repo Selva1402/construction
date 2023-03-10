@@ -33,7 +33,8 @@
 }
 
 #navbar {
-    position: relative;
+    position: fixed;
+    top: 0;
     height: 100px;
     width: 100%;
     background-image: linear-gradient(to right, #111110, #151312);
