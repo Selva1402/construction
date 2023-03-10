@@ -48,9 +48,9 @@ font-family: 'Sono', sans-serif; */
   height: fit-content;
   display: flex;
   /* From https://css.glass */
-  background: rgba(191, 148, 123, 0.43);
+  background: rgba(123, 191, 142, 0.43);
   border-radius: 16px;
-
+  margin-top: 100px;
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
   border: 3px solid rgb(218, 103, 32);
