@@ -68,7 +68,7 @@
     text-transform: uppercase;
 }
 
-#navbar ul li::after {
+#navbar ul li::after{
     content: "";
     display: block;
     background-color: #34a7a9;
@@ -89,7 +89,16 @@
 
     width: 100%;
 }
-
+#navbar ul li .btn-donate1{
+    background-color: #34a7a9;
+    color: #111110;
+    padding: 5px 05px;
+}
+#navbar ul li .btn-donate1:hover{
+    background-color: #181c1c;
+    color: #ccccc3;
+    padding: 5px 05px;
+}
 
 .list {
     position: absolute;
