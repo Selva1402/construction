@@ -22,7 +22,13 @@ body {
 }
 
 
-
+:root{
+  --orange:#ff5e14;
+  --slider:#5edaf0;
+  --black:#151515;
+  --text-color:#34a7a9;
+  --text1:#a4b5cba5;
+}
 
 
 @import url('https://fonts.googleapis.com/css2?family=Julee&family=Roboto+Slab&display=swap');
