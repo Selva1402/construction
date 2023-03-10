@@ -28,6 +28,7 @@ body {
   --black:#151515;
   --text-color:#34a7a9;
   --text1:#a4b5cba5;
+  --blue:rgb(23, 23, 160);;
 }
 
 
@@ -54,13 +55,13 @@ font-family: 'Sono', sans-serif; */
   height: fit-content;
   display: flex;
   /* From https://css.glass */
-  background: rgba(123, 191, 142, 0.43);
+  background: rgba(70, 70, 72, 0.284);
   border-radius: 16px;
-  margin-top: 10px;
+  margin-top: 0px;
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
-  border: 3px solid rgb(218, 103, 32);
-  
+  border: 3px solid var(--blue);
+
 }
 
 .b .box h5{
@@ -69,7 +70,7 @@ font-family: 'Sono', sans-serif; */
   top: 10px;
   border-radius: 50%;
   padding: 5px;
-  text-shadow: 1px -2px 6px rgb(235, 9, 9);
+  text-shadow: 1px -2px 6px rgb(20, 9, 235);
   color: rgb(228, 212, 212);
   font-size: 25px;
 }
@@ -106,7 +107,7 @@ font-family: 'Sono', sans-serif; */
   font-size: 40px;
   color: #dadada;
   letter-spacing: 1.5px;
-  text-shadow: 1px -2px 6px rgb(235, 9, 9);
+  text-shadow: 1px -2px 6px var(--blue);
   width: fit-content;
 }
 
@@ -129,7 +130,7 @@ font-family: 'Sono', sans-serif; */
   font-family: 'Roboto Slab', serif;
   vertical-align: middle;
   text-decoration: none;
-  background: rgb(194, 22, 22);
+  background: var(--slider);
   border-radius: 5px;
   padding: 02px;
   font-size: inherit;
@@ -137,8 +138,8 @@ font-family: 'Sono', sans-serif; */
 }
 
 .rightlogbox h2:hover {
-  color: rgb(17, 200, 63);
-  text-shadow: 1px -2px 6px rgb(47, 235, 9);
+  color: var(--black);
+  text-shadow: 1px -2px 6px rgb(37, 38, 37);
 }
 
 #space {
@@ -177,10 +178,10 @@ font-family: 'Sono', sans-serif; */
 }
 
 .input-field input:focus {
-  outline-color: #ac1717;
-  background: orangered;
-  box-shadow: inset 20px 20px 60px #bb1818,
-    inset -20px -20px 60px #a31d1d;
+  outline-color: #1787ac;
+  background: var(--text-color);
+  box-shadow: inset 20px 20px 60px #183ebb,
+    inset -20px -20px 60px #1d1da3;
   transition: 0.3s;
   border-color: black;
 }
@@ -205,7 +206,7 @@ input[type="submit"] {
   height: 30px;
   font-size: 18px;
   border-radius: 0.5em;
-  background: orangered;
+  background: var(--blue);
   border: 1px solid #23200e;
   transition: all .3s;
   margin-left: 20px;
@@ -241,13 +242,13 @@ input[type="submit"]:focus {
   border: none;
   padding: 15px;
   border-radius: 1rem;
-  background: #0f0f0f;
+  background: #7b1616;
   box-shadow: 20px 20px 60px #c5c5c53a,
     -20px -20px 60px #ffffff1b;
   transition: 0.3s;
   width: 50%;
   margin-bottom: 05px;
-  border-bottom: 1px solid rgb(213, 111, 111);
+  border-bottom: 1px solid rgb(41, 14, 176);
   outline: none;
   height: 20px;
   color: rgb(248, 247, 247);
