@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Verification</title>
+    <!--<title>OTP Verification Form</title>-->
+    <link rel="stylesheet" href="/static/password.css" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <!--<script src="script.js" defer></script>-->
     <title>Reset Password</title>
   </head>
   <body>
-      <h1>Reset Password</h1>
+      
+      
+
+      
+    <div class="container">
+        <header>
+          <i class="bx bxs-check-shield"></i>
+        </header>
+        <h1>Reset Password</h1>
       {% with messages = get_flashed_messages() %}
           {% if messages %}
               <ul>
@@ -15,17 +31,17 @@
               </ul>
           {% endif %}
       {% endwith %}
-      <form method="POST" action="{{ url_for('resetuser', email=email) }}">
-          <p>Enter OTP:</p>
-          <input type="text" name="otp" id="otp" required>
-          <br>
-          <br>
-          <p>Enter Password:</p>
-          <input type="password" name="password" id="password" required>
-          <p>Enter Confirm Password:</p>
-          <input type="password" name="confirm_password" id="confirm_password" required>
-          <button type="submit">Submit</button>
-      </form>
+        <form method="POST" action="{{ url_for('resetuser', email=email) }}">
+            <p>Enter OTP:</p>
+            <input type="text" name="otp" id="otp" required>
+            
+            <p>Enter Password:</p>
+            <input type="password" name="password" id="password" required>
+            <p>Enter Confirm Password:</p>
+            <input type="password" name="confirm_password" id="confirm_password" required>
+            <button type="submit">Submit</button>
+        </form>
+      </div>
   </body>
   </html>
 
