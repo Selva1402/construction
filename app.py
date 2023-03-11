@@ -23,7 +23,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'customercare.in2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abcdefghij'
+app.config['MAIL_PASSWORD'] = 'rktrsphkqdpltzge'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -39,7 +39,10 @@ def offline():
 
 @app.route('/')
 def home():
-    return render_template("home.html")
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM builder ORDER BY RAND()')
+    account = cursor.fetchall()
+    return render_template("home.html", name = account ,)
 
 
 @app.route('/builderinfo', methods=['GET', 'POST'])
@@ -282,7 +285,7 @@ def userdash():
         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
         cursor.connection.commit()
         acc = cursor.fetchone()
-        return render_template('userdash.html',name = acc[1], email=acc[2])
+        return render_template('userprofile.html',name = acc[1], email=acc[2], location = acc[5])
         
 
 @app.route('/logout')
