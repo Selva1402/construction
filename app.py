@@ -42,7 +42,7 @@ def home():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM builder ORDER BY RAND()')
     account = cursor.fetchall()
-    return render_template("home.html", name = account ,)
+    return render_template("home.html", name = account)
 
 
 @app.route('/builderinfo', methods=['GET', 'POST'])
