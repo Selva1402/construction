@@ -300,17 +300,17 @@ body.dark .sidebar li a:hover i {
 .home-section {
     position: relative;
     background: #E4E9F7;
-    min-height: 100vh;
-    top: 0;
-    left: 78px;
-    width: calc(100% - 78px);
+    min-height: fit-content;
+    top: -300px;
+    left: 35px;
+    width: fit-content;
     transition: all 0.5s ease;
     z-index: 2;
 }
 
 .sidebar.open~.home-section {
     left: 250px;
-    width: calc(100% - 250px);
+    width: calc(100% - 5000px);
 }
 
 .home-section .text {

@@ -59,8 +59,38 @@
         <section>
             <div class="swiper mySwiper container">
                 <div class="swiper-wrapper content">
-
+                    {% for row in name: %}
                     <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img15.png" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">{{row['username']}}</span>
+                                <span class="profession">{{row['companyname']}}</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">About us</button>
+                                <button class="hireMe">contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="swiper-slide card">
                         <div class="card-content">
                             <div class="image">
                                 <img src="/static/img15.png" alt="">
@@ -73,8 +103,8 @@
                             </div>
 
                             <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder1</span>
+                                <span class="name">{{name}}</span>
+                                <span class="profession">{{comp}}</span>
                             </div>
 
                             <div class="rating">
@@ -104,39 +134,8 @@
                             </div>
 
                             <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder1</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder1</span>
+                                <span class="name">{{name}}</span>
+                                <span class="profession">{{comp}}</span>
                             </div>
 
                             <div class="rating">
@@ -341,7 +340,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
