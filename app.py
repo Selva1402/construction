@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, Response
 from flask_mysqldb import MySQL
 import hashlib, secrets
 import MySQLdb.cursors
@@ -44,10 +44,19 @@ def home():
     account = cursor.fetchall()
     return render_template("home.html", name = account)
 
+# @app.route('/')
+# def getimage(uid):
+#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+#     cursor.execute("SELECT image FROM builder WHERE id = %s", uid)
+#     result = cursor.fetchone()
+#     response = Response(result[0], mimetype='image/jpeg')
+#     print(result)
+#     return response
+
 
 @app.route('/builderinfo', methods=['GET', 'POST'])
 def builderinfo():
-    global userid
+    global userid, random
     msg = ''
     name = ''
     if 'register' in request.form:
@@ -60,6 +69,7 @@ def builderinfo():
             industry = request.form['industry']
             location = request.form['location']
             phone = request.form['phone']
+            random = random.randint(0, 100)
             hashed_password = hashlib.sha256(password.encode()).hexdigest()
             hashed_conpassword = hashlib.sha256(conpassword.encode()).hexdigest()
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -75,7 +85,7 @@ def builderinfo():
                 msg = 'Please fill out the form !'
             else:
                 if (password == conpassword):
-                    cursor.execute('INSERT INTO builder VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, %s)', (username, email, hashed_password, hashed_conpassword, companyname, industry, location, phone))
+                    cursor.execute('INSERT INTO builder VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (username, email, hashed_password, hashed_conpassword, companyname, industry, location, phone, random))
                     mysql.connection.commit()
                     msg = 'Dear %s You have successfully registered !'%(username)
                 else:
@@ -171,6 +181,7 @@ def builderdash():
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
+    global random
     msg = ''
     name = ''
     if 'register' in request.form:
@@ -181,6 +192,7 @@ def userinfo():
             conpassword = request.form['confirm-password']
             location = request.form['location']
             phone = request.form['phone']
+            random = random.randint(0, 100)
             hashed_password = hashlib.sha256(password.encode()).hexdigest()
             hashed_conpassword = hashlib.sha256(conpassword.encode()).hexdigest()
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -196,7 +208,7 @@ def userinfo():
                 msg = 'Please fill out the form !'
             else:
                 if (password == conpassword):
-                    cursor.execute('INSERT INTO users VALUES (NULL, % s, % s, % s, % s, % s, %s)', (username, email, hashed_password, hashed_conpassword, location, phone))
+                    cursor.execute('INSERT INTO users VALUES (NULL, % s, % s, % s, % s, % s, % s, % s)', (username, email, hashed_password, hashed_conpassword, location, phone, random))
                     mysql.connection.commit()
                     msg = 'Dear %s You have successfully registered !'%(username)
                 else:
