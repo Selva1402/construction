@@ -28,14 +28,14 @@
         </div>
         <div class="rightlogbox">
           <div id="register" style="display:none;">
-            <form action="{{ url_for('userinfo') }}" method="post">
+            <form action="{{ url_for('userinfo') }}" method="post" enctype="multipart/form-data">
               <center>
                 <input type="hidden" name="action" value="register">
                 <h3>Register</h3>
                 <p>Welcome :)</p>
                 <div class="register">
                   <div class="form grid-item2">
-                    <form action="registration" method="post">
+                    <form action="registration" method="post" enctype="multipart/form-data">
                         <div class="input-field">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required><br>
@@ -64,6 +64,10 @@
                             <label for="phone">Phone Number</label>
                             <input type="phone" id="phone" name="phone" required><br>
                         </div>
+                        <div>
+                          <label>Image:</label>
+                          <input type="file" name="image" id ='image' required><br><br>
+                        </div>
                     </form>
                 </div>
                 <input type="submit" value="Register" name="register">
@@ -76,7 +80,7 @@
 
 
           <div id="login" style="display: block;">
-            <form method="post" action="{{ url_for('userinfo') }}">
+            <form method="post" action="{{ url_for('userinfo') }}" enctype="multipart/form-data">
               <input type="hidden" name="action" value="login">
 
               <h3>User Login</h3>
