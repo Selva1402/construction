@@ -1,15 +1,10 @@
-with open('F:/castle/static/img3.jpg', 'rb') as file:
-    new_image_data = file.read()
-import MySQLdb
+import binascii
+from PIL import Image
 
-# Connect to the database
-cnx = MySQLdb.connect(user='root', password='selva2002',
-                              host='localhost', database='haus')
 
-# Prepare the UPDATE statement
-update_query = "UPDATE builder SET image = %s WHERE id = %s"
+hex_string = "0x706578656C732D6D656E7461746467742D313034393632322E6A7067"
+decoded_string = binascii.unhexlify(hex_string[2:]).decode('utf-8')
+img = Image.open('/static/images/pexels-mentatdgt-1049622.jpg')
 
-# Execute the UPDATE statement with the new image data
-cursor = cnx.cursor()
-cursor.execute(update_query, (new_image_data, 1))
-cnx.commit()
+img.show()
+
