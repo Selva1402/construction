@@ -60,11 +60,11 @@
         <section>
             <div class="swiper mySwiper container">
                 <div class="swiper-wrapper content">
-                    {% for row in name: %}
+                    {% for data in data_list %}
                     <div class="swiper-slide card">
                         <div class="card-content">
                             <div class="image">
-                                <img src="/static/img15.png" alt="">
+                                <img src="/static/images/{{ data[3] }}" alt="">
                             </div>
 
                             <div class="media-icons">
@@ -73,8 +73,8 @@
                                 <i class="fab fa-github"></i>
                             </div>
                             <div class="name-profession">
-                                <span class="name">{{row['username']}}</span>
-                                <span class="profession">{{row['companyname']}}</span>
+                                <span class="name">{{ data[1] }}</span>
+                                <span class="profession">{{ data[2] }}</span>
                             </div>
                             <div class="rating">
                                 <i class="fas fa-star"></i>
@@ -90,262 +90,12 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
-                    <!-- <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">{{name}}</span>
-                                <span class="profession">{{comp}}</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">{{name}}</span>
-                                <span class="profession">{{comp}}</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder1</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">Contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder 1</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">Contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder 1</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">Contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder 1</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">Contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder 1</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">Contact us</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                            <div class="image">
-                                <img src="/static/img15.png" alt="">
-                            </div>
-
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
-
-                            <div class="name-profession">
-                                <span class="name">Someone Name</span>
-                                <span class="profession">Builder 1</span>
-                            </div>
-
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-
-                            <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">Contact us</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div> -->
-
-            <div class="swiper-button-next"></div>
+                    <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
+                    {% endfor %}
+
+            
         </section>
 
         <!-- Swiper JS -->

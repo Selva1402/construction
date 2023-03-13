@@ -387,6 +387,7 @@ body{
 
 .about .swiper-pagination{
   position: absolute;
+  top: -10px;
 }
 
 .about .swiper-pagination-bullet{

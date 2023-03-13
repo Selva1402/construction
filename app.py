@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, send_file
 from flask_mysqldb import MySQL
-import hashlib, secrets
+import hashlib, secrets, binascii
 import MySQLdb.cursors
 from flask_mail import Mail, Message
+import os
 
 import random
 
@@ -16,7 +17,7 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Maharaja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
@@ -42,16 +43,37 @@ def home():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM builder ORDER BY RAND()')
     account = cursor.fetchall()
-    return render_template("home.html", name = account)
+    data_list = []
+    for row in account:
+        id = row['id']
+        name = row['username']
+        email = row['companyname']
+        image_data = row['image']
+        my_string = image_data.decode('utf-8')
+        my_string_without_prefix = my_string.strip("'")
+        # print(my_string_without_prefix)
+
+
+        # print(image_data)
+        # if len(image_data) % 2 != 0:
+        #     image_data = "0" + image_data
+        # image_base64 = binascii.unhexlify(image_data[2:]).decode('utf-8')
+        
+
+        data_list.append((id, name, email, my_string_without_prefix))
+    return render_template('home.html', data_list = data_list)
+    # print(result)
+    # return response
+    # return render_template("home.html", name = account)
 
 
 @app.route('/builderinfo', methods=['GET', 'POST'])
 def builderinfo():
-    global userid
+    global userid, random
     msg = ''
     name = ''
     if 'register' in request.form:
-        if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'password' in request.form and 'confirm-password' in request.form and 'companyname' in request.form and 'industry' in request.form and 'location' in request.form and 'phone' in request.form:
+        if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'password' in request.form and 'confirm-password' in request.form and 'companyname' in request.form and 'industry' in request.form and 'location' in request.form and 'phone' in request.form  and 'image' in request.files:
             username = request.form['name']
             email = request.form['email']
             password = request.form['password']
@@ -60,6 +82,9 @@ def builderinfo():
             industry = request.form['industry']
             location = request.form['location']
             phone = request.form['phone']
+            randoms = random.randint(0, 10)
+            image = request.files['image']
+            image.save(os.path.join(app.static_folder, 'images', image.filename))
             hashed_password = hashlib.sha256(password.encode()).hexdigest()
             hashed_conpassword = hashlib.sha256(conpassword.encode()).hexdigest()
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -75,7 +100,8 @@ def builderinfo():
                 msg = 'Please fill out the form !'
             else:
                 if (password == conpassword):
-                    cursor.execute('INSERT INTO builder VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, %s)', (username, email, hashed_password, hashed_conpassword, companyname, industry, location, phone))
+                    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+                    cursor.execute('INSERT INTO builder VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (username, email, hashed_password, hashed_conpassword, companyname, industry, location, phone, randoms, image.filename))
                     mysql.connection.commit()
                     msg = 'Dear %s You have successfully registered !'%(username)
                 else:
@@ -171,6 +197,7 @@ def builderdash():
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
+    global random
     msg = ''
     name = ''
     if 'register' in request.form:
@@ -181,6 +208,7 @@ def userinfo():
             conpassword = request.form['confirm-password']
             location = request.form['location']
             phone = request.form['phone']
+            random = random.randint(0, 100)
             hashed_password = hashlib.sha256(password.encode()).hexdigest()
             hashed_conpassword = hashlib.sha256(conpassword.encode()).hexdigest()
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -196,7 +224,7 @@ def userinfo():
                 msg = 'Please fill out the form !'
             else:
                 if (password == conpassword):
-                    cursor.execute('INSERT INTO users VALUES (NULL, % s, % s, % s, % s, % s, %s)', (username, email, hashed_password, hashed_conpassword, location, phone))
+                    cursor.execute('INSERT INTO users VALUES (NULL, % s, % s, % s, % s, % s, % s, % s)', (username, email, hashed_password, hashed_conpassword, location, phone, random))
                     mysql.connection.commit()
                     msg = 'Dear %s You have successfully registered !'%(username)
                 else:
