@@ -70,6 +70,7 @@ def home():
 @app.route('/builderinfo', methods=['GET', 'POST'])
 def builderinfo():
     global userid, random
+
     msg = ''
     name = ''
     if 'register' in request.form:
