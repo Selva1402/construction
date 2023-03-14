@@ -193,7 +193,10 @@ def builderdash():
         cursor.execute('SELECT * FROM builder WHERE id = % s', (uid,))    
         cursor.connection.commit()
         acc = cursor.fetchone()
-        return render_template('builderdash.html',name = acc[1], comp=acc[5])
+        image = acc[10]
+        my_string = image.decode('utf-8')
+        my_string_without_prefix = my_string.strip("'")
+        return render_template('builderdash.html',name = acc[1], comp=acc[5], image = my_string_without_prefix)
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
@@ -209,7 +212,9 @@ def userinfo():
             conpassword = request.form['confirm-password']
             location = request.form['location']
             phone = request.form['phone']
-            random = random.randint(0, 100)
+            random1 = random.randint(0, 100)
+            image = request.files['image']
+            image.save(os.path.join(app.static_folder, 'images', image.filename))
             hashed_password = hashlib.sha256(password.encode()).hexdigest()
             hashed_conpassword = hashlib.sha256(conpassword.encode()).hexdigest()
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -225,14 +230,14 @@ def userinfo():
                 msg = 'Please fill out the form !'
             else:
                 if (password == conpassword):
-                    cursor.execute('INSERT INTO users VALUES (NULL, % s, % s, % s, % s, % s, % s, % s)', (username, email, hashed_password, hashed_conpassword, location, phone, random))
+                    cursor.execute('INSERT INTO users VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s)', (username, email, hashed_password, hashed_conpassword, location, phone, random1, image.filename))
                     mysql.connection.commit()
                     msg = 'Dear %s You have successfully registered !'%(username)
                 else:
                     msg = 'Passwords does not match.Re-enter password'
         elif request.method == 'POST':
             msg = 'Please fill out the form !'
-        return render_template('builderlogin.html', msg=msg)
+        return render_template('userlogin.html', msg=msg)
     else:
         if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
             username = request.form['email']
@@ -314,7 +319,10 @@ def userdash():
         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
         cursor.connection.commit()
         acc = cursor.fetchone()
-        return render_template('userprofile.html',name = acc[1], email=acc[2], location = acc[5])
+        image = acc[8]
+        my_string = image.decode('utf-8')
+        my_string_without_prefix = my_string.strip("'")
+        return render_template('userprofile.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
         
 
 @app.route('/logout')

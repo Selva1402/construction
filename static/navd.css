@@ -413,7 +413,7 @@ body.dark .bars .fa-bars:hover{
     /* background-color: var(--primary-color-light); */
     position: relative; 
     left: 0px;
-    top: -5px;
+    top: -35px;
     transition: var(--tran-05);
 }
 
@@ -481,6 +481,7 @@ body.dark .sidebar .nav-list .mode .sun-moon .sun{
     position: relative;
     height: 22px;
     width: 40px;
+    /* top:-20px; */
     border-radius: 25px;
     background-color: red;
     /* background-color: var(--toggle-color); */
