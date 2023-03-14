@@ -234,7 +234,7 @@ def userinfo():
                     mysql.connection.commit()
                     msg = 'Dear %s You have successfully registered !'%(username)
                 else:
-                    msg = 'Passwords does not match.Re-enter password'
+                    msg = 'Passwords does not match. Re-enter password'
         elif request.method == 'POST':
             msg = 'Please fill out the form !'
         return render_template('userlogin.html', msg=msg)
