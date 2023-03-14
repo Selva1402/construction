@@ -1,10 +1,29 @@
-import binascii
-from PIL import Image
+import MySQLdb
 
+# Create a connection to the MySQL database
+mydb = MySQLdb.connect(
+  host="localhost",
+  user="root",
+  password="selva2002",
+  database="haus"
+)
+mycursor = mydb.cursor()
 
-hex_string = "0x706578656C732D6D656E7461746467742D313034393632322E6A7067"
-decoded_string = binascii.unhexlify(hex_string[2:]).decode('utf-8')
-img = Image.open('/static/images/pexels-mentatdgt-1049622.jpg')
+# Read the binary data from the file
+with open('img4.jpg', 'rb') as file:
+    new_data = file.read()
+    print(new_data)
+# Define the update query
+sql = "UPDATE builder SET image = %s WHERE id = %s"
 
-img.show()
+# Set the values to insert into the query
+val = (new_data, 3)  # Replace 1 with the ID of the row you want to update
 
+# Execute the query with the values
+mycursor.execute(sql, val)
+
+# Commit the changes
+mydb.commit()
+
+# Print the number of records affected
+print(mycursor.rowcount, "record(s) affected")

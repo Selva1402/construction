@@ -192,7 +192,10 @@ def builderdash():
         cursor.execute('SELECT * FROM builder WHERE id = % s', (uid,))    
         cursor.connection.commit()
         acc = cursor.fetchone()
-        return render_template('builderdash.html',name = acc[1], comp=acc[5])
+        image = acc[10]
+        my_string = image.decode('utf-8')
+        my_string_without_prefix = my_string.strip("'")
+        return render_template('builderdash.html',name = acc[1], comp=acc[5], image = my_string_without_prefix)
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
@@ -233,7 +236,7 @@ def userinfo():
                     msg = 'Passwords does not match.Re-enter password'
         elif request.method == 'POST':
             msg = 'Please fill out the form !'
-        return render_template('builderlogin.html', msg=msg)
+        return render_template('userlogin.html', msg=msg)
     else:
         if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
             username = request.form['email']
