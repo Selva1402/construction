@@ -1,1 +1,2 @@
 # construction
+  A builder and user website is a platform designed to connect builders with potential customers and make the building process easier for both parties. The website can provide a variety of features and tools to help builders showcase their work, reach new clients, and manage their projects. For customers, the website can provide a one-stop- shop for finding builders, comparing quotes, and tracking the progress of their projects.
