@@ -229,7 +229,7 @@ body.dark .sidebar li a:hover i {
     height: 60px;
     width: 78px;
     left: 0;
-    bottom: -28px;
+    bottom: 5px;
     padding: 10px 14px;
     background: #e1e1e6;
     transition: all 0.5s ease;
@@ -407,13 +407,14 @@ body.dark .bars .fa-bars:hover{
     text-shadow: #bfb008;
 }
 
+/* theme  button */
 .sidebar .nav-list .mode{
     border-radius: 6px;
 
     /* background-color: var(--primary-color-light); */
     position: relative; 
     left: 0px;
-    top: -35px;
+    top: -25px;
     transition: var(--tran-05);
 }
 

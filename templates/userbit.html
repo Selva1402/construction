@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/static/userbit.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--<title>Responsive Regisration Form </title>-->
+</head>
+
+<body>
+    { % 'userdash.html' %}
+    <div class="container">
+        <header>Registration</header>
+       
+        <form action="#">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Email</label>
+                            <input type="text" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Location</label>
+                            <input type="text" placeholder="Enter your location" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Address</label>
+                            <input type="text" placeholder="Enter your Address" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Mobile Number</label>
+                            <input type="number" placeholder="Enter mobile number" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Do you have all permits and approvals?</label>
+                            <select required>
+                                <option disabled selected>Select</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option>On-Process</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Timeline</label>
+                            <select required>
+                                <option disabled selected>Select</option>
+                                <option>Within 6 months</option>
+                                <option>Within 1 year</option>
+                                <option>More than 1 year</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Land size in squarefeet</label>
+                            <input type="number" placeholder="Land size in squarefeet" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Building Type</label>
+                            <select required>
+                                <option disabled selected>Select</option>
+                                <option>Residential buildings/Apartments</option>
+                                <option>Commercial buildings</option>
+                                <option>Single-family detached house</option>
+                                <option>Bungalow </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details ID">
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Budget</label>
+                            <input type="number" placeholder="Budget" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Wood work</label>
+                            <select required>
+                                <option disabled selected>Select</option>
+                                <option>With furniture</option>
+                                <option>Without furniture</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="options">How many rooms you want?</label>
+                            <input type="number" placeholder="Rooms" required>
+                        </div>
+                    </div>
+
+
+                    <button class="nextBtn">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
