@@ -196,7 +196,7 @@ def builderdash():
         image = acc[10]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('builderdash.html',name = acc[1], comp=acc[5], image = my_string_without_prefix)
+        return render_template('builderprofile.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix)
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
@@ -234,7 +234,7 @@ def userinfo():
                     mysql.connection.commit()
                     msg = 'Dear %s You have successfully registered !'%(username)
                 else:
-                    msg = 'Passwords does not match.Re-enter password'
+                    msg = 'Passwords does not match. Re-enter password'
         elif request.method == 'POST':
             msg = 'Please fill out the form !'
         return render_template('userlogin.html', msg=msg)

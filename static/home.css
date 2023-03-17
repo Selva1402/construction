@@ -290,7 +290,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
+  padding: 10px;
   position: relative;
   z-index: 100;
 }
@@ -385,9 +385,10 @@ body{
   background: var(--slider);
 }
 
-.about .swiper-pagination{
+.about .swiper .content .swiper-pagination{
   position: absolute;
-  top: -10px;
+  margin-top: 20px;
+  background-color: rgba(255, 0, 0, 0.201);
 }
 
 .about .swiper-pagination-bullet{
@@ -403,7 +404,7 @@ body{
   color:  var(--slider);
   transition: all 0.3s ease;
 }
-.about .swiper-button-next:hover,.swiper-button-prev:hover{
+.about .swiper-button-next:hover,.about .swiper-button-prev:hover{
   opacity: 1;
   color: var(--slider);
 }
