@@ -76,9 +76,14 @@
                             <label for="phone">Phone Number</label>
                             <input type="phone" id="phone" name="phone" required><br>
                         </div>
-                        <div><label>Image:</label>
-                    <input type="file" name="image" id ='image' required><br><br>
-                  </div>
+                        <div class="input-field">
+                          <label for="phone">Profile picture</label>
+                            <div class="file-upload-wrapper" data-text="Select your file!">
+                              <input name="file-upload-field" type="file" class="file-upload-field" value="">
+                            </div>
+                        </div>
+                            
+                       
                     </form>
                 </div>
                 <input type="submit" value="Register" name="register">
