@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_file
 from flask_mysqldb import MySQL
-import hashlib, secrets, binascii
+import hashlib, secrets
 import MySQLdb.cursors
 from flask_mail import Mail, Message
 import os
@@ -17,7 +17,7 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
@@ -322,8 +322,20 @@ def userdash():
         image = acc[8]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('userprofile.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
+        return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
         
+@app.route('/userbit')
+def userbit():
+    #  if 'id' in session:
+    #     uid = session['id']
+    #     cursor = mysql.connection.cursor()
+    #     cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
+    #     cursor.connection.commit()
+    #     acc = cursor.fetchone()
+    #     image = acc[8]
+    #     my_string = image.decode('utf-8')
+    #     my_string_without_prefix = my_string.strip("'")
+    return render_template('userbit.html')
 
 @app.route('/logout')
 def logout():
