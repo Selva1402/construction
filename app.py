@@ -23,7 +23,7 @@ mysql = MySQL(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'customercare.in2022@gmail.com'
+app.config['MAIL_USERNAME'] = 'Futurehaus23@gmail.com'
 app.config['MAIL_PASSWORD'] = 'rktrsphkqdpltzge'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
