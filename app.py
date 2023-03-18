@@ -205,7 +205,7 @@ def userinfo():
     msg = ''
     name = ''
     if 'register' in request.form:
-        if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'password' in request.form and 'confirm-password' in request.form and 'location' in request.form and 'phone' in request.form:
+        if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'password' in request.form and 'confirm-password' in request.form and 'location' in request.form and 'phone' in request.form and 'image' in request.files:
             username = request.form['name']
             email = request.form['email']
             password = request.form['password']
