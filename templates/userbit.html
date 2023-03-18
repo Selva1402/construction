@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    { % include 'userdash.html' %}
-    <div class="container">
+    {%include'userdash.html'%}
+    <div class="container1">
         <header>Engineer quotation form</header>
        
         <form action="#">
@@ -27,32 +27,32 @@
 
                     <div class="fields">
                         <div class="input-field">
-                            <label>Full Name</label>
+                            <span>Full Name</span>
                             <input type="text" placeholder="Enter your name" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Email</label>
+                            <span>Email</span>
                             <input type="text" placeholder="Enter your email" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Location</label>
+                            <span>Location</span>
                             <input type="text" placeholder="Enter your location" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Address</label>
+                            <span>Address</span>
                             <input type="text" placeholder="Enter your Address" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Mobile Number</label>
+                            <span>Mobile Number</span>
                             <input type="number" placeholder="Enter mobile number" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Do you have all permits and approvals?</label>
+                            <span>Do you have all permits and approvals?</span>
                             <select required>
                                 <option disabled selected>Select</option>
                                 <option>Yes</option>
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="input-field">
-                            <label>Timeline</label>
+                            <span>Timeline</span>
                             <select required>
                                 
                                 <option disabled selected>Select</option>
@@ -73,11 +73,11 @@
                         </div>
 
                         <div class="input-field">
-                            <label>Land size in squarefeet</label>
+                            <span>Land size in squarefeet</span>
                             <input type="number" placeholder="Land size in squarefeet" required>
                         </div>
                         <div class="input-field">
-                            <label>Building Type</label>
+                            <span>Building Type</span>
                             <select required>
                                 <option disabled selected>Select</option>
                                 <option>Residential buildings/Apartments</option>
@@ -87,11 +87,11 @@
                             </select>
                         </div>
                         <div class="input-field">
-                            <label>Budget</label>
+                            <span>Budget</span>
                             <input type="number" placeholder="Budget" required>
                         </div>
                         <div class="input-field">
-                            <label>Wood work</label>
+                            <span>Wood work</span>
                             <select required>
                                 <option disabled selected>Select</option>
                                 <option>With furniture</option>
@@ -99,27 +99,21 @@
                             </select>
                         </div>
                         <div class="input-field">
-                            <label for="options">How many rooms you want?</label>
+                            <span for="options">How many rooms you want?</span>
                             <input type="number" placeholder="Rooms" required>
                         </div>
                         <div class="input-field text">
-                            <label for="options">Additional information</label>
+                            <span for="options">Additional information</span>
                             <input type="text" placeholder="Write here!!!" required>
                         </div>
+                        <button class="nextBtn">
+                            <span class="btnText">Submit</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
                     </div>
                 </div>
-
-                <div class="details ID">
-                    <div class="fields">
-                        
-                    </div>
-
-
-                    <button class="nextBtn">
-                        <span class="btnText">Submit</span>
-                        <i class="uil uil-navigator"></i>
-                    </button>
-                </div>
+                    
+               
             </div>
         </form>
     </div>

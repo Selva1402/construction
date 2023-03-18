@@ -9,7 +9,7 @@
 }
 body{
     min-height: 100vh;
-    background-color: var(--body-color);
+    background: #4070f4;
     transition: var(--tran-05);
 }
 

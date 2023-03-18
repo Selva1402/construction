@@ -322,7 +322,7 @@ def userdash():
         image = acc[8]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
+        return render_template('userprofile.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
         
 @app.route('/userbit')
 def userbit():
