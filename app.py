@@ -379,7 +379,7 @@ def userbit():
             mail.send(TEXT)
             cursor.execute('SELECT email FROM builder')
             emails = cursor.fetchall()
-            # name1 = cursor.fetchall()
+            # name1 = cursor.fetchall() 
             # Loop through email addresses and send message
             for emails in emails:
                 TEXT1 = Message('Hello', sender = 'Futurehaus23@gmail.com', recipients = [emails[0]])
