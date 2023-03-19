@@ -17,14 +17,14 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus23@gmail.com'
-app.config['MAIL_PASSWORD'] = 'qqyqzbwnjaumeifw'
+app.config['MAIL_PASSWORD'] = 'abcdefgh'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -379,7 +379,7 @@ def userbit():
             mail.send(TEXT)
             cursor.execute('SELECT email FROM builder')
             emails = cursor.fetchall()
-            # name1 = cursor.fetchall()
+            # name1 = cursor.fetchall() 
             # Loop through email addresses and send message
             for emails in emails:
                 TEXT1 = Message('Hello', sender = 'Futurehaus23@gmail.com', recipients = [emails[0]])
