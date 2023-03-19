@@ -20,6 +20,7 @@ body{
     width: 100%;
     height: 86vh;
     border-radius: 6px;
+    left: 100px;
     padding: 30px;
     margin: 0 1px;
     background-color: rgb(254, 255, 254);
