@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/cardstyle.css.css">
     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="/static/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <!-- CSS -->
     <!-- <link rel="stylesheet" href="/static/image.css" /> -->
@@ -21,38 +22,46 @@
 
 <body>
     {% include 'nav.html' %}
-    <main> 
-        
+    <main>
+
         <div class="intro">
-          <h1>FUTURE HAUS</h1>
-          <p>Building connections, building dreams.</p>
-          <button>Learn More</button>
+            <h1>FUTURE HAUS</h1>
+            <p>Building connections, building dreams.</p>
+            <button>Learn More</button>
         </div>
         <div class="achievements">
-          <div class="work">
-            <i class="fas fa-atom"></i>
-            <p class="work-heading">Our Mission</p>
-            <p class="work-text">Our mission is to streamline the construction process by providing a platform that makes it easy for users to find the right builder and for builders to connect with potential clients.</p>
-          </div>
-          <div class="work">
-            <i class="fas fa-skiing"></i>
-            <p class="work-heading">How It Works</p>
-            <p class="work-text">Our platform is easy to use and free for users. Users can search for builders by location, specialty, and other factors to find the right builder for their project. Builders can create a profile and showcase their work, including photos and testimonials from past clients.</p>
-          </div>
-          <div class="work">
-            <i class="fas fa-ethernet"></i>
-            <p class="work-heading">Our Values</p>
-            <p class="work-text">At BuildConnect, we believe in transparency, honesty, and customer satisfaction. We are committed to providing a platform that is easy to use, reliable, and effective. </p>
-          </div>
+            <div class="work">
+                <i class="fas fa-atom"></i>
+                <p class="work-heading">Our Mission</p>
+                <p class="work-text">Our mission is to streamline the construction process by providing a platform that
+                    makes it easy for users to find the right builder and for builders to connect with potential
+                    clients.</p>
+            </div>
+            <div class="work">
+                <i class="fas fa-skiing"></i>
+                <p class="work-heading">How It Works</p>
+                <p class="work-text">Our platform is easy to use and free for users. Users can search for builders by
+                    location, specialty, and other factors to find the right builder for their project. Builders can
+                    create a profile and showcase their work, including photos and testimonials from past clients.</p>
+            </div>
+            <div class="work">
+                <i class="fas fa-ethernet"></i>
+                <p class="work-heading">Our Values</p>
+                <p class="work-text">At BuildConnect, we believe in transparency, honesty, and customer satisfaction. We
+                    are committed to providing a platform that is easy to use, reliable, and effective. </p>
+            </div>
         </div>
         <div class="about-me">
-          <div class="about-me-text">
-            <h2>About Us</h2>
-            <p>At FutureHaus, we are committed to making the process of finding a builder and starting a construction project as easy and stress-free as possible. Our website serves as a platform for connecting builders and users, allowing users to find the right builder for their project and builders to showcase their work and connect with potential clients.</p>
-          </div>
-          <img src="/static/logo.png" alt="me">
+            <div class="about-me-text">
+                <h2>About Us</h2>
+                <p>At FutureHaus, we are committed to making the process of finding a builder and starting a
+                    construction project as easy and stress-free as possible. Our website serves as a platform for
+                    connecting builders and users, allowing users to find the right builder for their project and
+                    builders to showcase their work and connect with potential clients.</p>
+            </div>
+            <img src="/static/logo.png" alt="me">
         </div>
-      </main>
+    </main>
     <!-- IMAGES -->
 
     <div class="about">
@@ -61,21 +70,55 @@
             <div class="swiper mySwiper container">
                 <div class="swiper-wrapper content">
                     {% for data in data_list %}
+                        <div class="swiper-slide card">
+                            <div class="card-content">
+                                <div class="image">
+                                    <img src="/static/img1.jpg" alt="">
+                                </div>
+
+                                <div class="media-icons">
+                                    <i class="fab fa-facebook"></i>
+                                    <i class="fab fa-twitter"></i>
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+
+                                <div class="name-profession">
+                                    <span class="name">Builder name</span>
+                                    <span class="profession">Company name</span>
+                                </div>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+
+                                <div class="button">
+                                    <button class="aboutMe">about us</button>
+                                    <button class="hireMe">Contact us</button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                     <div class="swiper-slide card">
                         <div class="card-content">
                             <div class="image">
-                                <img src="/static/images/{{ data[3] }}" alt="">
+                                <img src="/static/img1.jpg" alt="">
                             </div>
 
                             <div class="media-icons">
                                 <i class="fab fa-facebook"></i>
                                 <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
+                                <i class="fab fa-instagram"></i>
                             </div>
+
                             <div class="name-profession">
-                                <span class="name">{{ data[1] }}</span>
-                                <span class="profession">{{ data[2] }}</span>
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
                             </div>
+
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -85,21 +128,236 @@
                             </div>
 
                             <div class="button">
-                                <button class="aboutMe">About us</button>
-                                <button class="hireMe">contact us</button>
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
                             </div>
                         </div>
                     </div>
-                    
-                    {% endfor %}
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-pagination"></div>
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img1.jpg" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-instagram"></i>
+                            </div>
+
+                            <div class="name-profession">
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
+                            </div>
+
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img1.jpg" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-instagram"></i>
+                            </div>
+
+                            <div class="name-profession">
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
+                            </div>
+
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img1.jpg" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-instagram"></i>
+                            </div>
+
+                            <div class="name-profession">
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
+                            </div>
+
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img1.jpg" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-instagram"></i>
+                            </div>
+
+                            <div class="name-profession">
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
+                            </div>
+
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img1.jpg" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-instagram"></i>
+                            </div>
+
+                            <div class="name-profession">
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
+                            </div>
+
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img1.jpg" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-instagram"></i>
+                            </div>
+
+                            <div class="name-profession">
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
+                            </div>
+
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="/static/img1.jpg" alt="">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-instagram"></i>
+                            </div>
+
+                            <div class="name-profession">
+                                <span class="name">Builder name</span>
+                                <span class="profession">Company name</span>
+                            </div>
+
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+
+                            <div class="button">
+                                <button class="aboutMe">about us</button>
+                                <button class="hireMe">Contact us</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </section>
-    </div>
 
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -122,61 +380,69 @@
                 },
             });
         </script>
-        <footer id="contact" class="footer-section">
+        </section>
+    </div>
+
+    <!-- Swiper JS -->
+    <!-- Swiper JS -->
 
 
-            <div class="grid-container">
-                <div class="grid-item part1">
-                    <div class="single-cta">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="cta-text">
-                            <h4>Find us</h4>
-                            <span>1010 Avenue, sw 54321, Tirunelveli</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item part2">
-                    <div class="single-cta">
-                        <i class="fas fa-phone-alt"></i>
-                        <div class="cta-text">
-                            <h4>Call us</h4>
-                            <span>9876543210</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item part3">
-                    <div class="single-cta">
-                        <i class="fas fa-envelope-open-text"></i>
-                        <div class="cta-text">
-                            <h4>Mail us</h4>
-                            <span>futurehaus@info.com</span>
-                        </div>
+
+    <footer id="contact" class="footer-section">
+
+
+        <div class="grid-container">
+            <div class="grid-item part1">
+                <div class="single-cta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="cta-text">
+                        <h4>Find us</h4>
+                        <span>1010 Avenue, sw 54321, Tirunelveli</span>
                     </div>
                 </div>
             </div>
-            <!-- SOCIAL MEDIA -->
-         
-
-            <div class="copyright-area">
-
-                <div class="copyright-text">
-                    <p>Copyright &copy; 2023, All Right Reserved <a href="/">Futurehaus</a></p>
+            <div class="grid-item part2">
+                <div class="single-cta">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="cta-text">
+                        <h4>Call us</h4>
+                        <span>9876543210</span>
+                    </div>
                 </div>
-
-
-                <div class="footer-menu">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Policy</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
+            </div>
+            <div class="grid-item part3">
+                <div class="single-cta">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <div class="cta-text">
+                        <h4>Mail us</h4>
+                        <span>futurehaus@info.com</span>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <!-- SOCIAL MEDIA -->
 
+
+        <div class="copyright-area">
+
+            <div class="copyright-text">
+                <p>Copyright &copy; 2023, All Right Reserved <a href="/">Futurehaus</a></p>
             </div>
 
-        </footer>
+
+            <div class="footer-menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Policy</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </footer>
 
 
 
