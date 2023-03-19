@@ -17,14 +17,14 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'customercare.in2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'rktrsphkqdpltzge'
+app.config['MAIL_USERNAME'] = 'Futurehaus23@gmail.com'
+app.config['MAIL_PASSWORD'] = 'qqyqzbwnjaumeifw'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -324,9 +324,9 @@ def userdash():
         my_string_without_prefix = my_string.strip("'")
         return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
         
-@app.route('/userbit')
+@app.route('/userbit', methods=["POST","GET"])
 def userbit():
-    #  if 'id' in session:
+    # if 'id' in session:
     #     uid = session['id']
     #     cursor = mysql.connection.cursor()
     #     cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
@@ -335,7 +335,74 @@ def userbit():
     #     image = acc[8]
     #     my_string = image.decode('utf-8')
     #     my_string_without_prefix = my_string.strip("'")
+    #     return render_template('userbit.html', name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
+    if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'location' in request.form and 'address' in request.form and 'phone' in request.form and 'approval_status' in request.form and 'timeline' in request.form and 'sqft' in request.form and 'build_type' in request.form and 'budget' in request.form and 'wood' in request.form and 'room' in request.form and 'additional' in request.form:
+        if 'id' in session:
+            msg = ''
+            uid=session['id']
+            name = request.form['name']
+            email = request.form['email']
+            location = request.form['location']
+            address = request.form['address']
+            phone = request.form['phone']
+            approval_status = request.form['approval_status']
+            timeline = request.form['timeline']
+            sqft = request.form['sqft']
+            build_type = request.form['build_type']
+            budget = request.form['budget']
+            wood = request.form['wood']
+            room = request.form['room']
+            additional = request.form['additional']
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional))
+            mysql.connection.commit()
+            msg = 'You have successfully registered your complaint'
+            TEXT = Message('Hello', sender = 'Futurehaus23@gmail.com', recipients = [email])
+            TEXT.body =  """ Dear """+name+"""
+                        You have Successfully send the quotation.
+                        The Quatations are listed below,
+                        Name : """+name+"""
+                        Email : """+email+"""
+                        Location : """+location+"""
+                        Address : """+address+"""
+                        Contact Number : """+phone+"""
+                        Approval Status : """+approval_status+"""
+                        Timeline : """+timeline+"""
+                        Square Feet : """+sqft+"""
+                        Building type : """+build_type+"""
+                        Budget : """+budget+"""
+                        Wood Type : """+wood+"""
+                        How many Rooms  : """+room+"""
+                        Additional Informations : """+additional+"""
+                        The Plans are given by the Engineer that are shown in the Bitting Page.
+                        Please check the Bitting page for choosing the best Engineer."""
+            mail.send(TEXT)
+            cursor.execute('SELECT email FROM builder')
+            emails = cursor.fetchall()
+            # name1 = cursor.fetchall()
+            # Loop through email addresses and send message
+            for emails in emails:
+                TEXT1 = Message('Hello', sender = 'Futurehaus23@gmail.com', recipients = [emails[0]])
+                TEXT1.body = """The Customer sends the Qutation for you
+                                Customer Name : """+name+"""
+                                Email : """+email+"""
+                                Location : """+location+"""
+                                Address : """+address+"""
+                                Contact Number : """+phone+"""
+                                Approval Status : """+approval_status+"""
+                                Timeline : """+timeline+"""
+                                Square Feet : """+sqft+"""
+                                Building type : """+build_type+"""
+                                Budget : """+budget+"""
+                                Wood Type : """+wood+"""
+                                How many Rooms  : """+room+"""
+                                Additional Informations : """+additional+"""
+                                You can send your plans and You can bitting for this quotation.
+                                if you have the best engineer, you are selected by the Customer"""
+                mail.send(TEXT1)
+            return render_template('userbit.html', msg = msg)
     return render_template('userbit.html')
+
 
 @app.route('/logout')
 def logout():
