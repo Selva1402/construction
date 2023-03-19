@@ -202,7 +202,7 @@ font-family: 'Sono', sans-serif; */
 input[type="submit"] {
   color: #ebeaea;
   padding: 0em 1em;
-  width: 100px;
+  width: 160px;
   height: 30px;
   font-size: 18px;
   border-radius: 0.5em;
@@ -330,13 +330,13 @@ body {
   background-image: linear-gradient(to top right,#bf7a6b 0%, #e6d8a7 100%);
 }
 
-.file-upload-wrapper {
+#image{
   position: relative;
   width: 50%;
-  height: 60px;
-  margin-top: 30px;
+  height: 30px;
+  margin-top: 10px;
 }
-.file-upload-wrapper:after {
+#image:after {
   content: attr(data-text);
   font-size: 14px;
   position: absolute;
@@ -354,7 +354,7 @@ body {
   border-radius: 5px 10px 10px 5px;
   font-weight: 300;
 }
-.file-upload-wrapper:before {
+#image:before {
   content: "Upload";
   position: absolute;
   top: 0;
@@ -372,7 +372,7 @@ body {
   pointer-events: none;
   border-radius: 0 5px 5px 0;
 }
-.file-upload-wrapper:hover:before {
+#image:hover:before {
   background: #130378;
 }
 
