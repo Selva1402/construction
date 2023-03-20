@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
     <title>User Dashboard</title>
   <link rel="stylesheet" href="/static/navd.css">
+  <link rel="stylesheet" href="/static/userbit.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
@@ -123,6 +126,10 @@ modeSwitch.addEventListener("click" , () =>{
       }
     }
   </script>
+  {% block content %}
+    
+  {% endblock %}
+
 </body>
 
 </html>
