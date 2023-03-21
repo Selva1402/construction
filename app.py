@@ -24,7 +24,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus23@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abcdefghijkl'
+app.config['MAIL_PASSWORD'] = 'abcdefghijklmn'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -376,7 +376,7 @@ def userbit(id):
             cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional))
             mysql.connection.commit()
             msg = 'You have successfully registered your complaint'
-            TEXT = Message('Hello', sender = 'Futurehaus23@gmail.com', recipients = [email])
+            TEXT = Message('Hello, Mail form Future Haus', sender = 'Futurehaus23@gmail.com', recipients = [email])
             TEXT.body =  """ Dear """+name+"""
                         You have Successfully send the quotation.
                         The Quatations are listed below,
@@ -401,7 +401,7 @@ def userbit(id):
             # name1 = cursor.fetchall() 
             # Loop through email addresses and send message
             for emails in emails:
-                TEXT1 = Message('Hello', sender = 'Futurehaus23@gmail.com', recipients = [emails[0]])
+                TEXT1 = Message('Hello, Mail from Future Haus', sender = 'Futurehaus23@gmail.com', recipients = [emails[0]])
                 TEXT1.body = """The Customer sends the Qutation for you
                                 Customer Name : """+name+"""
                                 Email : """+email+"""
