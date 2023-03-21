@@ -24,7 +24,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus23@gmail.com'
-app.config['MAIL_PASSWORD'] = 'qqyqzbwnjaumeifw'
+app.config['MAIL_PASSWORD'] = 'abcdefghijkl'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -319,26 +319,42 @@ def userdash():
         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
         cursor.connection.commit()
         acc = cursor.fetchone()
+        id = acc[0]
         image = acc[8]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
+        return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
         
-@app.route('/userbit', methods=["GET"])
-def userbit_get():
-    if 'id' in session:
-        uid = session['id']
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
-        cursor.connection.commit()
-        acc = cursor.fetchone()
-        image = acc[8]
-        my_string = image.decode('utf-8')
-        my_string_without_prefix = my_string.strip("'")
-        return render_template('userbit.html', name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
+# @app.route('/userbit', methods=["GET"])
+# def userbit_get():
+#     if 'id' in session:
+#         uid = session['id']
+#         cursor = mysql.connection.cursor()
+#         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
+#         cursor.connection.commit()
+#         acc = cursor.fetchone()
+#         image = acc[8]
+#         my_string = image.decode('utf-8')
+#         my_string_without_prefix = my_string.strip("'")
+#         return render_template('userbit.html', name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
     
-@app.route('/userbit', methods=["POST"])
-def userbit_post():
+@app.route('/userbit/<int:id>', methods=["GET","POST"])
+def userbit(id):
+    # name1 = session.get('username')
+    # email2 = session.get('email')
+    # image = session.get('image')
+    # my_string = image.decode('utf-8')
+    # my_string_without_prefix = my_string.strip("'")
+    # print(email2)   
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+
     if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'location' in request.form and 'address' in request.form and 'phone' in request.form and 'approval_status' in request.form and 'timeline' in request.form and 'sqft' in request.form and 'build_type' in request.form and 'budget' in request.form and 'wood' in request.form and 'room' in request.form and 'additional' in request.form:
         if 'id' in session:
             msg = ''
@@ -403,8 +419,8 @@ def userbit_post():
                                 You can send your plans and You can bitting for this quotation.
                                 if you have the best engineer, you are selected by the Customer"""
                 mail.send(TEXT1)
-            return render_template('userbit.html', msg = msg)
-    return render_template('userbit.html')
+            return render_template('userbit.html', msg = msg, name = name1, email = email1, image = my_string_without_prefix, id = id)
+    return render_template('userbit.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
 
 
 @app.route('/logout')
