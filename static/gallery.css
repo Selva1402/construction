@@ -18,9 +18,8 @@ body{
   min-height: 100vh;
   
 }
-.wrapper{
+.wrapper2{
   max-width: 1100px;
- 
 }
 .gallery{
   display: flex;

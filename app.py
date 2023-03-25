@@ -37,7 +37,6 @@ def page_not_found(e):
 def offline():
     return render_template('404.html')
 
-
 @app.route('/')
 def home():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -53,12 +52,10 @@ def home():
         my_string_without_prefix = my_string.strip("'")
         # print(my_string_without_prefix)
 
-
         # print(image_data)
         # if len(image_data) % 2 != 0:
         #     image_data = "0" + image_data
         # image_base64 = binascii.unhexlify(image_data[2:]).decode('utf-8')
-        
 
         data_list.append((id, name, email, my_string_without_prefix))
     return render_template('home.html', data_list = data_list)
@@ -196,7 +193,20 @@ def builderdash():
         image = acc[10]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('builderprofile.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix)
+        return render_template('builderdash.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
+    
+@app.route('/buildergallery/<int:id>', methods=["GET","POST"])
+def buildergallery(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id)
+
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
