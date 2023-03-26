@@ -194,7 +194,42 @@ def builderdash():
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
         return render_template('builderdash.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
-    
+
+@app.route('/builderupload/<int:id>', methods=["GET","POST"])
+def builderupload(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    if request.method == 'POST' and 'image' in request.files:
+        uid = session['id']
+        image2 = request.files['image']
+        image2.save(os.path.join(app.static_folder, 'image', image2.filename))
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute("INSERT INTO image VALUES (NULL, %s, %s)",(uid, image2.filename))
+        mysql.connection.commit()
+        msg = 'Image upload Successfully!'
+        return render_template('buildergallery.html', msg = msg, id = id, name = name1, comp = comp, image = my_string_without_prefix)
+    else:
+        msg = 'Image not Uploaded'
+        return render_template('image.html', msg = msg, id = id, name = name1, comp = comp, image = my_string_without_prefix)
+#     if request.method == 'POST' and 'image' in request.files:
+#         uid = session['id']
+#         image2 = request.files['image']
+#         image2.save(os.path.join(app.static_folder, 'photo', image2.filename))
+#         cursor1 = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+#         cursor1.execute("INSERT INTO image VALUES (NULL, %s, %s)",(uid, image2.filename))
+#         mysql.connection.commit()
+#         msg = 'Image upload Successfully!'
+#         return redirect(url_for('buildergallery', id = id, msg = msg, name = name1, comp = comp, image = my_string_without_prefix))
+#     else:
+#         msg = 'Image not Selected'
+#         return render_template('image.html',msg = msg, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+
 @app.route('/buildergallery/<int:id>', methods=["GET","POST"])
 def buildergallery(id):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -205,8 +240,28 @@ def buildergallery(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id)
-
+    if request.method == 'POST' and 'image' in request.files:
+        uid = session['id']
+        image2 = request.files['image']
+        image2.save(os.path.join(app.static_folder, 'image', image2.filename))
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute("INSERT INTO image VALUES (NULL, %s, %s)",(uid, image2.filename))
+        mysql.connection.commit()
+        return redirect(url_for('buildergallery', id = id))
+    else:
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM image WHERE uid = %s', (id, ))
+        mysql.connection.commit()
+        account = cursor.fetchall()
+        image_str_list = []
+        for image_data in account:
+            image_str = image_data[2].decode('utf-8')
+            image_str_list.append(image_str)
+        if account:
+            return render_template('buildergallery.html', data = image_str_list, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+        else:
+            msg = 'No Image is uploaded'
+            return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, msg = msg)
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
