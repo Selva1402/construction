@@ -23,11 +23,10 @@
                 <input name="image" type="file" class="file-upload-field" id="image" value="">
                 <input type="submit" value="Upload" name="submit">
             </div>
+            <span><h4>{{a}}</h4></span>
         </form>
         </div>
-        <!-- <form action="{{ url_for('builderupload', id=id) }}" method="post" enctype="multipart/form-data">
-            <button>Upload</button>
-        </form> -->
+    
         {% if data %}
         <div class="gallery" id="imageview">
             {% for row in data %}
