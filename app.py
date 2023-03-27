@@ -410,8 +410,8 @@ def userbit(id):
                         Wood Type : """+wood+"""
                         How many Rooms  : """+room+"""
                         Additional Informations : """+additional+"""
-                        The Plans are given by the Engineer that are shown in the Bitting Page.
-                        Please check the Bitting page for choosing the best Engineer."""
+                The Plans are given by the Engineer that are shown in the Bitting Page.
+                Please check the Bitting page for choosing the best Engineer."""
             mail.send(TEXT)
             cursor.execute('SELECT email FROM builder')
             emails = cursor.fetchall()
@@ -433,8 +433,8 @@ def userbit(id):
                                 Wood Type : """+wood+"""
                                 How many Rooms  : """+room+"""
                                 Additional Informations : """+additional+"""
-                                You can send your plans and You can bitting for this quotation.
-                                if you have the best engineer, you are selected by the Customer"""
+                        You can send your plans and You can bitting for this quotation.
+                        if you have the best engineer, you are selected by the Customer"""
                 mail.send(TEXT1)
             return render_template('userbit.html', msg = msg, name = name1, email = email1, image = my_string_without_prefix, id = id)
     return render_template('userbit.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
