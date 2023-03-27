@@ -360,27 +360,9 @@ def userdash():
         my_string_without_prefix = my_string.strip("'")
         return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
         
-# @app.route('/userbit', methods=["GET"])
-# def userbit_get():
-#     if 'id' in session:
-#         uid = session['id']
-#         cursor = mysql.connection.cursor()
-#         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
-#         cursor.connection.commit()
-#         acc = cursor.fetchone()
-#         image = acc[8]
-#         my_string = image.decode('utf-8')
-#         my_string_without_prefix = my_string.strip("'")
-#         return render_template('userbit.html', name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
     
 @app.route('/userbit/<int:id>', methods=["GET","POST"])
-def userbit(id):
-    # name1 = session.get('username')
-    # email2 = session.get('email')
-    # image = session.get('image')
-    # my_string = image.decode('utf-8')
-    # my_string_without_prefix = my_string.strip("'")
-    # print(email2)   
+def userbit(id):  
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
     row = cursor.fetchone()
@@ -457,6 +439,25 @@ def userbit(id):
             return render_template('userbit.html', msg = msg, name = name1, email = email1, image = my_string_without_prefix, id = id)
     return render_template('userbit.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
 
+@app.route('/usergallery/<int:id>', methods=["GET","POST"])
+def usergallery(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM image')
+    mysql.connection.commit()
+    account = cursor.fetchall()
+    image_str_list = []
+    for image_data in account:
+        image_str = image_data[2].decode('utf-8')
+        image_str_list.append(image_str)
+    return render_template('usergallery.html', data = image_str_list, name = name1, email = email1, image = my_string_without_prefix, id = id)
 
 @app.route('/logout')
 def logout():

@@ -15,22 +15,25 @@
 
     {%include 'builderdash.html'%}
     <div class="wrapper2">
-        
-            <label for="image">Upload Photos</label>
-            <div class="input-field" id = "imageinsert">
+
+        <label for="image">Upload Photos</label>
+        <div class="input-field1" id="imageinsert">
             <form action="{{ url_for('buildergallery', id=id) }}" method="post" enctype="multipart/form-data">
-            <div class="file-upload-wrapper" data-text="Select your file!">
-                <input name="image" type="file" class="file-upload-field" id="image" value="">
-                <input type="submit" value="Upload" name="submit">
-            </div>
-            <span><h4>{{a}}</h4></span>
-        </form>
+                <div class="file-upload-wrapper" data-text="Select your file!">
+                    <input name="image" type="file" class="file-upload-field" id="image" value="">
+                    <input type="submit" value="Upload" name="submit">
+                </div>
+                <span>
+                    <h4>{{a}}</h4>
+                </span>
+            </form>
         </div>
-    
+
         {% if data %}
         <div class="gallery" id="imageview">
             {% for row in data %}
-            <div class="image"><span><img src="/static/image/{{ row }}" alt="image" width="100" height="100"></span></div>
+            <div class="image"><span><img src="/static/image/{{ row }}" alt="image" width="100" height="100"></span>
+            </div>
             <!-- <div class="image"><span><img src="/static/img16.jpg" alt=""></span></div>
             <div class="image"><span><img src="/static/img17.jpg" alt=""></span></div>
             <div class="image"><span><img src="/static/img18.jpg" alt=""></span></div>
@@ -39,25 +42,16 @@
             {% endfor %}
         </div>
         {% else %}
-        <span><h4>{{msg}}</h4></span>
+        <span>
+            <h4>{{msg}}</h4>
+        </span>
         {% endif %}
     </div>
+
     
-    <div class="preview-box">
-        <div class="details">
-            <span class="title">Image <p class="current-img"></p> of <p class="total-img"></p></span>
-            <span class="icon fas fa-times"></span>
-        </div>
-        <div class="image-box">
-            <div class="slide prev"><i class="fas fa-angle-left"></i></div>
-            <div class="slide next"><i class="fas fa-angle-right"></i></div>
-            <img src="" alt="">
-        </div>
-    </div>
-    <div class="shadow"></div>
 
     <script src="/js/gallery.js"></script>
-    
+
 
 </body>
 

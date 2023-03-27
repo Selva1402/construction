@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="/static/navd.css">
   <link rel="stylesheet" href="/static/userbit.css">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="/static/gallery.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -47,7 +49,7 @@
         <span class="tooltip">Messages</span>
       </li>
       <li>
-        <a href="#">
+        <a href="{{ url_for('usergallery', id=id) }}">
           <i class='bx bx-photo-album' ></i>
           <span class="links_name">Gallery</span>
         </a>
@@ -126,6 +128,7 @@ modeSwitch.addEventListener("click" , () =>{
       }
     }
   </script>
+  <script src="/js/gallery.js"></script>
   {% block content %}
     
   {% endblock %}
