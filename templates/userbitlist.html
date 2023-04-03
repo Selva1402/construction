@@ -1,0 +1,41 @@
+{% extends 'userdash.html' %}
+{% block content %}
+<div class="table">
+    <header>Engineer quotation form</header>
+    <table>
+
+        <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Permission</th>
+            <th>Timeline</th>
+            <th>Land size</th>
+            <th>Building Type</th>
+            <th>Budget</th>
+            <th>Rooms</th>
+        </thead>
+
+        <tbody>
+            {% for row in userbit: %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.email}}</td>
+                <td>{{ row.location}}</td>
+                <td>{{ row.phone }}</td>
+                <td>{{ row.address}}</td>
+                <td>{{ row.approval_status}}</td>
+                <td>{{ row.timeline}}</td>
+                <td>{{ row.landsize}}</td>
+                <td>{{ row.buildingtype}}</td>
+                <td>{{ row.budget}}</td>
+                <td>{{ row.rooms}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
