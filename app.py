@@ -17,7 +17,7 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
@@ -438,6 +438,18 @@ def userbit(id):
                 mail.send(TEXT1)
             return render_template('userbit.html', msg = msg, name = name1, email = email1, image = my_string_without_prefix, id = id)
     return render_template('userbit.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
+
+@app.route('/viewquotation/<int:id>', methods=["GET","POST"])
+def viewquotation(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    return render_template('userbitlist.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
 
 @app.route('/usergallery/<int:id>', methods=["GET","POST"])
 def usergallery(id):
