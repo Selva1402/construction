@@ -194,7 +194,8 @@ def builderdash():
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
         return render_template('builderdash.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
-    
+
+
 @app.route('/buildergallery/<int:id>', methods=["GET","POST"])
 def buildergallery(id):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -205,8 +206,32 @@ def buildergallery(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id)
-
+    if request.method == 'POST' and 'image' in request.files:
+        uid = session['id']
+        image2 = request.files['image']
+        image2.save(os.path.join(app.static_folder, 'image', image2.filename))
+        if not image2:
+            msg = 'Image not Inserted'
+            return render_template('buildergallery.html', a = msg, id = id)    
+        else:
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute("INSERT INTO image VALUES (NULL, %s, %s)",(uid, image2.filename))
+            mysql.connection.commit()
+            return redirect(url_for('buildergallery', id = id))
+    else:
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM image WHERE uid = %s', (id, ))
+        mysql.connection.commit()
+        account = cursor.fetchall()
+        image_str_list = []
+        for image_data in account:
+            image_str = image_data[2].decode('utf-8')
+            image_str_list.append(image_str)
+        if account:
+            return render_template('buildergallery.html', data = image_str_list, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+        else:
+            msg = 'No Image is uploaded'
+            return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, msg = msg)
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
@@ -335,27 +360,9 @@ def userdash():
         my_string_without_prefix = my_string.strip("'")
         return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
         
-# @app.route('/userbit', methods=["GET"])
-# def userbit_get():
-#     if 'id' in session:
-#         uid = session['id']
-#         cursor = mysql.connection.cursor()
-#         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
-#         cursor.connection.commit()
-#         acc = cursor.fetchone()
-#         image = acc[8]
-#         my_string = image.decode('utf-8')
-#         my_string_without_prefix = my_string.strip("'")
-#         return render_template('userbit.html', name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix)
     
 @app.route('/userbit/<int:id>', methods=["GET","POST"])
-def userbit(id):
-    # name1 = session.get('username')
-    # email2 = session.get('email')
-    # image = session.get('image')
-    # my_string = image.decode('utf-8')
-    # my_string_without_prefix = my_string.strip("'")
-    # print(email2)   
+def userbit(id):  
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
     row = cursor.fetchone()
@@ -403,8 +410,8 @@ def userbit(id):
                         Wood Type : """+wood+"""
                         How many Rooms  : """+room+"""
                         Additional Informations : """+additional+"""
-                        The Plans are given by the Engineer that are shown in the Bitting Page.
-                        Please check the Bitting page for choosing the best Engineer."""
+                The Plans are given by the Engineer that are shown in the Bitting Page.
+                Please check the Bitting page for choosing the best Engineer."""
             mail.send(TEXT)
             cursor.execute('SELECT email FROM builder')
             emails = cursor.fetchall()
@@ -426,12 +433,31 @@ def userbit(id):
                                 Wood Type : """+wood+"""
                                 How many Rooms  : """+room+"""
                                 Additional Informations : """+additional+"""
-                                You can send your plans and You can bitting for this quotation.
-                                if you have the best engineer, you are selected by the Customer"""
+                        You can send your plans and You can bitting for this quotation.
+                        if you have the best engineer, you are selected by the Customer"""
                 mail.send(TEXT1)
             return render_template('userbit.html', msg = msg, name = name1, email = email1, image = my_string_without_prefix, id = id)
     return render_template('userbit.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
 
+@app.route('/usergallery/<int:id>', methods=["GET","POST"])
+def usergallery(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM image')
+    mysql.connection.commit()
+    account = cursor.fetchall()
+    image_str_list = []
+    for image_data in account:
+        image_str = image_data[2].decode('utf-8')
+        image_str_list.append(image_str)
+    return render_template('usergallery.html', data = image_str_list, name = name1, email = email1, image = my_string_without_prefix, id = id)
 
 @app.route('/logout')
 def logout():

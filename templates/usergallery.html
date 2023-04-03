@@ -1,0 +1,18 @@
+{% extends 'userdash.html' %}
+{% block content %}
+{% if data %}
+<div class="wrapper2">
+        <div class="gallery" id="imageview">
+            {% for row in data %}
+            <div class="image"><span><img src="/static/image/{{ row }}" alt="image" width="100" height="100"></span>
+            </div>
+            
+            {% endfor %}
+        </div>
+        {% else %}
+        <span>
+            <h4>{{msg}}</h4>
+        </span>
+        {% endif %}
+    </div>   
+{% endblock %}
