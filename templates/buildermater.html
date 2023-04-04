@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile Card </title>
+    <link rel="stylesheet" href="/static/buildermater.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        <form action="{{url_for(' ')}}" method="post">
+            <div class="buttons"><br>
+                <h1>Materials Used In Construction</h1>
+                <p>Cement :</p>
+                <div class="form-row"><input type="text" id="Cement" name="Cement" placeholder="Cement"></div>
+                <br>
+                <p>Steel :</p>
+                <div class="form-row"><input type="text" id="steel" name="steel" placeholder="steel"></div><br>
+                <p>Wood :</p>
+                <div class="form-row"><input type="text" id="wood" name="wood" placeholder="wood"></div><br>
+                <p>Bricks and Stone </p>
+                <div class="form-row"><input type="text" id="stone" name="stone" placeholder="Bricks and Stone"></div><br>
+                <p>Ceramic Tiles</p>
+                <div class="form-row"><input type="text" id="Tiles" name="Tiles" placeholder="Ceramic Tiles"></div><br>
+                <p>Paints</p>
+                <div class="form-row"><input type="text" id="paints" name="paints" placeholder="paints"></div><br>
+                <p>Glass</p>
+                <div class="form-row"><input type="text" id="glass" name="glass" placeholder="glass"></div><br>
+                <center><span>{{a}}</span></center>
+
+                <button class="button-85" role="button">Save</button>
+
+            </div>
+        </form>
+
+    </div>
+ 
+</body>
+
+</html>
