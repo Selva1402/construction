@@ -24,7 +24,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus23@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abcdefghijklmn'
+app.config['MAIL_PASSWORD'] = 'pdiovzzsydruzpsa'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -135,13 +135,15 @@ def forgot_password():
 
         cursor.execute('SELECT * FROM builder WHERE email=%s', (email,))
         account = cursor.fetchone()
+        name = account[1]
 
         if account:
             otp = random.randint(100000, 999999)
             cursor.execute('UPDATE builder SET reset_otp=%s WHERE email=%s', (otp, email))
             mysql.connection.commit()
+            html = render_template('otpemail.html', name=name , otp=otp)
             msg = Message('Reset Password OTP', sender = 'customercare.in2022@gmail.com', recipients = [email])
-            msg.body = f'Your OTP for resetting password is {otp}'
+            msg.html = html
             mail.send(msg)
             return redirect(url_for('reset_password', email=email))
         else:
@@ -299,13 +301,14 @@ def forgotuser():
 
         cursor.execute('SELECT * FROM users WHERE email=%s', (email,))
         account = cursor.fetchone()
-
+        name = account[1]
         if account:
             otp = random.randint(100000, 999999)
             cursor.execute('UPDATE users SET reset_otp=%s WHERE email=%s', (otp, email))
             mysql.connection.commit()
+            html = render_template('otpemail.html', name=name , otp=otp)
             msg = Message('Reset Password OTP', sender = 'customercare.in2022@gmail.com', recipients = [email])
-            msg.body = f'Your OTP for resetting password is {otp}'
+            msg.html = html
             mail.send(msg)
             return redirect(url_for('resetuser', email=email))
         else:
