@@ -1,0 +1,112 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            margin: auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .content {
+            
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 100px;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .logoname {
+            color: rgb(13, 12, 12);
+            font-size: 40px;
+            font-weight: 600;
+            position: relative;
+            top: -68px;
+            left: 35%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="/static/logo.png" alt="logo">
+        <div class="logoname">Future Haus</div>
+        <h3 class="content">The Customer sends the Qutation for you,</h3><br>
+        <table>
+            <tr>
+                <td>Customer Name</td>
+                <td>{{name}}</td>
+            </tr>
+            <tr>
+                <td>Customer Email</td>
+                <td>{{email}}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{location}}</td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td>{{phone}}</td>
+            </tr>
+            <tr>
+                <td>Approval Status</td>
+                <td>{{approval_status}}</td>
+            </tr>
+            <tr>
+                <td>TimeLine</td>
+                <td>{{timeline}}</td>
+            </tr>
+            <tr>
+                <td>Square Feet</td>
+                <td>{{sqft}}</td>
+            </tr>
+            <tr>
+                <td>Budget</td>
+                <td>{{budget}}</td>
+            </tr>
+            <tr>
+                <td>Wood Type</td>
+                <td>{{wood}}</td>
+            </tr>
+            <tr>
+                <td>Rooms</td>
+                <td>{{room}}</td>
+            </tr>
+            <tr>
+                <td>Additional Information</td>
+                <td>{{additional}}</td>
+            </tr>
+        </table>
+        <br>
+        <h3 class="content">You can send your plans and You can bitting for this quotation. <br>
+            if you have the best engineer, you are selected by the Customer</h3>
+        <br>
+        <p class="content">Best regards,</p>
+        <p class="content">Future Haus Team</p>
+
+    </div>
+
+</body>
+
+</html>

@@ -23,8 +23,8 @@ mysql = MySQL(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'Futurehaus23@gmail.com'
-app.config['MAIL_PASSWORD'] = 'pdiovzzsydruzpsa'
+app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
+app.config['MAIL_PASSWORD'] = 'abcdefghijklmno'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -142,7 +142,7 @@ def forgot_password():
             cursor.execute('UPDATE builder SET reset_otp=%s WHERE email=%s', (otp, email))
             mysql.connection.commit()
             html = render_template('otpemail.html', name=name , otp=otp)
-            msg = Message('Reset Password OTP', sender = 'customercare.in2022@gmail.com', recipients = [email])
+            msg = Message('Reset Password OTP for Future Haus', sender = 'futurehaus2022@gmail.com', recipients = [email])
             msg.html = html
             mail.send(msg)
             return redirect(url_for('reset_password', email=email))
@@ -307,7 +307,7 @@ def forgotuser():
             cursor.execute('UPDATE users SET reset_otp=%s WHERE email=%s', (otp, email))
             mysql.connection.commit()
             html = render_template('otpemail.html', name=name , otp=otp)
-            msg = Message('Reset Password OTP', sender = 'customercare.in2022@gmail.com', recipients = [email])
+            msg = Message('Reset Password OTP for Future Haus', sender = 'futurehaus2022@gmail.com', recipients = [email])
             msg.html = html
             mail.send(msg)
             return redirect(url_for('resetuser', email=email))
@@ -395,49 +395,53 @@ def userbit(id):
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional))
             mysql.connection.commit()
+            html = render_template('quationmail.html', name = name, email = email, location = location, phone = phone, approval_status = approval_status, timeline = timeline, sqft = sqft, budget = budget, wood = wood, room = room, additional = additional)
             msg = 'You have successfully registered your complaint'
-            TEXT = Message('Hello, Mail form Future Haus', sender = 'Futurehaus23@gmail.com', recipients = [email])
-            TEXT.body =  """ Dear """+name+"""
-                        You have Successfully send the quotation.
-                        The Quatations are listed below,
-                        Name : """+name+"""
-                        Email : """+email+"""
-                        Location : """+location+"""
-                        Address : """+address+"""
-                        Contact Number : """+phone+"""
-                        Approval Status : """+approval_status+"""
-                        Timeline : """+timeline+"""
-                        Square Feet : """+sqft+"""
-                        Building type : """+build_type+"""
-                        Budget : """+budget+"""
-                        Wood Type : """+wood+"""
-                        How many Rooms  : """+room+"""
-                        Additional Informations : """+additional+"""
-                The Plans are given by the Engineer that are shown in the Bitting Page.
-                Please check the Bitting page for choosing the best Engineer."""
+            TEXT = Message('Hello, Mail form Future Haus', sender = 'futurehaus2022@gmail.com', recipients = [email])
+            # TEXT.body =  """ Dear """+name+"""
+            #             You have Successfully send the quotation.
+            #             The Quatations are listed below,
+            #             Name : """+name+"""
+            #             Email : """+email+"""
+            #             Location : """+location+"""
+            #             Address : """+address+"""
+            #             Contact Number : """+phone+"""
+            #             Approval Status : """+approval_status+"""
+            #             Timeline : """+timeline+"""
+            #             Square Feet : """+sqft+"""
+            #             Building type : """+build_type+"""
+            #             Budget : """+budget+"""
+            #             Wood Type : """+wood+"""
+            #             How many Rooms  : """+room+"""
+            #             Additional Informations : """+additional+"""
+            #     The Plans are given by the Engineer that are shown in the Bitting Page.
+            #     Please check the Bitting page for choosing the best Engineer."""
+            TEXT.html = html
             mail.send(TEXT)
             cursor.execute('SELECT email FROM builder')
             emails = cursor.fetchall()
             # name1 = cursor.fetchall() 
             # Loop through email addresses and send message
             for emails in emails:
-                TEXT1 = Message('Hello, Mail from Future Haus', sender = 'Futurehaus23@gmail.com', recipients = [emails[0]])
-                TEXT1.body = """The Customer sends the Qutation for you
-                                Customer Name : """+name+"""
-                                Email : """+email+"""
-                                Location : """+location+"""
-                                Address : """+address+"""
-                                Contact Number : """+phone+"""
-                                Approval Status : """+approval_status+"""
-                                Timeline : """+timeline+"""
-                                Square Feet : """+sqft+"""
-                                Building type : """+build_type+"""
-                                Budget : """+budget+"""
-                                Wood Type : """+wood+"""
-                                How many Rooms  : """+room+"""
-                                Additional Informations : """+additional+"""
-                        You can send your plans and You can bitting for this quotation.
-                        if you have the best engineer, you are selected by the Customer"""
+                html1 = render_template('quotationengin.html', name = name, email = email, location = location, phone = phone, approval_status = approval_status, timeline = timeline, sqft = sqft, budget = budget, wood = wood, room = room, additional = additional)
+                TEXT1 = Message('Hello, Mail from Future Haus', sender = 'futurehaus2022@gmail.com', recipients = [emails[0]])
+                # TEXT1.body = """The Customer sends the Qutation for you
+                #                 Customer Name : """+name+"""
+                #                 Email : """+email+"""
+                #                 Location : """+location+"""
+                #                 Address : """+address+"""
+                #                 Contact Number : """+phone+"""
+                #                 Approval Status : """+approval_status+"""
+                #                 Timeline : """+timeline+"""
+                #                 Square Feet : """+sqft+"""
+                #                 Building type : """+build_type+"""
+                #                 Budget : """+budget+"""
+                #                 Wood Type : """+wood+"""
+                #                 How many Rooms  : """+room+"""
+                #                 Additional Informations : """+additional+"""
+                #         You can send your plans and You can bitting for this quotation.
+                #         if you have the best engineer, you are selected by the Customer"""
+                TEXT1.html = html1
                 mail.send(TEXT1)
             return render_template('userbit.html', msg = msg, name = name1, email = email1, image = my_string_without_prefix, id = id)
     return render_template('userbit.html', name = name1, email = email1, image = my_string_without_prefix, id = id)

@@ -3,13 +3,64 @@
 
 <head>
     <title>Flask Email Template</title>
-    <link rel="stylesheet" href="/static/otpemail.css">
+    <style>
+        /* CSS code for the email template */
+        .container {
+            position: relative;
+            margin: auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        img {
+            
+            width: 100px;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .title {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            left: 38%;
+            top: 35px;
+        }
+
+        .content {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #0062cc;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <div >
-            <img class="logo" src="/static/logo1.png" alt="Logo">
+            <img class="logo" src="/static/logo.png" alt="Logo">
             <h1 class="title">FUTURE HAUS</h1>
         </div>
 
