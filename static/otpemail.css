@@ -1,0 +1,55 @@
+/* CSS code for the email template */
+body{
+    background-color: #262525;
+}
+.container {
+    margin: auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #0f679e;
+    border: 3px solid rgb(14, 0, 97);
+    border-radius: 5px;
+    position: relative;
+    color: aliceblue;
+}
+h1{
+    position: absolute;
+    top: 6%;
+    left: 15%;
+    text-shadow: 2px 1px 3px rgb(255, 0, 81);
+}
+img {
+    width: 60px;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.content {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #0062cc;
+    color: #fff;
+    cursor: pointer;
+}
