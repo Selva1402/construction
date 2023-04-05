@@ -6,6 +6,7 @@
     <style>
         /* CSS code for the email template */
         .container {
+            position: relative;
             margin: auto;
             max-width: 600px;
             padding: 20px;
@@ -15,7 +16,7 @@
         }
 
         img {
-            width: 60px;
+            width: 100px;
         }
 
         .logo {
@@ -23,9 +24,12 @@
         }
 
         .title {
+            position: absolute;
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 20px;
+            left: 38%;
+            top: 35px;
         }
 
         .content {
@@ -55,7 +59,7 @@
 <body>
     <div class="container">
         <div >
-            <img class="logo" src="/static/logo1.png" alt="Logo">
+            <img class="logo" src="/static/logo.png" alt="Logo">
             <h1 class="title">FUTURE HAUS</h1>
         </div>
 
