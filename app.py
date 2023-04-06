@@ -122,7 +122,7 @@ def builderinfo():
                 return redirect(url_for('builderdash'))
             else:
                 msg = 'Incorrect username / password !'
-                return render_template('builderlogin.html', msg = msg,indicator="failure")
+                return render_template('builderlogin.html', msg = msg, indicator="failure")
         else:
             return render_template("builderlogin.html")
 
