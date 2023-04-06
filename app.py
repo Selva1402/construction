@@ -19,7 +19,7 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
@@ -458,7 +458,15 @@ def viewquotation(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    return render_template('userbitlist.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM bit WHERE uid = %s", (id, ))
+    cursor.connection.commit()
+    acc = cursor.fetchall()
+    if not acc:
+        msg = 'No Data is Found'
+        return render_template('userview.html', acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id, msg = msg)
+    else:
+        return render_template('userview.html',acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id)
 
 @app.route('/usergallery/<int:id>', methods=["GET","POST"])
 def usergallery(id):

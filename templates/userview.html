@@ -1,5 +1,7 @@
+{% extends 'userdash.html' %}
+{% block content %}
 <style>
-    .wrapper{
+    .wrapper {
         background-color: aliceblue;
     }
 </style>
@@ -11,31 +13,41 @@
             <th>Email</th>
             <th>Location</th>
             <th>Phone Number</th>
-            <th>Address</th>
             <th>Permission</th>
             <th>Timeline</th>
-            <th>Land size</th>
+            <th>Square Feet</th>
             <th>Building Type</th>
             <th>Budget</th>
+            <th>Wood</th>
             <th>Rooms</th>
+            <th>Additional</th>
         </thead>
 
         <tbody>
-            {% for row in complaints: %}
+            {% if acc %}
+            {% for data in acc: %}
             <tr>
-                <td>{{ row.id }}</td>
-                <td>{{ row.email}}</td>
-                <td>{{ row.location}}</td>
-                <td>{{ row.phone }}</td>
-                <td>{{ row.address}}</td>
-                <td>{{ row.approval_status}}</td>
-                <td>{{ row.timeline}}</td>
-                <td>{{ row.landsize}}</td>
-                <td>{{ row.buildingtype}}</td>
-                <td>{{ row.budget}}</td>
-                <td>{{ row.rooms}}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.location }}</td>
+                <td>{{ data.phone }}</td>
+                <td>{{ data.approval_status }}</td>
+                <td>{{ data.timeline }}</td>
+                <td>{{ data.sqft }}</td>
+                <td>{{ data.build_type }}</td>
+                <td>{{ data.budget }}</td>
+                <td>{{ data.wood }}</td>
+                <td>{{ data.room }}</td>
+                <td>{{ data.additional }}</td>
             </tr>
             {% endfor %}
+            {% else %}
+            <span>
+                <h4>{{msg}}</h4>
+            </span>
+            {% endif %}
         </tbody>
 
+
 </div>
+{% endblock %}
