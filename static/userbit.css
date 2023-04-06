@@ -200,4 +200,10 @@ input[type=number]::-webkit-outer-spin-button {
     user-select: none;
   }
   
- 
+ .msg{
+    position:absolute;
+    bottom: 0%;
+    color: rgb(39, 39, 38);
+    left: 45%;
+    font-family: sans-serif;
+ }
