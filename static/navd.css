@@ -71,7 +71,7 @@ body.dark .sidebar .logo-details .logo_name {
     opacity: 1;
 }
 .sidebar i {
-    color: rgb(180, 1, 1);
+    color: rgb(1, 4, 180);
     height: 60px;
     min-width: 50px;
     font-size: 28px;
@@ -109,7 +109,7 @@ body.dark .sidebar .logo-details .logo_name {
 }
 
 body.dark .sidebar li .tooltip {
-    color: #a50008;
+    color: #1600a5;
     background: rgb(36, 33, 33);
     box-shadow: 0 5px 10px rgba(139, 53, 53, 0.3);
     
@@ -215,7 +215,7 @@ body.dark .sidebar.open li a .links_name {
 
 body.dark .sidebar li a:hover i {
     transition: all 0.5s ease;
-    color: #dd0000;
+    color: #0700dd;
 }
 
 .sidebar li i {
@@ -356,7 +356,7 @@ label:hover {
 }
 
 .bars .fa-bars {
-    color: #ea0606;
+    color: #0606ea;
     font-size: 20px;
     top: 0%;
     transform: translate(-12%,-16%);
@@ -374,7 +374,7 @@ body.dark .bars .fa-bars:hover{
 
 .sidebar.open .button{
     
-    color: #ea0606;
+    color: #0621ea;
     font-size: 20px;
     top: 30%;
     transform: translate(100%,-16%);
@@ -395,7 +395,7 @@ body.dark .bars .fa-bars:hover{
 }
 
 .cancel .fa-arrow-left{
-    color: #ea0606;
+    color: #060eea;
     font-size: 20px;
     top: 0%;
     transform: translate(-14%,-19%);
@@ -485,7 +485,7 @@ body.dark .sidebar .nav-list .mode .sun-moon .sun{
     width: 40px;
     /* top:-20px; */
     border-radius: 25px;
-    background-color: red;
+    background-color: rgb(8, 0, 255);
     /* background-color: var(--toggle-color); */
     transition: var(--tran-05);
 }
