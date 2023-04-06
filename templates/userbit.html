@@ -1,104 +1,111 @@
 {% extends 'userdash.html' %}
 {% block content %}
-    <div class="container1">
-        <header>Engineer quotation form</header>
-       
-        <form action="{{ url_for('userbit', id=id) }}" method="post">
-            <div class="form first">
-                <div class="details personal">
-                    <span class="title">Building Details</span>
+<div class="container1">
+    <header>Engineer quotation form</header>
 
-                    <div class="fields">
-                        <div class="input-field">
-                            <span>Full Name</span>
-                            <input type="text" placeholder="Enter your name" name="name" required>
-                        </div>
+    <form action="{{ url_for('userbit', id=id) }}" method="post">
+        <div class="form first">
+            <div class="details personal">
+                <span class="title">Building Details</span>
 
-                        <div class="input-field">
-                            <span>Email</span>
-                            <input type="text" placeholder="Enter your email" name="email" required>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Location</span>
-                            <input type="text" placeholder="Enter your location" name="location" required>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Address</span>
-                            <input type="text" placeholder="Enter your Address" name="address" required>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Mobile Number</span>
-                            <input type="number" placeholder="Enter mobile number" name="phone" required>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Do you have all permits and approvals?</span>
-                            <select name="approval_status" required>
-                                <option disabled selected>Select</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>On-Process</option>
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Timeline</span>
-                            <select name="timeline" required>
-                                
-                                <option disabled selected>Select</option>
-                                <option>Within 6 months</option>
-                                <option>Within 1 year</option>
-                                <option>More than 1 year</option>
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Land size in squarefeet</span>
-                            <input type="number" placeholder="Land size in squarefeet" name="sqft" required>
-                        </div>
-                        <div class="input-field">
-                            <span>Building Type</span>
-                            <select name="build_type" required>
-                                <option disabled selected>Select</option>
-                                <option>Residential buildings/Apartments</option>
-                                <option>Commercial buildings</option>
-                                <option>Single-family detached house</option>
-                                <option>Bungalow </option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <span>Budget</span>
-                            <input type="number" placeholder="Budget" name="budget" required>
-                        </div>
-                        <div class="input-field">
-                            <span>Wood work</span>
-                            <select name="wood" required>
-                                <option disabled selected>Select</option>
-                                <option>With furniture</option>
-                                <option>Without furniture</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <span for="options">How many rooms you want?</span>
-                            <input type="number" placeholder="Rooms" name="room" required>
-                        </div>
-                        <div class="input-field text">
-                            <span for="options">Additional information</span>
-                            <input type="text" placeholder="Write here!!!" name="additional" required>
-                        </div>
-                        <span>{{msg}}</span>
-                        <button class="nextBtn">
-                            <span class="btnText">Submit</span>
-                            <i class="uil uil-navigator"></i>
-                        </button>
+                <div class="fields">
+                    <div class="input-field">
+                        <span>Full Name</span>
+                        <input type="text" placeholder="Enter your name" name="name" required>
                     </div>
+
+                    <div class="input-field">
+                        <span>Email</span>
+                        <input type="text" placeholder="Enter your email" name="email" required>
+                    </div>
+
+                    <div class="input-field">
+                        <span>Location</span>
+                        <input type="text" placeholder="Enter your location" name="location" required>
+                    </div>
+
+                    <div class="input-field">
+                        <span>Address</span>
+                        <input type="text" placeholder="Enter your Address" name="address" required>
+                    </div>
+
+                    <div class="input-field">
+                        <span>Mobile Number</span>
+                        <input type="number" placeholder="Enter mobile number" name="phone" required>
+                    </div>
+
+                    <div class="input-field">
+                        <span>Do you have all permits and approvals?</span>
+                        <select name="approval_status" required>
+                            <option disabled selected>Select</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                            <option>On-Process</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <span>Timeline</span>
+                        <select name="timeline" required>
+
+                            <option disabled selected>Select</option>
+                            <option>Within 6 months</option>
+                            <option>Within 1 year</option>
+                            <option>More than 1 year</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field">
+                        <span>Land size in squarefeet</span>
+                        <input type="number" placeholder="Land size in squarefeet" name="sqft" required>
+                    </div>
+                    <div class="input-field">
+                        <span>Building Type</span>
+                        <select name="build_type" required>
+                            <option disabled selected>Select</option>
+                            <option>Residential buildings/Apartments</option>
+                            <option>Commercial buildings</option>
+                            <option>Single-family detached house</option>
+                            <option>Bungalow </option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <span>Budget</span>
+                        <input type="number" placeholder="Budget" name="budget" required>
+                    </div>
+                    <div class="input-field">
+                        <span>Wood work</span>
+                        <select name="wood" required>
+                            <option disabled selected>Select</option>
+                            <option>With furniture</option>
+                            <option>Without furniture</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <span for="options">How many rooms you want?</span>
+                        <input type="number" placeholder="Rooms" name="room" required>
+                    </div>
+                    <div class="input-field text">
+                        <span for="options">Additional information</span>
+                        <input type="text" placeholder="Write here!!!" name="additional" required>
+                    </div>
+                    <div class="msg">
+                        <span >{{msg}}</span>
+                    </div>
+                    <br>
+                    <button class="nextBtn">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                    <button class="nextBtn1">
+                        <span class="btnText1">view Quotation</span>
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
-                    
-               
             </div>
-        </form>
-    </div>
-    {% endblock %}
+
+
+        </div>
+    </form>
+</div>
+{% endblock %}
