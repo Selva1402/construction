@@ -9,7 +9,7 @@
 }
 body{
     min-height: 100vh;
-    background: #4070f4;
+    background: #ecf0f3;
     transition: var(--tran-05);
 }
 
