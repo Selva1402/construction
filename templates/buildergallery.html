@@ -16,18 +16,7 @@
     {%include 'builderdash.html'%}
     <div class="wrapper2">
 
-        <label for="image">Upload Photos</label>
-        <div class="input-field1" id="imageinsert">
-            <form action="{{ url_for('buildergallery', id=id) }}" method="post" enctype="multipart/form-data">
-                <div class="file-upload-wrapper" data-text="Select your file!">
-                    <input name="image" type="file" class="file-upload-field" id="image" value="">
-                    <input type="submit" value="Upload" name="submit">
-                </div>
-                <span>
-                    <h4>{{a}}</h4>
-                </span>
-            </form>
-        </div>
+        
 
         {% if data %}
         <div class="gallery" id="imageview">
