@@ -17,14 +17,14 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abcdefghijklmno'
+app.config['MAIL_PASSWORD'] = 'dgcbdayybzcxdmvk'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -396,7 +396,7 @@ def userbit(id):
             cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional))
             mysql.connection.commit()
             html = render_template('quationmail.html', name = name, email = email, location = location, phone = phone, approval_status = approval_status, timeline = timeline, sqft = sqft, budget = budget, wood = wood, room = room, additional = additional)
-            msg = 'You have successfully registered your complaint'
+            msg = 'You have successfully registered your Quotation'
             TEXT = Message('Hello, Mail form Future Haus', sender = 'futurehaus2022@gmail.com', recipients = [email])
             # TEXT.body =  """ Dear """+name+"""
             #             You have Successfully send the quotation.
