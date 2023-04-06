@@ -393,7 +393,7 @@ def userbit(id):
             room = request.form['room']
             additional = request.form['additional']
             cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional))
+            cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional, 'Not Assigned'))
             mysql.connection.commit()
             html = render_template('quationmail.html', name = name, email = email, location = location, phone = phone, approval_status = approval_status, timeline = timeline, sqft = sqft, budget = budget, wood = wood, room = room, additional = additional)
             msg = 'You have successfully registered your Quotation'
@@ -465,6 +465,22 @@ def viewquotation(id):
         return render_template('userview.html', acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id, msg = msg)
     else:
         return render_template('userview.html',acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id)
+    
+@app.route('/assigned/<int:id>', methods=["GET","POST"])
+def assigned(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor()
+    cursor.execute("UPDATE bit SET status = % s WHERE uid = % s",('Assigned', id))
+    cursor.connection.commit()
+    return redirect(url_for('viewquotation', id=id, name = name1, email = email1, image = my_string_without_prefix))
+
 
 @app.route('/usergallery/<int:id>', methods=["GET","POST"])
 def usergallery(id):

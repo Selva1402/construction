@@ -21,6 +21,7 @@
             <th>Wood</th>
             <th>Rooms</th>
             <th>Additional</th>
+            <th>Status</th>
         </thead>
 
         <tbody>
@@ -39,6 +40,10 @@
                 <td>{{ data.wood }}</td>
                 <td>{{ data.room }}</td>
                 <td>{{ data.additional }}</td>
+                <td><a href="{{ url_for('assigned', id=id) }}">
+                    {{ data.status }}
+                </a></td>
+
             </tr>
             {% endfor %}
             {% else %}
