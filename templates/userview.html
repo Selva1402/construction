@@ -4,11 +4,15 @@
     .wrapper {
         background-color: aliceblue;
     }
+    table {
+        border-collapse:collapse;
+    }
 </style>
 <div class="wrapper">
     <table>
 
         <thead>
+            <th>Id</th>
             <th>Name</th>
             <th>Email</th>
             <th>Location</th>
@@ -28,6 +32,7 @@
             {% if acc %}
             {% for data in acc: %}
             <tr>
+                <td>{{ data.id }}</td>
                 <td>{{ data.name }}</td>
                 <td>{{ data.email }}</td>
                 <td>{{ data.location }}</td>
