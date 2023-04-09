@@ -11,37 +11,43 @@
 
 <body>
 
-
+    {%include 'builderdash.html' %}
     <div class="wrapper">
-        <form action="{{url_for(' ')}}" method="post">
-            <div class="buttons"><br>
-                
+        <form action="{{ url_for('editmaterial', id=id) }}" method="post">
+            
+
                 <h1>Materials Used In Construction</h1>
                 <p>Cement :</p>
-                <div class="form-row"><input type="text" id="Cement" name="Cement" placeholder="Cement"></div>
+                <div class="form-row"><input type="text" id="cement" name="cement" placeholder="cement"></div>
                 <br>
                 <p>Steel :</p>
                 <div class="form-row"><input type="text" id="steel" name="steel" placeholder="steel"></div><br>
                 <p>Wood :</p>
                 <div class="form-row"><input type="text" id="wood" name="wood" placeholder="wood"></div><br>
                 <p>Bricks and Stone </p>
-                <div class="form-row"><input type="text" id="stone" name="stone" placeholder="Bricks and Stone"></div><br>
+                <div class="form-row"><input type="text" id="bricks" name="bricks" placeholder="bricks"></div>
+                <br>
                 <p>Ceramic Tiles</p>
-                <div class="form-row"><input type="text" id="Tiles" name="Tiles" placeholder="Ceramic Tiles"></div><br>
+                <div class="form-row"><input type="text" id="tiles" name="tiles" placeholder="tiles"></div><br>
                 <p>Paints</p>
-                <div class="form-row"><input type="text" id="paints" name="paints" placeholder="paints"></div><br>
+                <div class="form-row"><input type="text" id="paint" name="paint" placeholder="paint"></div><br>
                 <p>Glass</p>
                 <div class="form-row"><input type="text" id="glass" name="glass" placeholder="glass"></div><br>
                 <br>
-                <center><span>{{a}}</span></center>
+                <center><span>{{a}}</span></center><br>
+                
 
-                <button class="button-85" role="button">Save</button>
-
-            </div>
+                <center><button class="button-85" role="button" onclick="{{ url_for('editmaterial', id=id) }}">Save</button></center>
         </form>
 
     </div>
- 
+    <!-- <script>
+        var button = document.getElementById('myButton');
+        button.onclick = function () {
+            location.assign("{{ url_for('editmaterial', id=id) }}");
+        }
+    </script> -->
+
 </body>
 
 </html>

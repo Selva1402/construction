@@ -235,6 +235,64 @@ def buildergallery(id):
             msg = 'No Image is uploaded'
             return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, msg = msg)
 
+@app.route('/material/<int:id>', methods=['GET','POST'])
+def material(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM material WHERE uid = % s', (id, ))
+    acc = cursor.fetchone()
+    return render_template('showmater.html', acc = acc, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+
+@app.route('/editmaterial/<int:id>', methods=['POST','GET'])
+def editmaterial(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    msg = ''
+    if request.method == 'POST' and 'cement' in request.form and 'steel' in request.form and 'wood' in request.form and 'bricks' in request.form and 'tiles' in request.form and 'paint' in request.form and 'glass' in request.form:
+        if 'id' in session:
+            uid=session['id']
+            cement = request.form['cement']
+            steel = request.form['steel']
+            wood = request.form['wood']
+            bricks = request.form['bricks']
+            tiles = request.form['tiles']
+            paint = request.form['paint']
+            glass = request.form['glass']
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT * FROM material WHERE uid = % s', (id, ))
+            account = cursor.fetchone()
+            if not account:
+                cursor = mysql.connection.cursor()
+                cursor.execute('INSERT INTO material VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (uid, cement, steel, wood, bricks, tiles, paint, glass))
+                mysql.connection.commit()
+                msg = 'Added Successfully!'
+                return redirect(url_for('material',  id = id, name = name1, comp = comp, image = my_string_without_prefix, a = msg))
+            else:
+                cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+                cursor.execute('UPDATE material SET uid = % s, cement = % s, steel = % s, wood = % s, bricks = % s, tiles = % s, paint = % s, glass = % s WHERE uid = % s', (uid, cement, steel, wood, bricks, tiles, paint, glass, id))
+                mysql.connection.commit()
+                msg = 'Updated Successfully!'
+                return redirect(url_for('material', id = id, name = name1, comp = comp, image = my_string_without_prefix, a = msg))
+        else:
+            msg = 'Please fill the form!'
+            return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)  
+    return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)
+    
+
+
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
