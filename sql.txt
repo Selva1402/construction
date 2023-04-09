@@ -1,0 +1,1 @@
+mysqldump --host=localhost --user=root --port=3306 --password=selva2002 haus > D:\backup_all_databases.sql

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile Card </title>
+    <link rel="stylesheet" href="/static/buildermater.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+
+    {%include 'builderdash.html' %}
+    <div class="wrapper">
+        <h1>Materials Used In Construction</h1>
+        <table>
+            <tr>
+                <td>
+                    <p>Cement</p>
+                </td>
+                <td>{{acc.cement}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Steel</p>
+                </td>
+                <td>{{acc.steel}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Wood</p>
+                </td>
+                <td>{{acc.wood}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Bricks</p>
+                </td>
+                <td>{{acc.bricks}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Ceramic Tiles</p>
+                </td>
+                <td>{{acc.tiles}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Paints</p>
+                </td>
+                <td>{{acc.paint}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Glass</p>
+                </td>
+                <td>{{acc.glass}}</td>
+            </tr>
+        </table><br>
+        <span>{{a}}</span><br>
+        <button class="button-85" role="button" id="myButton">Edit Materials</button>
+
+    </div>
+    <script>
+        var button = document.getElementById('myButton');
+        button.onclick = function () {
+            location.assign("{{ url_for('editmaterial', id=id) }}");
+        }
+    </script>
+
+</body>
+
+</html>

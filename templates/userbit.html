@@ -11,32 +11,32 @@
                     <div class="fields">
                         <div class="input-field">
                             <span>Full Name</span>
-                            <input type="text" placeholder="Enter your name" name="name" required>
+                            <input type="text" placeholder="Enter your name" name="name" >
                         </div>
 
                         <div class="input-field">
                             <span>Email</span>
-                            <input type="text" placeholder="Enter your email" name="email" required>
+                            <input type="text" placeholder="Enter your email" name="email" >
                         </div>
 
                         <div class="input-field">
                             <span>Location</span>
-                            <input type="text" placeholder="Enter your location" name="location" required>
+                            <input type="text" placeholder="Enter your location" name="location" >
                         </div>
 
                         <div class="input-field">
                             <span>Address</span>
-                            <input type="text" placeholder="Enter your Address" name="address" required>
+                            <input type="text" placeholder="Enter your Address" name="address" >
                         </div>
 
                         <div class="input-field">
                             <span>Mobile Number</span>
-                            <input type="number" placeholder="Enter mobile number" name="phone" required>
+                            <input type="number" placeholder="Enter mobile number" name="phone" >
                         </div>
 
                         <div class="input-field">
                             <span>Do you have all permits and approvals?</span>
-                            <select name="approval_status" required>
+                            <select name="approval_status" >
                                 <option disabled selected>Select</option>
                                 <option>Yes</option>
                                 <option>No</option>
@@ -46,7 +46,7 @@
 
                         <div class="input-field">
                             <span>Timeline</span>
-                            <select name="timeline" required>
+                            <select name="timeline">
                                 
                                 <option disabled selected>Select</option>
                                 <option>Within 6 months</option>
@@ -57,11 +57,11 @@
 
                         <div class="input-field">
                             <span>Land size in squarefeet</span>
-                            <input type="number" placeholder="Land size in squarefeet" name="sqft" required>
+                            <input type="number" placeholder="Land size in squarefeet" name="sqft">
                         </div>
                         <div class="input-field">
                             <span>Building Type</span>
-                            <select name="build_type" required>
+                            <select name="build_type" >
                                 <option disabled selected>Select</option>
                                 <option>Residential buildings/Apartments</option>
                                 <option>Commercial buildings</option>
@@ -71,11 +71,11 @@
                         </div>
                         <div class="input-field">
                             <span>Budget</span>
-                            <input type="number" placeholder="Budget" name="budget" required>
+                            <input type="number" placeholder="Budget" name="budget" >
                         </div>
                         <div class="input-field">
                             <span>Wood work</span>
-                            <select name="wood" required>
+                            <select name="wood" >
                                 <option disabled selected>Select</option>
                                 <option>With furniture</option>
                                 <option>Without furniture</option>
@@ -83,23 +83,26 @@
                         </div>
                         <div class="input-field">
                             <span for="options">How many rooms you want?</span>
-                            <input type="number" placeholder="Rooms" name="room" required>
+                            <input type="number" placeholder="Rooms" name="room" >
                         </div>
                         <div class="input-field text">
                             <span for="options">Additional information</span>
-                            <input type="text" placeholder="Write here!!!" name="additional" required>
+                            <input type="text" placeholder="Write here!!!" name="additional" >
                         </div>
                         <div class="msg">
-                         <span>msg</span>
+                         <span><span>
+                            <h4>{{msg}}</h4>
+                        </span></span>
                         </div>
                         <button class="nextBtn">
                             <span class="btnText">Submit</span>
                             <i class="uil uil-navigator"></i>
                         </button>
-                        <button class="nextBtn1">
+                        <!-- <button class="nextBtn1"> -->
+                            <a href="{{ url_for('viewquotation', id=id) }}">
                             <span class="btnText">View Quotation</span>
-                            <i class="far fa-eye"></i>
-                        </button>
+                            <i class="far fa-eye"></i></a>
+                        <!-- </button> -->
                     </div>
                 </div>
                     

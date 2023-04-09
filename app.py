@@ -9,8 +9,6 @@ import random
 
 import re
 
-
-
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
@@ -19,7 +17,7 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
@@ -124,7 +122,7 @@ def builderinfo():
                 return redirect(url_for('builderdash'))
             else:
                 msg = 'Incorrect username / password !'
-                return render_template('builderlogin.html', msg = msg,indicator="failure")
+                return render_template('builderlogin.html', msg = msg, indicator="failure")
         else:
             return render_template("builderlogin.html")
 
@@ -236,6 +234,64 @@ def buildergallery(id):
         else:
             msg = 'No Image is uploaded'
             return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, msg = msg)
+
+@app.route('/material/<int:id>', methods=['GET','POST'])
+def material(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM material WHERE uid = % s', (id, ))
+    acc = cursor.fetchone()
+    return render_template('showmater.html', acc = acc, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+
+@app.route('/editmaterial/<int:id>', methods=['POST','GET'])
+def editmaterial(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    msg = ''
+    if request.method == 'POST' and 'cement' in request.form and 'steel' in request.form and 'wood' in request.form and 'bricks' in request.form and 'tiles' in request.form and 'paint' in request.form and 'glass' in request.form:
+        if 'id' in session:
+            uid=session['id']
+            cement = request.form['cement']
+            steel = request.form['steel']
+            wood = request.form['wood']
+            bricks = request.form['bricks']
+            tiles = request.form['tiles']
+            paint = request.form['paint']
+            glass = request.form['glass']
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT * FROM material WHERE uid = % s', (id, ))
+            account = cursor.fetchone()
+            if not account:
+                cursor = mysql.connection.cursor()
+                cursor.execute('INSERT INTO material VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (uid, cement, steel, wood, bricks, tiles, paint, glass))
+                mysql.connection.commit()
+                msg = 'Added Successfully!'
+                return redirect(url_for('material',  id = id, name = name1, comp = comp, image = my_string_without_prefix, a = msg))
+            else:
+                cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+                cursor.execute('UPDATE material SET uid = % s, cement = % s, steel = % s, wood = % s, bricks = % s, tiles = % s, paint = % s, glass = % s WHERE uid = % s', (uid, cement, steel, wood, bricks, tiles, paint, glass, id))
+                mysql.connection.commit()
+                msg = 'Updated Successfully!'
+                return redirect(url_for('material', id = id, name = name1, comp = comp, image = my_string_without_prefix, a = msg))
+        else:
+            msg = 'Please fill the form!'
+            return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)  
+    return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)
+    
+
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
@@ -395,54 +451,18 @@ def userbit(id):
             room = request.form['room']
             additional = request.form['additional']
             cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional))
+            cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional, 'Not Assigned'))
             mysql.connection.commit()
             html = render_template('quationmail.html', name = name, email = email, location = location, phone = phone, approval_status = approval_status, timeline = timeline, sqft = sqft, budget = budget, wood = wood, room = room, additional = additional)
             msg = 'You have successfully registered your Quotation'
             TEXT = Message('Hello, Mail form Future Haus', sender = 'futurehaus2022@gmail.com', recipients = [email])
-            # TEXT.body =  """ Dear """+name+"""
-            #             You have Successfully send the quotation.
-            #             The Quatations are listed below,
-            #             Name : """+name+"""
-            #             Email : """+email+"""
-            #             Location : """+location+"""
-            #             Address : """+address+"""
-            #             Contact Number : """+phone+"""
-            #             Approval Status : """+approval_status+"""
-            #             Timeline : """+timeline+"""
-            #             Square Feet : """+sqft+"""
-            #             Building type : """+build_type+"""
-            #             Budget : """+budget+"""
-            #             Wood Type : """+wood+"""
-            #             How many Rooms  : """+room+"""
-            #             Additional Informations : """+additional+"""
-            #     The Plans are given by the Engineer that are shown in the Bitting Page.
-            #     Please check the Bitting page for choosing the best Engineer."""
             TEXT.html = html
             mail.send(TEXT)
             cursor.execute('SELECT email FROM builder')
             emails = cursor.fetchall()
-            # name1 = cursor.fetchall() 
-            # Loop through email addresses and send message
             for emails in emails:
                 html1 = render_template('quotationengin.html', name = name, email = email, location = location, phone = phone, approval_status = approval_status, timeline = timeline, sqft = sqft, budget = budget, wood = wood, room = room, additional = additional)
                 TEXT1 = Message('Hello, Mail from Future Haus', sender = 'futurehaus2022@gmail.com', recipients = [emails[0]])
-                # TEXT1.body = """The Customer sends the Qutation for you
-                #                 Customer Name : """+name+"""
-                #                 Email : """+email+"""
-                #                 Location : """+location+"""
-                #                 Address : """+address+"""
-                #                 Contact Number : """+phone+"""
-                #                 Approval Status : """+approval_status+"""
-                #                 Timeline : """+timeline+"""
-                #                 Square Feet : """+sqft+"""
-                #                 Building type : """+build_type+"""
-                #                 Budget : """+budget+"""
-                #                 Wood Type : """+wood+"""
-                #                 How many Rooms  : """+room+"""
-                #                 Additional Informations : """+additional+"""
-                #         You can send your plans and You can bitting for this quotation.
-                #         if you have the best engineer, you are selected by the Customer"""
                 TEXT1.html = html1
                 mail.send(TEXT1)
             return render_template('userbit.html', msg = msg, name = name1, email = email1, image = my_string_without_prefix, id = id)
@@ -458,7 +478,33 @@ def viewquotation(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    return render_template('userbitlist.html', name = name1, email = email1, image = my_string_without_prefix, id = id)
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM bit WHERE uid = %s", (id, ))
+    cursor.connection.commit()
+    acc = cursor.fetchall()
+    if not acc:
+        msg = 'No Data is Found'
+        return render_template('userview.html', acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id, msg = msg)
+    else:
+        return render_template('userview.html',acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id)
+    
+@app.route('/assigned/<int:id>', methods=["GET","POST"])
+def assigned(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor1 = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor1.exexute("SELECT id FROM bit")
+    ids = cursor1.fetchone()
+    cursor.execute("UPDATE bit SET status = % s WHERE id = % s",('Assigned', ids))
+    cursor.connection.commit()
+    return redirect(url_for('viewquotation', id=id, name = name1, email = email1, image = my_string_without_prefix))
+
 
 @app.route('/usergallery/<int:id>', methods=["GET","POST"])
 def usergallery(id):

@@ -44,19 +44,23 @@
             top: -68px;
             left: 35%;
         }
-        .table{
+        table{
     background-color: rgb(227, 222, 252);
     box-shadow: -3px -3px 7px #97c4e0,
                  3px 3px 5px #4545ad;
+                 border-collapse:collapse;
                
   }
   
   table, th, td {
-    border:2px solid rgb(22, 73, 212);
+    border: 2px solid rgb(9, 13, 22);
     padding: 05px;
     background-color: #f4f4f4;
     width: 600px;
     
+  }
+  .shrink{
+    white-space:nowrap
   }
     </style>
 </head>
@@ -68,48 +72,48 @@
         <h3 class="content">The Customer sends the Qutation for you,</h3><br>
         <table>
             <tr>
-                <td>Customer Name</td>
-                <td>{{name}}</td>
+                <td class="shrink">Customer Name</td>
+                <td class="shrink">{{name}}</td>
             </tr>
             <tr>
-                <td>Customer Email</td>
-                <td>{{email}}</td>
+                <td class="shrink">Customer Email</td>
+                <td class="shrink">{{email}}</td>
             </tr>
             <tr>
-                <td>Location</td>
-                <td>{{location}}</td>
+                <td class="shrink">Location</td>
+                <td class="shrink">{{location}}</td>
             </tr>
             <tr>
-                <td>Phone Number</td>
-                <td>{{phone}}</td>
+                <td class="shrink">Phone Number</td>
+                <td class="shrink">{{phone}}</td>
             </tr>
             <tr>
-                <td>Approval Status</td>
-                <td>{{approval_status}}</td>
+                <td class="shrink">Approval Status</td>
+                <td class="shrink">{{approval_status}}</td>
             </tr>
             <tr>
-                <td>TimeLine</td>
-                <td>{{timeline}}</td>
+                <td class="shrink">TimeLine</td>
+                <td class="shrink">{{timeline}}</td>
             </tr>
             <tr>
-                <td>Square Feet</td>
-                <td>{{sqft}}</td>
+                <td class="shrink">Square Feet</td>
+                <td class="shrink">{{sqft}}</td>
             </tr>
             <tr>
-                <td>Budget</td>
-                <td>{{budget}}</td>
+                <td class="shrink">Budget</td>
+                <td class="shrink">{{budget}}</td>
             </tr>
             <tr>
-                <td>Wood Type</td>
-                <td>{{wood}}</td>
+                <td class="shrink">Wood Type</td>
+                <td class="shrink">{{wood}}</td>
             </tr>
             <tr>
-                <td>Rooms</td>
-                <td>{{room}}</td>
+                <td class="shrink">Rooms</td>
+                <td class="shrink">{{room}}</td>
             </tr>
             <tr>
-                <td>Additional Information</td>
-                <td>{{additional}}</td>
+                <td class="shrink">Additional Information</td>
+                <td class="shrink">{{additional}}</td>
             </tr>
         </table>
         <br>
