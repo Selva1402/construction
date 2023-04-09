@@ -9,7 +9,7 @@
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="https://kit.fontawesome.com/b949337282.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="body">
@@ -25,42 +25,42 @@
     <ul class="nav-list">
       <li>
         <a href="/builderdash">
-          <i class='bx bx-grid-alt'></i>
+          <i class="fas fa-user-circle"></i>
           <span class="links_name">Dashboard</span>
         </a>
         <span class="tooltip">Dashboard</span>
       </li>
       <li>
         <a href="#">
-          <i class='bx bx-user'></i>
+          <i class="fas fa-edit"></i>
           <span class="links_name">Client</span>
         </a>
         <span class="tooltip">Client</span>
       </li>
       <li>
         <a href="#">
-          <i class='bx bx-chat'></i>
+          <i class="fas fa-comments"></i>
           <span class="links_name">Messages</span>
         </a>
         <span class="tooltip">Messages</span>
       </li>
       <li>
         <a href="{{ url_for('buildergallery', id=id) }}">
-          <i class='bx bx-photo-album' ></i>
+          <i class="fas fa-images"></i>
           <span class="links_name">Gallery</span>
         </a>
         <span class="tooltip">Gallery</span>
       </li>
       <li>
         <a href="{{ url_for('material', id=id) }}">
-          <i class="far fa-tools"></i>
+          <i class="fas fa-tools"></i>
           <span class="links_name">Materials</span>
         </a>
         <span class="tooltip">Materials</span>
       </li>
       <li>
         <a href="#">
-          <i class='bx bx-heart'></i>
+          <i class="fas fa-chart-pie"></i>
           <span class="links_name">Saved</span>
         </a>
         <span class="tooltip">Saved</span>
@@ -124,6 +124,7 @@ modeSwitch.addEventListener("click" , () =>{
       }
     }
   </script>
+  
 </body>
 
 </html>
