@@ -179,7 +179,6 @@ def reset_password(email):
             else:
                 flash('Invalid OTP')
                 return redirect(url_for('reset_password', email=email))
-
         return render_template('reset_password.html', email=email)
     flash('Email does not exist')
     return redirect(url_for('forgot_password'))
