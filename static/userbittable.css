@@ -1,26 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 
-.table{
-    background-color: #ecf0f3;
+.view{
+    background-color: #ecf1f5;
     position: relative;
     width: 1010px;
     min-height: 500px;
-    margin-left: 190px;
+    margin-left: 450px;
     padding: 30px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    box-shadow: #ecf0f3
-               
+    box-shadow: #ecf0f3;
+    z-index: 4;      
   }
   
   table, th, td {
     border:1px solid black;
     padding: 10px;
-    background: linear-gradient(0deg, #ecf0f3 0%, #ecf0f3 100%);
+    background: linear-gradient(0deg, #0c75c6 0%, #0b7fd7 100%);
     
     
   }

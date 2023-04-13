@@ -13,7 +13,6 @@
     list-style-type: none;
     text-decoration: none;
     font-family: 'poppins',sans-serif;
-
 }
 
 #nav-toggle:checked + .sidebar{
@@ -52,10 +51,10 @@ header{
     padding: 1rem 1.5rem;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     position: fixed;
-    left: 100px;
+    left: 250px;
     width: calc(100% - 345px);
     top: 0;
-    z-index: 100;
+    z-index: 0;
     transition: left 300ms;
 }
 
@@ -113,10 +112,13 @@ header label span{
 }
 
 main{
-    margin-top: 85px;
+    margin-top: 100px;
     padding: 2rem 1.5rem;
     background: #ecf0f3;
+    
     min-height: calc(100vh - 90px);
+    width: 1200px;
+    margin-left: 150px;
 }
 
 .cards{

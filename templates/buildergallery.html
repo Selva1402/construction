@@ -8,36 +8,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Builder Gallery</title>
     <link rel="stylesheet" href="/static/gallery.css">
+    <link rel="stylesheet" href="/static/userbit.css">
+    <!-- <link rel="stylesheet" href="/static/gallery.css"> -->
+
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
 
     {%include 'builderdash.html'%}
-    <div class="wrapper2">
 
-        
+    <div class="container1">
+        <header>Construction Details</header>
 
-        {% if data %}
-        <div class="gallery" id="imageview">
-            {% for row in data %}
-            <div class="image"><span><img src="/static/image/{{ row }}" alt="image" width="100" height="100"></span>
+        <form action=" " method="post">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Building Details</span>
+
+                    <div class="fields">
+
+                        <div class="input-field">
+                            <span>Location</span>
+                            <input type="text" placeholder="Enter your location" name="location">
+                        </div>
+                        <div class="input-field">
+                            <span>Do you have all permits and approvals?</span>
+                            <select name="approval_status">
+                                <option disabled selected>Select</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option>On-Process</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <span>Land size in squarefeet</span>
+                            <input type="number" placeholder="Land size in squarefeet" name="sqft">
+                        </div>
+                        <div class="input-field">
+                            <span>Building Type</span>
+                            <select name="build_type">
+                                <option disabled selected>Select</option>
+                                <option>Residential buildings/Apartments</option>
+                                <option>Commercial buildings</option>
+                                <option>Single-family detached house</option>
+                                <option>Bungalow </option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <span>Budget</span>
+                            <input type="number" placeholder="Budget" name="budget">
+                        </div>
+                        <div class="input-field">
+                            <span>Wood work</span>
+                            <select name="wood">
+                                <option disabled selected>Select</option>
+                                <option>With furniture</option>
+                                <option>Without furniture</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <span for="options">Rooms</span>
+                            <input type="number" placeholder="Rooms" name="room">
+                        </div>
+                        <div class="input-field">
+                            <span for="options">Upload Image</span>
+                            <input type="file" placeholder="Rooms" name="file">
+                        </div>
+                        <div class="msg">
+                            <span><span>
+                                    <h4>{{msg}}</h4>
+                                </span></span>
+                        </div>
+                        <button class="nextBtn">
+                            <span class="btnText">Submit</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
+                        <!-- <button class="nextBtn1"> -->
+                        
+                    </div>
+                </div>
+
+
             </div>
-            <!-- <div class="image"><span><img src="/static/img16.jpg" alt=""></span></div>
+        </form>
+
+
+        <div class="wrapper2">
+
+
+
+            {% if data %}
+            <div class="gallery" id="imageview">
+                {% for row in data %}
+                <div class="image"><span><img src="/static/image/{{ row }}" alt="image" width="100" height="100"></span>
+                </div>
+                <!-- <div class="image"><span><img src="/static/img16.jpg" alt=""></span></div>
             <div class="image"><span><img src="/static/img17.jpg" alt=""></span></div>
             <div class="image"><span><img src="/static/img18.jpg" alt=""></span></div>
             <div class="image"><span><img src="/static/img19.jpg" alt=""></span></div>
             <div class="image"><span><img src="/static/img20.jpg" alt=""></span></div> -->
-            {% endfor %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <span>
+                <h4>{{msg}}</h4>
+            </span>
+            {% endif %}
         </div>
-        {% else %}
-        <span>
-            <h4>{{msg}}</h4>
-        </span>
-        {% endif %}
     </div>
 
-    
 
     <script src="/js/gallery.js"></script>
 

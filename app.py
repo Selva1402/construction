@@ -7,6 +7,7 @@ import os
 import random
 import re
 
+
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
@@ -15,14 +16,14 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'selva2002'
+app.config['MYSQL_PASSWORD'] = 'Raja@123'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abcdefghijklmno'
+app.config['MAIL_PASSWORD'] = 'abcdefghij'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
