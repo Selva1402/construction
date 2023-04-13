@@ -26,24 +26,39 @@ h1{
 }
 
 .wrapper{
-  background: #ecf0f3;
+  background: #dedfe8;
   position: relative;
-  width: 450px;
+  width: 500px;
   padding: 30px;
   border-radius: 10px;
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  box-shadow: inset -3px -3px 7px #ffffff,
+        inset 3px 3px 5px #ceced1;
 }
 
 
-table, th, td {
+table{
   border:2px solid rgb(9, 13, 22);
   padding: 05px;
   background-color: #ecf0f3;
-  width: 400px;
+  width: 110%;
   border-collapse:collapse;
+
+}
+
+tr,td{
+  border: 2px solid blue;
+  padding: 1rem;
+  background:rgb(215, 215, 215);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+table td:first-child {
+  background-color: #1d1c1c;
+  font-weight: bold;
+  color: #b0b7b6;
   
 }
 
@@ -124,7 +139,7 @@ table, th, td {
       border-radius: 10px;
       } 
 
-.wrapper .buttons input{
+.wrapper .buttons .input{
   color: rgb(7, 7, 7);
   background: linear-gradient(0deg, #dfddddd3 0%, #e9e9ebf7 100%);
   border-radius: 10px;  
@@ -133,7 +148,7 @@ table, th, td {
              3px 3px 5px #4545ad;
 }
 
-.wrapper input{
+.wrapper .input{
     width: 100%;
     margin-top: 02%;
     padding: 11.5px 15px 8px 15px;
@@ -156,9 +171,25 @@ table, th, td {
     -webkit-box-sizing: border-box;
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-weight: 500;
+  font-size: .8vw;
+  color: #fff;
+  background-color: rgb(28,28,30);
+  box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
+  border-radius: 0.4vw;
+  border: none;
+  outline: none;
+  transition: .4s;
 }
 
+.input:hover {
+  box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+}
 
+.input:focus {
+  box-shadow: 0 0 0 .15vw rgb(10, 10, 201);
+}
 /* SCROLLBAR */
 ::-webkit-scrollbar {
     width: 10px;

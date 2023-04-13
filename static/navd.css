@@ -177,6 +177,7 @@ body.dark .sidebar li a:hover:before {
     box-shadow: inset -3px -3px 7px #d420207d,
         inset 3px 3px 5px #9205218f;
 }
+
 .sidebar li a .links_name {
     color: #31344b;
     font-size: 15px;

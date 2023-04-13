@@ -14,30 +14,46 @@
     {%include 'builderdash.html' %}
     <div class="wrapper">
         <form action="{{ url_for('editmaterial', id=id) }}" method="post">
-            
 
-                <h1>Materials Used In Construction</h1>
+
+            <h1>Materials Used In Construction</h1>
+            <div class="part1">
                 <p>Cement :</p>
-                <div class="form-row"><input type="text" id="cement" name="cement" placeholder="cement"></div>
+                <div class="form-row"><input class="input" type="text" id="cement" name="cement" placeholder="cement">
+                </div>
                 <br>
                 <p>Steel :</p>
-                <div class="form-row"><input type="text" id="steel" name="steel" placeholder="steel"></div><br>
+                <div class="form-row"><input class="input" type="text" id="steel" name="steel" placeholder="steel">
+                </div><br>
                 <p>Wood :</p>
-                <div class="form-row"><input type="text" id="wood" name="wood" placeholder="wood"></div><br>
+                <div class="form-row"><input class="input" type="text" id="wood" name="wood" placeholder="wood"></div>
+                <br>
                 <p>Bricks and Stone </p>
-                <div class="form-row"><input type="text" id="bricks" name="bricks" placeholder="bricks"></div>
+                <div class="form-row"><input class="input" type="text" id="bricks" name="bricks" placeholder="bricks">
+                </div>
                 <br>
                 <p>Ceramic Tiles</p>
-                <div class="form-row"><input type="text" id="tiles" name="tiles" placeholder="tiles"></div><br>
-                <p>Paints</p>
-                <div class="form-row"><input type="text" id="paint" name="paint" placeholder="paint"></div><br>
-                <p>Glass</p>
-                <div class="form-row"><input type="text" id="glass" name="glass" placeholder="glass"></div><br>
-                <br>
-                <center><span>{{a}}</span></center><br>
-                
+                <div class="form-row"><input class="input" type="text" id="tiles" name="tiles" placeholder="tiles">
+                </div><br>
 
-                <center><button class="button-85" role="button" onclick="{{ url_for('editmaterial', id=id) }}">Save</button></center>
+            </div>
+            <div class="part2">
+                <p>Paints</p>
+                <div class="form-row"><input class="input" type="text" id="paint" name="paint" placeholder="paint">
+                </div>
+                <br>
+                <p>Glass</p>
+                <div class="form-row"><input class="input" type="text" id="glass" name="glass" placeholder="glass">
+                </div>
+                <br>
+                <br>
+            </div>
+
+            <center><span>{{a}}</span></center><br>
+
+
+            <center><button class="button-85" role="button" onclick="{{ url_for('editmaterial', id=id) }}">Save</button>
+            </center>
         </form>
 
     </div>
