@@ -7,10 +7,13 @@
   <link rel="stylesheet" href="/static/navd.css">
   <link rel="stylesheet" href="/static/userbit.css">
   <link rel="stylesheet" href="/static/userbittable.css">
+  <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="stylesheet" href="/static/gallery.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
 
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -38,10 +41,10 @@
       </li>
       <li>
         <a href="{{ url_for('userbit', id=id) }}">
-          <i class="fal fa-money-check-edit"></i>
-          <span class="links_name">Bit</span>
+          <i class="las la-file-contract" style="font-size: 24px;"></i>
+          <span class="links_name">Bidding</span>
         </a>
-        <span class="tooltip">Bit</span>
+        <span class="tooltip">Bidding</span>
       </li>
       <li>
         <a href="#">
@@ -65,7 +68,7 @@
         <span class="tooltip">Order</span>
       </li>
       <li>
-        <a href="{{ url_for('viewquotation', id=id) }}">
+        <a href="#">
           <i class='bx bx-heart'></i>
           <span class="links_name">Saved</span>
         </a>

@@ -179,7 +179,6 @@ def reset_password(email):
             else:
                 flash('Invalid OTP')
                 return redirect(url_for('reset_password', email=email))
-
         return render_template('reset_password.html', email=email)
     flash('Email does not exist')
     return redirect(url_for('forgot_password'))
@@ -195,7 +194,7 @@ def builderdash():
         image = acc[10]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('builderdash.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
+        return render_template('navprof.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
 
 
 @app.route('/buildergallery/<int:id>', methods=["GET","POST"])
@@ -498,9 +497,9 @@ def assigned(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    cursor1 = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor1.exexute("SELECT id FROM bit")
-    ids = cursor1.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT id FROM bit")
+    ids = cursor.fetchone()
     cursor.execute("UPDATE bit SET status = % s WHERE id = % s",('Assigned', ids))
     cursor.connection.commit()
     return redirect(url_for('viewquotation', id=id, name = name1, email = email1, image = my_string_without_prefix))
