@@ -4,9 +4,7 @@ import hashlib, secrets
 import MySQLdb.cursors
 from flask_mail import Mail, Message
 import os
-
 import random
-
 import re
 
 app = Flask(__name__)
@@ -289,8 +287,54 @@ def editmaterial(id):
             msg = 'Please fill the form!'
             return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)  
     return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)
-    
 
+# @app.route('/messageuser/<int:id>', methods=['GET', 'POST'])
+# def messageuser(id):
+#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+#     cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+#     row = cursor.fetchone()
+#     name1 = row['username']
+#     email1 = row['email']
+#     image = row['image']
+#     my_string = image.decode('utf-8')
+#     my_string_without_prefix = my_string.strip("'")
+#     if request.method == 'POST':
+#         uid = session['id']
+#         sender = name1
+#         receiver = 'seller'
+#         message = request.form['message']
+
+#         # Insert message into database
+#         c = mysql.connection.cursor()
+#         c.execute("INSERT INTO messages VALUES (% s, % s, % s, % s)", (uid, sender, receiver, message))
+#         mysql.connection.commit()
+#         return redirect(url_for('messageuser', id = id, name = name1, email = email1, image = my_string_without_prefix))
+
+#     return render_template('chat.html', id = id, name = name1, email = email1, image = my_string_without_prefix)
+
+# @app.route('/messagebuilder/<int:id>', methods=['GET', 'POST'])
+# def messagebuilder(id):
+#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+#     cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+#     row = cursor.fetchone()
+#     name1 = row['username']
+#     comp = row['companyname']
+#     image = row['image']
+#     my_string = image.decode('utf-8')
+#     my_string_without_prefix = my_string.strip("'")
+#     if request.method == 'POST':
+#         uid = session['id']
+#         sender = name1
+#         receiver = 'customer'
+#         message = request.form['message']
+
+#         # Insert message into database
+#         c = mysql.connection.cursor()
+#         c.execute("INSERT INTO messages VALUES (% s, % s, % s, % s)", (uid, sender, receiver, message))
+#         mysql.connection.commit()
+#         return redirect(url_for('messagebuilder', id = id, name = name1, comp = comp, image = my_string_without_prefix))
+
+#     return render_template('chatbuilder.html', id = id, name = name1, comp = comp, image = my_string_without_prefix)
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])
