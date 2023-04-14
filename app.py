@@ -197,10 +197,20 @@ def builderdash(id):
         cursor2 = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         countuser = cursor2.execute('SELECT * FROM users')
         countproj = cursor1.execute('SELECT * FROM images WHERE uid = % s',(id,))
+        cursor1.execute('SELECT * FROM images WHERE uid = % s ORDER BY RAND() LIMIT 6',(id,))
         project = cursor1.fetchall()
-        cursor2.execute('SELECT * FROM users LIMIT 4')
+        cursor2.execute('SELECT * FROM users ORDER BY RAND() LIMIT 4')
         user = cursor2.fetchall()
-        return render_template('navprof.html', user = user, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
+        data_list = []
+        for row in user:
+            id = row['id']
+            name = row['username']
+            location = row['location']
+            image_data = row['image']
+            my_string1 = image_data.decode('utf-8')
+            my_string_without_prefix1 = my_string1.strip("'")
+            data_list.append((id, name, location, my_string_without_prefix1))
+        return render_template('navprof.html', user = data_list, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
 
 @app.route('/showuser/<int:id>', methods=['GET','POST'])
 def showuser(id):

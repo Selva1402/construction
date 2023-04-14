@@ -115,11 +115,11 @@
                             {% for user in user: %}
                             <div class="customer">
                                 <div class="info">
-                                    <img src="/static/images/{{ image }}" width="40px" height="40px" alt="">
+                                    <img src="/static/images/{{ user[3] }}" width="40px" height="40px" alt="">
                                     <div>
 
-                                        <h4>{{user.username}}</h4>
-                                        <small>{{user.location}}</small>
+                                        <h4>{{user[1]}}</h4>
+                                        <small>{{user[2]}}</small>
 
                                     </div>
                                 </div>
