@@ -18,6 +18,14 @@ body{
   min-height: 100vh;
   
 }
+.text21{
+  margin-top: 5px;
+  color: #212121;
+  line-height: 22px;
+  display: table;
+  display: table-row;
+}
+
 .wrapper2{
   width: 900px;
  
@@ -30,7 +38,7 @@ body{
 .gallery .image{
   padding: 7px;
  
-  width: calc(100% / 3);
+  width: calc(100% / 2);
 
 }
 .gallery .image span{

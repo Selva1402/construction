@@ -607,16 +607,21 @@ def usergallery(id):
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT image FROM images')
+    cursor.execute('SELECT * FROM images')
     mysql.connection.commit()
-    image_str_list = []
-    acc = cursor.fetchone()
-    while acc:
-        for image_data in acc:
-            image_str = image_data.decode('utf-8')
-            image_str_list.append(image_str)
-        acc = cursor.fetchone()
-    return render_template('usergallery.html', data = image_str_list, name = name1, email = email1, image = my_string_without_prefix, id = id)
+    acc = cursor.fetchall()
+    data_list = []
+    for row in acc:
+        location = row[2]
+        sqft = row[3]
+        build_type = row[4]
+        budget = row[5]
+        room = row[6]
+        image_data = row[7]
+        my_string1 = image_data.decode('utf-8')
+        my_string_without_prefix1 = my_string1.strip("'")
+        data_list.append((location, sqft, build_type, budget, room, my_string_without_prefix1))
+    return render_template('usergallery.html', data = data_list, name = name1, email = email1, image = my_string_without_prefix, id = id)
 
 @app.route('/logout')
 def logout():
