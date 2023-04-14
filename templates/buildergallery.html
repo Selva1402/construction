@@ -21,7 +21,7 @@
     <div class="container1">
         <header>Construction Details</header>
 
-        <form action=" " method="post">
+        <form action="{{ url_for('buildergallery', id=id) }}" method="POST" enctype="multipart/form-data">
             <div class="form first">
                 <div class="details personal">
                     <span class="title">Building Details</span>
@@ -30,24 +30,15 @@
 
                         <div class="input-field">
                             <span>Location</span>
-                            <input type="text" placeholder="Enter your location" name="location">
-                        </div>
-                        <div class="input-field">
-                            <span>Do you have all permits and approvals?</span>
-                            <select name="approval_status">
-                                <option disabled selected>Select</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>On-Process</option>
-                            </select>
+                            <input type="text" placeholder="Enter your location" name="location" id="location" required>
                         </div>
                         <div class="input-field">
                             <span>Land size in squarefeet</span>
-                            <input type="number" placeholder="Land size in squarefeet" name="sqft">
+                            <input type="number" placeholder="Land size in squarefeet" name="sqft" id="sqft" required>
                         </div>
                         <div class="input-field">
                             <span>Building Type</span>
-                            <select name="build_type">
+                            <select name="build_type" id="build_type" required>
                                 <option disabled selected>Select</option>
                                 <option>Residential buildings/Apartments</option>
                                 <option>Commercial buildings</option>
@@ -57,28 +48,28 @@
                         </div>
                         <div class="input-field">
                             <span>Budget</span>
-                            <input type="number" placeholder="Budget" name="budget">
-                        </div>
-                        <div class="input-field">
-                            <span>Wood work</span>
-                            <select name="wood">
-                                <option disabled selected>Select</option>
-                                <option>With furniture</option>
-                                <option>Without furniture</option>
-                            </select>
+                            <input type="number" placeholder="Budget" name="budget" id="budget" required>
                         </div>
                         <div class="input-field">
                             <span for="options">Rooms</span>
-                            <input type="number" placeholder="Rooms" name="room">
+                            <input type="number" placeholder="Rooms" name="room" id="room" required>
                         </div>
                         <div class="input-field">
                             <span for="options">Upload Image</span>
-                            <input type="file" placeholder="Rooms" name="file">
+                            <input type="file" name="image" id="image" required>
+                        </div>
+                        <div class="input-field">
+                            <span>Building Status</span>
+                            <select name="status" id="status" required>
+                                <option disabled selected>Select</option>
+                                <option>In-progress</option>
+                                <option>completed</option>
+                            </select>
                         </div>
                         <div class="msg">
-                            <span><span>
-                                    <h4>{{msg}}</h4>
-                                </span></span>
+                            <span>
+                                    <center><h4>{{a}}</h4></center>
+                            </span>
                         </div>
                         <button class="nextBtn">
                             <span class="btnText">Submit</span>

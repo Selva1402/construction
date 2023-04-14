@@ -23,7 +23,7 @@
                 <div class="card-single">
                     <div>
                         <h1>
-                            54
+                            {{countu}}
                         </h1>
                         <span>Customer</span>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="card-single">
                     <div>
                         <h1>
-                            79
+                            {{countp}}
                         </h1>
                         <span>projects</span>
                     </div>
@@ -71,7 +71,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Recent Projects</h3>
-                            <button>See all <span class="las la-arrow-right"></span></button>
+                            <a href="{{ url_for('showproject', id=id) }}">
+                            <button>See all <span class="las la-arrow-right"></span></button></a>
                         </div>
 
                         <div class="card-body">
@@ -85,55 +86,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for project in project: %}
                                         <tr>
-                                            <td>Commercial Building</td>
-                                            <td>Tirunelveli</td>
+                                            <td>{{ project.build_type }}</td>
+                                            <td>{{ project.location }}</td>
                                             <td>
-                                                <span class="status purple"></span>
-                                                completed
+                                                {% if project.status == 'completed' %}<span class="status purple"></span>
+                                                {% else %}<span class="status pink"></span>{% endif %}
+                                                {{project.status}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Bungalow</td>
-                                            <td>Madurai</td>
-                                            <td>
-                                                <span class="status pink"></span>
-                                                in progress
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Apartment</td>
-                                            <td>Tenkasi</td>
-                                            <td>
-                                                <span class="status orange"></span>
-                                                pending
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Residental House</td>
-                                            <td>Tirunelveli Town</td>
-                                            <td>
-                                                <span class="status purple"></span>
-                                                completed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Residental House</td>
-                                            <td>Madurai</td>
-                                            <td>
-                                                <span class="status pink"></span>
-                                                in progress
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Commercial Building</td>
-                                            <td>Nagercoil</td>
-                                            <td>
-                                                <span class="status orange"></span>
-                                                pending
-                                            </td>
-                                        </tr>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -145,17 +108,18 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>New customer</h3>
-                            <button>See all <span class="las la-arrow-right"></span></button>
+                            <a href="{{ url_for('showuser', id=id) }}">
+                            <button>See all <span class="las la-arrow-right"></span></button></a>
                         </div>
-
                         <div class="card-body">
+                            {% for user in user: %}
                             <div class="customer">
                                 <div class="info">
-                                    <img src="/static/img18.jpg" width="40px" height="40px" alt="">
+                                    <img src="/static/images/{{ image }}" width="40px" height="40px" alt="">
                                     <div>
 
-                                        <h4>Jestus</h4>
-                                        <small>Tirunelveli</small>
+                                        <h4>{{user.username}}</h4>
+                                        <small>{{user.location}}</small>
 
                                     </div>
                                 </div>
@@ -166,7 +130,8 @@
                                 </div>
 
                             </div>
-                            <div class="customer">
+                            {% endfor %}
+                            <!-- <div class="customer">
                                 <div class="info">
                                     <img src="/static/img18.jpg" width="40px" height="40px" alt="">
                                     <div>
@@ -216,7 +181,7 @@
                                     <span class="las la-phone"></span>
                                 </div>
 
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>

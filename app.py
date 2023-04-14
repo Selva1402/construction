@@ -16,7 +16,7 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
@@ -118,7 +118,7 @@ def builderinfo():
                 session['id'] = account['id']
                 userid =  account['id']
                 session['username'] = account['username']
-                return redirect(url_for('builderdash'))
+                return redirect(url_for('builderdash', id = userid))
             else:
                 msg = 'Incorrect username / password !'
                 return render_template('builderlogin.html', msg = msg, indicator="failure")
@@ -182,8 +182,8 @@ def reset_password(email):
     flash('Email does not exist')
     return redirect(url_for('forgot_password'))
     
-@app.route('/builderdash', methods=["POST","GET"])    
-def builderdash():
+@app.route('/builderdash/<int:id>', methods=["POST","GET"])    
+def builderdash(id):
     if 'id' in session:
         uid = session['id']
         cursor = mysql.connection.cursor()
@@ -193,8 +193,35 @@ def builderdash():
         image = acc[10]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('navprof.html',name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
+        cursor1 = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor2 = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        countuser = cursor2.execute('SELECT * FROM users')
+        countproj = cursor1.execute('SELECT * FROM images WHERE uid = % s',(id,))
+        project = cursor1.fetchall()
+        cursor2.execute('SELECT * FROM users LIMIT 4')
+        user = cursor2.fetchall()
+        return render_template('navprof.html', user = user, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
 
+@app.route('/showuser/<int:id>', methods=['GET','POST'])
+def showuser(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor.execute('SELECT * FROM users')
+    user = cursor.fetchall()
+    return render_template('seeall.html', user = user, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+
+@app.route('/showproject/<int:id>', methods=['GET','POST'])
+def showproject(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM images WHERE uid = % s',(id,))
+    project = cursor.fetchall()
+    return render_template('seeproject.html', project = project, id = id)
 
 @app.route('/buildergallery/<int:id>', methods=["GET","POST"])
 def buildergallery(id):
@@ -206,26 +233,35 @@ def buildergallery(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    if request.method == 'POST' and 'image' in request.files:
-        uid = session['id']
-        image2 = request.files['image']
-        image2.save(os.path.join(app.static_folder, 'image', image2.filename))
-        if not image2:
-            msg = 'Image not Inserted'
-            return render_template('buildergallery.html', a = msg, id = id)    
-        else:
-            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute("INSERT INTO image VALUES (NULL, %s, %s)",(uid, image2.filename))
-            mysql.connection.commit()
-            return redirect(url_for('buildergallery', id = id))
-    else:
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM image WHERE uid = %s', (id, ))
+    msg = ''
+    if request.method=='POST' and 'location' in request.form and 'sqft' in request.form and 'build_type' in request.form and 'budget' in request.form and 'room' in request.form and 'image' in request.files and 'status' in request.form:
+        if 'id' in session:
+            uid = session['id']
+            location = request.form['location']
+            sqft = request.form['sqft']
+            build_type = request.form['build_type']
+            budget = request.form['budget']
+            room = request.form['room']
+            image2 = request.files['image']
+            status = request.form['status']
+            image2.save(os.path.join(app.static_folder, 'image', image2.filename))
+            if not image2:
+                msg = 'Image not Inserted'
+                return render_template('buildergallery.html', a = msg, id = id)    
+            else:
+                cursor = mysql.connection.cursor()
+                cursor.execute('INSERT INTO images VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, % s)', (uid, location, sqft, build_type, budget, room, image2.filename, status))
+                mysql.connection.commit()
+                msg = 'Image Added Successfully!'
+                return redirect(url_for('buildergallery',  id = id))
+    else:    
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM images WHERE uid = %s', (id, ))
         mysql.connection.commit()
         account = cursor.fetchall()
         image_str_list = []
         for image_data in account:
-            image_str = image_data[2].decode('utf-8')
+            image_str = image_data['image'].decode('utf-8')
             image_str_list.append(image_str)
         if account:
             return render_template('buildergallery.html', data = image_str_list, name = name1, comp = comp, image = my_string_without_prefix, id = id)
@@ -561,13 +597,15 @@ def usergallery(id):
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM image')
+    cursor.execute('SELECT image FROM images')
     mysql.connection.commit()
-    account = cursor.fetchall()
     image_str_list = []
-    for image_data in account:
-        image_str = image_data[2].decode('utf-8')
-        image_str_list.append(image_str)
+    acc = cursor.fetchone()
+    while acc:
+        for image_data in acc:
+            image_str = image_data.decode('utf-8')
+            image_str_list.append(image_str)
+        acc = cursor.fetchone()
     return render_template('usergallery.html', data = image_str_list, name = name1, email = email1, image = my_string_without_prefix, id = id)
 
 @app.route('/logout')
