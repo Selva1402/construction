@@ -264,20 +264,39 @@ def buildergallery(id):
                 mysql.connection.commit()
                 msg = 'Image Added Successfully!'
                 return redirect(url_for('buildergallery',  id = id))
-    else:    
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM images WHERE uid = %s', (id, ))
-        mysql.connection.commit()
-        account = cursor.fetchall()
-        image_str_list = []
-        for image_data in account:
-            image_str = image_data['image'].decode('utf-8')
-            image_str_list.append(image_str)
-        if account:
-            return render_template('buildergallery.html', data = image_str_list, name = name1, comp = comp, image = my_string_without_prefix, id = id)
-        else:
-            msg = 'No Image is uploaded'
-            return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, msg = msg)
+    return render_template('buildergallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, msg = msg)
+
+@app.route('/viewgallery/<int:id>', methods = ['GET', 'POST'])
+def viewgallery(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM images WHERE uid = %s', (id, ))
+    mysql.connection.commit()
+    account = cursor.fetchall()
+    data_list = []
+    for row in account:
+        location = row['location']
+        sqft = row['sqft']
+        build_type = row['build_type']
+        budget = row['budget']
+        room = row['room']
+        image_data = row['image']
+        my_string1 = image_data.decode('utf-8')
+        my_string_without_prefix1 = my_string1.strip("'")
+        data_list.append((location, sqft, build_type, budget, room, my_string_without_prefix1))
+    if account:
+        return render_template('viewgallery.html', data = data_list, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+    else:
+        msg = 'No Image is uploaded'
+        return render_template('viewgallery.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, msg = msg)
+
 
 @app.route('/material/<int:id>', methods=['GET','POST'])
 def material(id):
@@ -323,13 +342,13 @@ def editmaterial(id):
                 cursor.execute('INSERT INTO material VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (uid, cement, steel, wood, bricks, tiles, paint, glass))
                 mysql.connection.commit()
                 msg = 'Added Successfully!'
-                return redirect(url_for('material',  id = id, name = name1, comp = comp, image = my_string_without_prefix, a = msg))
+                return redirect(url_for('material',  id = id, a = msg))
             else:
                 cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
                 cursor.execute('UPDATE material SET uid = % s, cement = % s, steel = % s, wood = % s, bricks = % s, tiles = % s, paint = % s, glass = % s WHERE uid = % s', (uid, cement, steel, wood, bricks, tiles, paint, glass, id))
                 mysql.connection.commit()
                 msg = 'Updated Successfully!'
-                return redirect(url_for('material', id = id, name = name1, comp = comp, image = my_string_without_prefix, a = msg))
+                return redirect(url_for('material', id = id, a = msg))
         else:
             msg = 'Please fill the form!'
             return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)  
@@ -509,7 +528,7 @@ def userdash():
         image = acc[8]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('userdash.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
+        return render_template('navuser.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
         
     
 @app.route('/userbit/<int:id>', methods=["GET","POST"])

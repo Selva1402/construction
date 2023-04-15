@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder Gallery</title>
+    <link rel="stylesheet" href="/static/gallery.css">
+    <link rel="stylesheet" href="/static/userbit.css">
+    <!-- <link rel="stylesheet" href="/static/gallery.css"> -->
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+    {%include 'builderdash.html'%}
+
+    <div class="wrapper2">
+        {% if data %}
+        <div class="gallery" id="imageview">
+            {% for row in data %}
+            <div class="image"><span><img src="/static/image/{{ row[5] }}" alt="image" width="100" height="100"></span>
+            </div>
+            <ul class="text21">
+                <li>Building Type : {{ row[2] }}</li>
+                <li>Square Feet :{{ row[1] }}</li>
+                <li>Rooms : {{ row[4] }}</li>
+                <li>Budget : {{ row[3] }}</li>
+                <li>Location : {{ row[0] }}</li>
+            </ul>
+            {% endfor %}
+        </div>
+        {% else %}
+        <span>
+            <h4>{{msg}}</h4>
+        </span>
+        {% endif %}
+    </div>
+    <script src="/js/gallery.js"></script>
+
+
+</body>
+
+</html>

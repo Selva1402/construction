@@ -30,15 +30,15 @@
 
                         <div class="input-field">
                             <span>Location</span>
-                            <input type="text" placeholder="Enter your location" name="location" id="location" required>
+                            <input type="text" placeholder="Enter your location" name="location" id="location" >
                         </div>
                         <div class="input-field">
                             <span>Land size in squarefeet</span>
-                            <input type="number" placeholder="Land size in squarefeet" name="sqft" id="sqft" required>
+                            <input type="number" placeholder="Land size in squarefeet" name="sqft" id="sqft" >
                         </div>
                         <div class="input-field">
                             <span>Building Type</span>
-                            <select name="build_type" id="build_type" required>
+                            <select name="build_type" id="build_type" >
                                 <option disabled selected>Select</option>
                                 <option>Residential buildings/Apartments</option>
                                 <option>Commercial buildings</option>
@@ -48,19 +48,19 @@
                         </div>
                         <div class="input-field">
                             <span>Budget</span>
-                            <input type="number" placeholder="Budget" name="budget" id="budget" required>
+                            <input type="number" placeholder="Budget" name="budget" id="budget" >
                         </div>
                         <div class="input-field">
                             <span for="options">Rooms</span>
-                            <input type="number" placeholder="Rooms" name="room" id="room" required>
+                            <input type="number" placeholder="Rooms" name="room" id="room" >
                         </div>
                         <div class="input-field">
                             <span for="options">Upload Image</span>
-                            <input type="file" name="image" id="image" required>
+                            <input type="file" name="image" id="image">
                         </div>
                         <div class="input-field">
                             <span>Building Status</span>
-                            <select name="status" id="status" required>
+                            <select name="status" id="status" >
                                 <option disabled selected>Select</option>
                                 <option>In-progress</option>
                                 <option>completed</option>
@@ -75,6 +75,7 @@
                             <span class="btnText">Submit</span>
                             <i class="uil uil-navigator"></i>
                         </button>
+                        
                         <!-- <button class="nextBtn1"> -->
                         
                     </div>
@@ -83,30 +84,14 @@
 
             </div>
         </form>
+        <a href="{{ url_for('viewgallery', id=id) }}">
+            <button class="nextBtn">
+                <span class="btnText">View Gallery</span>
+                <i class="uil uil-navigator"></i>
+            </button></a>
 
 
-        <div class="wrapper2">
-
-
-
-            {% if data %}
-            <div class="gallery" id="imageview">
-                {% for row in data %}
-                <div class="image"><span><img src="/static/image/{{ row }}" alt="image" width="100" height="100"></span>
-                </div>
-                <!-- <div class="image"><span><img src="/static/img16.jpg" alt=""></span></div>
-            <div class="image"><span><img src="/static/img17.jpg" alt=""></span></div>
-            <div class="image"><span><img src="/static/img18.jpg" alt=""></span></div>
-            <div class="image"><span><img src="/static/img19.jpg" alt=""></span></div>
-            <div class="image"><span><img src="/static/img20.jpg" alt=""></span></div> -->
-                {% endfor %}
-            </div>
-            {% else %}
-            <span>
-                <h4>{{msg}}</h4>
-            </span>
-            {% endif %}
-        </div>
+        
     </div>
 
 
