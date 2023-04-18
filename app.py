@@ -551,7 +551,19 @@ def userdash():
         image = acc[8]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('navuser.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
+        cursor.execute('SELECT * FROM builder')
+        builder = cursor.fetchall()
+        data = []
+        for row in builder:
+            id = row[0]
+            name1 = row[1]
+            comp = row[5]
+            location1 = row[7]
+            image = row[10]
+            my_string1 = image.decode('utf-8')
+            my_string_without_prefix1 = my_string1.strip("'")
+            data.append((id, name1, comp, location1,my_string_without_prefix1))
+        return render_template('navuser.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id, data = data)
     
 @app.route('/userprofile/<int:id>', methods = ['GET','POST'])
 def userprofile(id):

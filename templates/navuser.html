@@ -22,14 +22,14 @@
         </div>
 
     </header>
-
+    {% for row in data %}
     <div class="content1">
         <div class="card1">
-            <div class="firstinfo"><img src="/static/images/{{ image }}" />
+            <div class="firstinfo"><img src="/static/images/{{ row[4] }}" />
                 <div class="profileinfo">
-                    <h1>{{name}}</h1>
-                    <h3>{{location}}</h3>
-                    <h3 class="bio">Company name</h3>
+                    <h1>{{row[1]}}</h1>
+                    <h3>{{row[2]}}</h3>
+                    <h3 class="bio">{{ row[3] }}</h3>
                     <a class="text1" href=" ">View Profile</a>
                 </div>
             </div>
@@ -37,6 +37,7 @@
         </div>
 
     </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
