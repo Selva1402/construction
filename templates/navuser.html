@@ -11,31 +11,32 @@
         </div>
         <div class="user-wrapper">
             <a href="{{ url_for('userprofile', id = id)}}">
-            <img src="/static/images/{{ image }}" width="65px" height="65px" alt="">
-        </a>
+                <img src="/static/images/{{ image }}" width="65px" height="65px" alt="">
+            </a>
             <div>
                 <a href="{{ url_for('userprofile', id = id)}}">
-                <h2>{{name}}</h2>
-                <small>{{location}}</small></a>
+                    <h2>{{name}}</h2>
+                    <small>{{location}}</small>
+                </a>
             </div>
         </div>
 
     </header>
-    
-<div class="content">
-    <div class="card">
-        <div class="firstinfo"><img src="/static/images/{{ image }}" />
-            <div class="profileinfo">
-                <h1>{{name}}</h1>
-                <h3>{{location}}</h3>
-                <p class="bio">{{companyname}}</p>
-                <a class="text1" href=" ">View Profile</a>
+
+    <div class="content1">
+        <div class="card1">
+            <div class="firstinfo"><img src="/static/images/{{ image }}" />
+                <div class="profileinfo">
+                    <h1>{{name}}</h1>
+                    <h3>{{location}}</h3>
+                    <h3 class="bio">Company name</h3>
+                    <a class="text1" href=" ">View Profile</a>
+                </div>
             </div>
+
         </div>
-        
+
     </div>
-    
-</div>
 </div>
 
 {% endblock %}

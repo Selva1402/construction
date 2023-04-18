@@ -8,23 +8,23 @@ body {
 }
 
 
-.content {
+.content1 {
     
     position: relative;
     animation: animatop 0.9s cubic-bezier(0.425, 1.14, 0.47, 1.125) forwards;
 }
 
-.card {
-    width: 500px;
+.card1 {
+    width: 1000px;
     min-height: 100px;
     padding: 20px;
     border-radius: 3px;
-    background-color: rgba(160, 2, 2, 0.874);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
+    background-color: rgb(254, 255, 254);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
-.card:after {
+.card1:after {
     content: "";
     display: block;
     width: 190px;
@@ -35,12 +35,14 @@ body {
 }
 
 .firstinfo {
+    justify-content: flex-start;
     flex-direction: row;
     z-index: 2;
     position: relative;
 }
 
 .firstinfo img {
+    
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -48,16 +50,21 @@ body {
 
 .firstinfo .profileinfo {
     padding: 0px 20px;
+    display: flex;
+    flex-direction: row;
+    
 }
 
 .firstinfo .profileinfo h1 {
     font-size: 1.8em;
+    padding: 0px 20px;
 }
 
 .firstinfo .profileinfo h3 {
-    font-size: 1.2em;
+    font-size: 1.8em;
     color: #001e96;
     font-style: italic;
+    padding: 0px 20px;
 }
 
 .firstinfo .profileinfo p.bio {
@@ -76,12 +83,13 @@ body {
     border: none;
     width: 100px;
     height: 25px;
-    margin-top: 30px;
+    margin-top: 10px;
     text-align: center;
     background: #1835b7ee;
     color: #fafafa;
     font-weight: 600;
     z-index: 5;
+    padding: 0px 20px;
    }
    
    .text1:hover {
