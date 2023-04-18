@@ -24,7 +24,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'dgcbdayybzcxdmvk'
+app.config['MAIL_PASSWORD'] = 'abcdefghijklm'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -200,6 +200,12 @@ def builderdash(id):
         countproj = cursor1.execute('SELECT * FROM images WHERE uid = % s',(id,))
         cursor1.execute('SELECT * FROM images WHERE uid = % s ORDER BY RAND() LIMIT 6',(id,))
         project = cursor1.fetchall()
+        data = []
+        for row in project:
+            build_type = row['build_type']
+            location1 = row['location']
+            status = row['status']
+            data.append((build_type, location1, status))
         cursor2.execute('SELECT * FROM users ORDER BY RAND() LIMIT 4')
         user = cursor2.fetchall()
         data_list = []
@@ -211,7 +217,7 @@ def builderdash(id):
             my_string1 = image_data.decode('utf-8')
             my_string_without_prefix1 = my_string1.strip("'")
             data_list.append((id, name, location, my_string_without_prefix1))
-        return render_template('navprof.html', user = data_list, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
+        return render_template('navprof.html',data = data, user = data_list, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
 
 @app.route('/builderprofile/<int:id>', methods=['GET','POST'])
 def builderprofile(id):
@@ -237,7 +243,16 @@ def showuser(id):
     my_string_without_prefix = my_string.strip("'")
     cursor.execute('SELECT * FROM users')
     user = cursor.fetchall()
-    return render_template('seeall.html', user = user, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+    data = []
+    for users in user:
+        id = users['id']
+        name = users['username']
+        location = users['location']
+        image1 = users['image']
+        my_string1 = image1.decode('utf-8')
+        my_string_without_prefix1 = my_string1.strip("'")
+        data.append((id, name, location, my_string_without_prefix1))
+    return render_template('seeall.html', data = data, user = user, name = name1, comp = comp, image = my_string_without_prefix, id = id)
 
 @app.route('/showproject/<int:id>', methods=['GET','POST'])
 def showproject(id):
@@ -547,7 +562,6 @@ def userdash():
         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
         cursor.connection.commit()
         acc = cursor.fetchone()
-        id = acc[0]
         image = acc[8]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
@@ -563,7 +577,7 @@ def userdash():
             my_string1 = image.decode('utf-8')
             my_string_without_prefix1 = my_string1.strip("'")
             data.append((id, name1, comp, location1,my_string_without_prefix1))
-        return render_template('navuser.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id, data = data)
+        return render_template('navuser.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = uid, data = data)
     
 @app.route('/userprofile/<int:id>', methods = ['GET','POST'])
 def userprofile(id):
