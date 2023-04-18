@@ -22,8 +22,9 @@ body{
   margin-top: 5px;
   color: #212121;
   line-height: 22px;
-  display: table;
-  display: table-row;
+  display: grid;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 400px;
 }
 
 .wrapper2{
@@ -33,6 +34,7 @@ body{
 .gallery{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 
 }
 .gallery .image{
