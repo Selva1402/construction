@@ -2,92 +2,24 @@
 {% block content %}
 {% if data %}
 <div class="wrapper2">
-        <div class="gallery" id="imageview">
-            {% for row in data %}
-            <div class="image"><span><img src="/static/image/{{ row[5] }}" alt="image" width="50" height="50"></span>
-            </div>
-            <ul class="text21">
+    <div class="gallery" id="imageview">
+        {% for row in data %}
+        <div class="image"><span><img src="/static/image/{{ row[5] }}" alt="image" width="50" height="50"></span>
+        </div>
+        <ul class="text21">
             <li>Building Type : {{ row[2] }}</li>
             <li>Square Feet :{{ row[1] }}</li>
             <li>Rooms : {{ row[4] }}</li>
             <li>Budget : {{ row[3] }}</li>
             <li>Location : {{ row[0] }}</li>
         </ul>
-            {% endfor %}
-        </div>
-        {% else %}
-        <span>
-            <h4>{{msg}}</h4>
-        </span>
-        {% endif %}
-    </div>  
-    
-    
-    <div class="container1">
-        <header>Construction Details</header>
-    
-        <form action="{{ url_for('buildergallery', id=id) }}" method="POST" enctype="multipart/form-data">
-            <div class="form first">
-                <div class="details personal">
-                    <span class="title">Building Details</span>
-    
-                    <div class="fields">
-    
-                        <div class="input-field">
-                            <span>Location</span>
-                            <input type="text" placeholder="Enter your location" name="location" id="location" >
-                        </div>
-                        <div class="input-field">
-                            <span>Land size in squarefeet</span>
-                            <input type="number" placeholder="Land size in squarefeet" name="sqft" id="sqft" >
-                        </div>
-                        <div class="input-field">
-                            <span>Building Type</span>
-                            <select name="build_type" id="build_type" >
-                                <option disabled selected>Select</option>
-                                <option>Residential buildings/Apartments</option>
-                                <option>Commercial buildings</option>
-                                <option>Single-family detached house</option>
-                                <option>Bungalow </option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <span>Budget</span>
-                            <input type="number" placeholder="Budget" name="budget" id="budget" >
-                        </div>
-                        <div class="input-field">
-                            <span for="options">Rooms</span>
-                            <input type="number" placeholder="Rooms" name="room" id="room" >
-                        </div>
-                        <div class="input-field">
-                            <span for="options">Upload Image</span>
-                            <input type="file" name="image" id="image">
-                        </div>
-                        <div class="input-field">
-                            <span>Building Status</span>
-                            <select name="status" id="status" >
-                                <option disabled selected>Select</option>
-                                <option>In-progress</option>
-                                <option>completed</option>
-                            </select>
-                        </div>
-                        <div class="msg">
-                            <span>
-                                    <center><h4>{{a}}</h4></center>
-                            </span>
-                        </div>
-                        <button class="nextBtn">
-                            <span class="btnText">Submit</span>
-                            <i class="uil uil-navigator"></i>
-                        </button>
-                        
-                        <!-- <button class="nextBtn1"> -->
-                        
-                    </div>
-                </div>
-            </div>
-        </form>
+        {% endfor %}
     </div>
+    {% else %}
+    <span>
+        <h4>{{msg}}</h4>
+    </span>
+    {% endif %}
+</div>
+
 {% endblock %}
-
-
