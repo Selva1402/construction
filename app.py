@@ -355,60 +355,64 @@ def editmaterial(id):
             return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)  
     return render_template('buildermater.html', name = name1, comp = comp, image = my_string_without_prefix, id = id, a = msg)
 
-@app.route('/buildermessage/<int:id>', methods=['GET','POST'])
-def buildermessage(id):
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM users')
-    acc = cursor.fetchall()
-    data_list = []
-    for row in acc:
-        id = row[0]
-        name = row[1]
-        image_data = row[8]
-        my_string1 = image_data.decode('utf-8')
-        my_string_without_prefix1 = my_string1.strip("'")
-        data_list.append((id, name, my_string_without_prefix1))
-    print(data_list)
-    return render_template('chat.html', acc = data_list, id = id)
+# @app.route('/buildermessage/<int:id>', methods=['GET','POST'])
+# def buildermessage(id):
+#     cursor = mysql.connection.cursor()
+#     cursor.execute('SELECT * FROM users')
+#     acc = cursor.fetchall()
+#     data_list = []
+#     for row in acc:
+#         id = row[0]
+#         name = row[1]
+#         image_data = row[8]
+#         my_string1 = image_data.decode('utf-8')
+#         my_string_without_prefix1 = my_string1.strip("'")
+#         data_list.append((id, name, my_string_without_prefix1))
+#     print(data_list)
+#     return render_template('chat.html', acc = data_list, id = id)
 
-@app.route("/builderchat/<string:name>")
-def builderchat(name):
+
+@app.route('/messages/<int:id>', methods = ['GET','POST'])
+def messages(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM users')
+    user = cur.fetchone()
+    users = user[0]
+    cur.execute("SELECT * FROM messages WHERE sender_id = %s AND receiver_id = %s",(id, users, ))
+    messages = cur.fetchall()
+    if not id and not users:
+        msg = 'No Message'
+        return render_template('chatbuilder.html', id = id)
+    else:
+        msg = []
+        for row in messages:
+            sender_id = row[1]
+            receiver_id = row[2]
+            message = row[3]
+            timestamp = row[4]
+            msg.append((sender_id, receiver_id, message, timestamp))
+        return render_template("chatbuilder.html", messages=msg, id = id)
+
+@app.route("/send-message/<int:id>", methods=["GET", "POST"])
+def send_message(id):
     if 'id' in session:
         uid = session['id']
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM builder WHERE id = %s', (uid, ))
-        users = cursor.fetchone()
-        usern = users[1]
-        userid = ''
-        if request.method =='POST' and 'message' in request.form:
-            now = datetime.now()
-            timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
-            builderna = name
-            userid = usern
-            message = request.form['message']
-            print(message)
-            cursor1 = mysql.connection.cursor1(MySQLdb.cursors.DictCursor)
-            cursor1.execute('INSERT INTO message VALUES (%s, %s, %s, %s)', (timestamp, builderna, userid, message))
+        cursor.execute('SELECT * FROM users')
+        user = cursor.fetchall()
+        cursor.execute('SELECT * FROM builder WHERE id = %s', (id, ))
+        builder = cursor.fetchone()
+        builderid = builder[0]
+        if request.method == "POST" and 'message' in request.form:
+            sender_id = builderid
+            receiver_id = uid
+            message = request.form["message"]
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO messages (sender_id, receiver_id, message, timestamp) VALUES (%s, %s, %s, %s)', (sender_id, receiver_id, message, timestamp))
             mysql.connection.commit()
-            return render_template('chatuser.html', user = name)
-        else:
-            cursor1 = mysql.connection.cursor()
-            cursor1.execute('SELECT * FROM builder WHERE id = % s' ,(uid, ))
-            users = cursor1.fetchone()
-            builderid = name
-            userid = users[1]
-            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute('SELECT * FROM message WHERE sendid = %s AND receiveid = %s',(userid, builderid))
-            messages = cursor.fetchall()
-            data_list = []
-            for row in messages:
-                timestamp = row['timestamp']
-                sender = row['sendid']
-                receive = row['receiveid']
-                message = row['message']
-                data_list.append((timestamp, sender, receive, message))
-            return render_template('chatuser.html', user = name, messages = data_list)
-    return render_template('chatuser.html', user = name,)
+            return redirect(url_for("messages", id=id))
+    return render_template("chatb.html", id = id, acc = user)
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
@@ -604,8 +608,8 @@ def viewquotation(id):
     else:
         return render_template('userview.html',acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id)
 
-@app.route('/usermessage/<string:name>', methods=['GET','POST'])
-def usermessage(name):
+@app.route('/usermessage/<int:id>', methods=['GET','POST'])
+def usermessage(id):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM builder')
     acc = cursor.fetchall()
@@ -618,9 +622,9 @@ def usermessage(name):
         my_string_without_prefix1 = my_string1.strip("'")
         data_list.append((id, name, my_string_without_prefix1))
     print(data_list)
-    return render_template('chatb.html', acc = data_list)
+    return render_template('chatb.html', acc = data_list, id = id)
 
-@app.route("/userchat/<string:name>")
+@app.route("/userchat/<string:name>", methods = ['GET', 'POST'])
 def userchat(name):
     if 'id' in session:
         uid = session['id']
@@ -647,7 +651,7 @@ def userchat(name):
             builderid = name
             userid = users[1]
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute('SELECT * FROM message WHERE sendid = %s AND receiveid = %s',(userid, builderid))
+            cursor.execute('SELECT * FROM message')
             messages = cursor.fetchall()
             data_list = []
             for row in messages:
