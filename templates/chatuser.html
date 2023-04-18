@@ -1,86 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Welcome</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style type="text/css">
-		nav{
-			background-color: #1123e6;
-			background-image: linear-gradient(315deg, #1123e6 0%, #1123e6 74%);
-			color:white;
-		}
-		.nav-tabs li a{
-			color:white;
-		}
-		.nav-tabs{
-			text-align: center;
-			width: 100%;
-		}
-
-		.navbar{
-			padding-bottom: 0;
-			padding-left: 0;
-			padding-right: 0;
-		}
-		html {
-			position: relative;
-			min-height: 100%;
-			overflow-x: hidden;
-		}
-		body {
-			margin-bottom: 60px;
-			overflow-x: hidden;
-		}
-		.footer {
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-			height: 60px; /* Set the fixed height of the footer here */
-			background-color: #1123e6;
-			background-image: linear-gradient(315deg, #1123e6 0%, #1123e6 74%);
-			overflow-x: hidden;
-		}
-
-	</style>
-</head>
-<body>
-	<nav class="navbar sticky-top justify-content-center">
-			<br>
-			<a style="color:white;" href="#">{{ user }}</a>
-		</button>
-	</nav>
-	<main>
-		<div style="padding: 2px;margin: 2px;" id="message-box-user" class="container-fluid">
-		</div>
-	</main>
-    {% if messages %}
-    {% for message in messages %}
-    <p>[({{ message[0] }}) {{ message[2] }}]: {{ message[3] }}</p>
-    {% endfor %}
-    {% else %}
-        <span>
-            <h4>No message yet</h4>
-        </span>
-    {% endif %}
-	<footer class="footer">
-        <form action="../userchat/{{user}}" method = 'post'>
-		<div style="margin: 0;padding-left: 0;padding-right: 0;padding-top: 1px;" class="container-fluid">
-			<div class="input-group md-form form-sm form-2 pl-0">
-				<input class="form-control my-0 py-1 red-border" id="message" type="text" placeholder="Send Message" aria-label="Messagebar">
-				<div class="input-group-append">
-					<a href="../userchat/{{user}}">
-                    <button class="input-group-text red lighten-3" id="send"><i class="fa fa-paper-plane"
-			        aria-hidden="true"></i></button></a>
-				</div>
-			</div>
-		</div>
-    </form>
-	</footer>
-</body>
+    <head>
+        <title>Messages</title>
+    </head>
+    <body>
+        <h1>Messages</h1>
+        <h2>User {{ user_id }} and Seller {{ seller_id }}</h2>
+        <ul>
+            {% for message in messages %}
+            {% if message[1] == user_id %}
+            <li><strong>User:</strong> {{ message[3] }} ({{ message[2] }})</li>
+            {% else %}
+            <li><strong>Seller:</strong> {{ message[3] }} ({{ message[2] }})</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <form method="POST" action="{{ url_for('send_message') }}">
+            <input type="hidden" id="sender_id" name="sender_id" value="{{ user_id }}">
+			<input type="hidden" id="receiver_id" name="receiver_id" value="{{ seller_id }}">
+            <label for="message">Message:</label>
+            <input type="text" id="message" name="message">
+            <button type="submit">Send</button>
+        </form>
+    </body>
 </html>

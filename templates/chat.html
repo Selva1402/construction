@@ -61,13 +61,12 @@
 			<li class="nav-item">
 				<h3 class="nav-link active" style="background-color: #1123e6; color: white;">User Chat</h3>
 			</li>
-			
 		</ul>
 	</nav>
 	<div class="card" style="width: 100%;">
 		<ul id="channels_lists" class="list-group list-group-flush">
 			{% for user in acc %}
-				<a style="color:black;text-decoration:none;cursor: pointer;" id="{{ user[1] }}" href="../builderchat/{{ user[1] }}">
+				<a style="color:black;text-decoration:none;cursor: pointer;" id="{{ user[1] }}" href="../userchat/{{ user[1] }}">
                     <li class="list-group-item">{{ user[1] }}</li>
                     
 				</a>
