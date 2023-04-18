@@ -23,8 +23,10 @@ body{
   color: #212121;
   line-height: 22px;
   display: grid;
+  background-color: beige;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 400px;
+  border: 2px solid blue;
 }
 
 .wrapper2{
