@@ -17,14 +17,14 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abcdefghij'
+app.config['MAIL_PASSWORD'] = 'dgcbdayybzcxdmvk'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -212,6 +212,18 @@ def builderdash(id):
             my_string_without_prefix1 = my_string1.strip("'")
             data_list.append((id, name, location, my_string_without_prefix1))
         return render_template('navprof.html', user = data_list, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
+
+@app.route('/builderprofile/<int:id>', methods=['GET','POST'])
+def builderprofile(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    return render_template('builderprofile.html', user = name1, name = name1, comp = comp, image = my_string_without_prefix, id = id)
 
 @app.route('/showuser/<int:id>', methods=['GET','POST'])
 def showuser(id):
@@ -540,6 +552,19 @@ def userdash():
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
         return render_template('navuser.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
+    
+@app.route('/userprofile/<int:id>', methods = ['GET','POST'])
+def userprofile(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    location = row['location']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    return render_template('userprofile.html', id = id,location = location,  name = name1, email = email1, image = my_string_without_prefix)
         
     
 @app.route('/userbit/<int:id>', methods=["GET","POST"])
@@ -571,7 +596,7 @@ def userbit(id):
             room = request.form['room']
             additional = request.form['additional']
             cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional, 'Not Assigned'))
+            cursor.execute('INSERT INTO bit VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (uid, name, email, location, address, phone, approval_status, timeline, sqft, build_type, budget, wood, room, additional))
             mysql.connection.commit()
             html = render_template('quationmail.html', name = name, email = email, location = location, phone = phone, approval_status = approval_status, timeline = timeline, sqft = sqft, budget = budget, wood = wood, room = room, additional = additional)
             msg = 'You have successfully registered your Quotation'

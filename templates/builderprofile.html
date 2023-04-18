@@ -4,12 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile Card </title>
-    <link rel="stylesheet" href="/static/userd.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-</head>
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
 <body>
   {%include 'builderdash.html' %}
-    
-    
+  
+  <div class="profile-card">
+      <div class="image">
+        <img src="/static/images/{{ image }}" width="65px" height="65px" alt="">
+      </div>
+
+      <div class="text-data">
+        <span class="name">{{name}}</span>
+        <span class="name">{{comp}}</span>
+      </div>
+
+      <div class="media-buttons">
+        <a href="#" style="background: #4267b2" class="link">
+          <i class="bx bxl-facebook"></i>
+        </a>
+        <a href="#" style="background: #1da1f2" class="link">
+          <i class="bx bxl-twitter"></i>
+        </a>
+        <a href="#" style="background: #e1306c" class="link">
+          <i class="bx bxl-instagram"></i>
+        </a>
+        <a href="#" style="background: #ff0000" class="link">
+          <i class="bx bxl-youtube"></i>
+        </a>
+      </div>
+
+      <div class="buttons">
+        <a href="{{ url_for('buildergallery', id=id) }}">
+        <button class="button">&nbsp&nbsp &nbsp Edit &nbsp &nbsp&nbsp</button></a>
+        <button class="button">Message</button>
+      </div>
+
 </body>
 </html>

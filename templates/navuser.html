@@ -10,10 +10,13 @@
             <input type="search" placeholder="search here" />
         </div>
         <div class="user-wrapper">
+            <a href="{{ url_for('userprofile', id = id)}}">
             <img src="/static/images/{{ image }}" width="65px" height="65px" alt="">
+        </a>
             <div>
+                <a href="{{ url_for('userprofile', id = id)}}">
                 <h2>{{name}}</h2>
-                <small>{{location}}</small>
+                <small>{{location}}</small></a>
             </div>
         </div>
 
