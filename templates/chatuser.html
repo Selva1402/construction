@@ -5,19 +5,16 @@
     </head>
     <body>
         <h1>Messages</h1>
-        <h2>User {{ user_id }} and Seller {{ seller_id }}</h2>
-        <ul>
-            {% for message in messages %}
-            {% if message[1] == user_id %}
-            <li><strong>User:</strong> {{ message[3] }} ({{ message[2] }})</li>
-            {% else %}
-            <li><strong>Seller:</strong> {{ message[3] }} ({{ message[2] }})</li>
-            {% endif %}
+			{%if message %}
+            {% for message in message %}
+            <p>[({{ message.timestamp }}) {{ message.sender_id }} {{ message.receiver_id }}]: {{ message.message }}</p>
             {% endfor %}
-        </ul>
-        <form method="POST" action="{{ url_for('send_message') }}">
-            <input type="hidden" id="sender_id" name="sender_id" value="{{ user_id }}">
-			<input type="hidden" id="receiver_id" name="receiver_id" value="{{ seller_id }}">
+			{% else %}
+        <span>
+            <h4>No Message</h4>
+        </span>
+        {% endif %}
+		<form action="{{ url_for('usermessage', id = id, builder = builder) }}" method="post">
             <label for="message">Message:</label>
             <input type="text" id="message" name="message">
             <button type="submit">Send</button>
