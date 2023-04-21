@@ -423,9 +423,10 @@ def message(id, user):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    cursor.execute('SELECT * FROM users')
-    user1 = cursor.fetchone()
-    uid = user1['id']
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM users WHERE id = %s',(user, ))
+    use = cur.fetchone()
+    us = use[1]
     cursor.execute('SELECT * FROM messages WHERE (sender_id=%s AND receiver_id=%s) OR (sender_id=%s AND  receiver_id=%s) ORDER BY id ASC', (id, user, user, id))
     message = cursor.fetchall()
     if request.method == 'POST' and 'message' in request.form:
@@ -434,7 +435,7 @@ def message(id, user):
         cursor.execute('INSERT INTO messages VALUES (NULL,%s, %s, %s, %s)', (id, user, message, timestamp))
         mysql.connection.commit()
         return redirect(url_for('message', id = id, user = user))
-    return render_template('chatbuilder.html', message = message, id = id, user = user)
+    return render_template('chatbuilder.html', message = message, id = id, user = user, us = us)
 
 @app.route('/usersendmessage/<int:id>', methods = ['GET','POST'])
 def usersendmessage(id):
@@ -463,9 +464,10 @@ def usermessage(id, builder):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    cursor.execute('SELECT * FROM builder')
-    user = cursor.fetchone()
-    uid = user['id']
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM builder WHERE id = %s',(builder, ))
+    use = cur.fetchone()
+    us = use[1]
     cursor.execute('SELECT * FROM messages WHERE (sender_id=%s AND receiver_id=%s) OR (sender_id=%s AND  receiver_id=%s) ORDER BY id ASC', (id, builder, builder, id))
     message = cursor.fetchall()
     if request.method == 'POST' and 'message' in request.form:
@@ -474,7 +476,7 @@ def usermessage(id, builder):
         cursor.execute('INSERT INTO messages VALUES (NULL,%s, %s, %s, %s)', (id, builder, message, timestamp))
         mysql.connection.commit()
         return redirect(url_for('usermessage', id = id, builder = builder))
-    return render_template('chatuser.html', message = message, id = id, builder = builder)
+    return render_template('chatuser.html', message = message, id = id, builder = builder, us = us)
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
