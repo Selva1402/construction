@@ -449,7 +449,7 @@ def usersendmessage(id):
     my_string_without_prefix = my_string.strip("'")
     cursor.execute('SELECT * FROM builder')
     builder = cursor.fetchall()
-    return render_template('chatb.html', builder = builder, name = name1, email = email1, image = my_string_without_prefix, id = id)
+    return render_template('chatb.html', builder = builder, name = name1, email = email1, location = location, image = my_string_without_prefix, id = id)
 
 @app.route('/usermessage/<int:id>/<int:builder>', methods=['GET','POST'])
 def usermessage(id, builder):
@@ -473,7 +473,7 @@ def usermessage(id, builder):
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         cursor.execute('INSERT INTO messages VALUES (NULL,%s, %s, %s, %s)', (id, builder, message, timestamp))
         mysql.connection.commit()
-        return render_template('chatuser.html', id = id, builder = builder)
+        return redirect(url_for('usermessage', id = id, builder = builder))
     return render_template('chatuser.html', message = message, id = id, builder = builder)
 
 @app.route('/userinfo', methods=['GET', 'POST'])
