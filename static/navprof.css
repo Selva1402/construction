@@ -54,7 +54,7 @@ header{
     left: 250px;
     width: calc(100% - 345px);
     top: 0;
-    z-index: 0;
+    z-index: 999;
     transition: left 300ms;
 }
 
