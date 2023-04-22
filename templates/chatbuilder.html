@@ -5,6 +5,7 @@
     </head>
     <body>
         <h1>Messages</h1>
+        {% if message %}
 			
             {% for message in message %}
 
@@ -22,6 +23,11 @@
             </div>
         {% endif %}
             {% endfor %}
+            {% else %}
+    <span>
+        <h4>No Message found</h4>
+    </span>
+    {% endif %}
 			
 		<form action="{{ url_for('message', id = id, user = user) }}" method="post">
             <label for="message">Message:</label>

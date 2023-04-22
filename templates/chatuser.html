@@ -5,6 +5,8 @@
     </head>
     <body>
         <h1>Messages</h1>
+
+        {% if message %}
             {% for message in message %}
             {% if (message.sender_id or message.receiver_id) != session.id %}
             <div class="" style="text-align:right; padding:2px 5px;">
@@ -20,6 +22,11 @@
             </div>
         {% endif %}
             {% endfor %}
+            {% else %}
+    <span>
+        <h4>No Message found</h4>
+    </span>
+    {% endif %}
 			
 		<form action="{{ url_for('usermessage', id = id, builder = builder) }}" method="post">
             <label for="message">Message:</label>
