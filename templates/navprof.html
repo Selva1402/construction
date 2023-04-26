@@ -49,7 +49,7 @@
                 <div class="card-single">
                     <div>
                         <h1>
-                            124
+                            0
                         </h1>
                         <span>Order</span>
                     </div>
@@ -79,14 +79,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for project in project: %}
+                                        {% for project in data: %}
                                         <tr>
-                                            <td>{{ project.build_type }}</td>
-                                            <td>{{ project.location }}</td>
+                                            <td>{{ project[0] }}</td>
+                                            <td>{{ project[1] }}</td>
                                             <td>
-                                                {% if project.status == 'completed' %}<span class="status purple"></span>
+                                                {% if project[2] == 'completed' %}<span class="status purple"></span>
                                                 {% else %}<span class="status pink"></span>{% endif %}
-                                                {{project.status}}
+                                                {{project[2]}}
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -117,9 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="contact">
-                                    <span class="las la-user-circle"></span>
                                     <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
                                 </div>
 
                             </div>

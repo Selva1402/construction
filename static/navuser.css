@@ -9,8 +9,9 @@ body {
 
 
 .content1 {
-    
+    padding: 10px 0px;
     position: relative;
+    top: 100px;
     animation: animatop 0.9s cubic-bezier(0.425, 1.14, 0.47, 1.125) forwards;
 }
 

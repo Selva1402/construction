@@ -24,7 +24,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'dgcbdayybzcxdmvk'
+app.config['MAIL_PASSWORD'] = 'abcdefghijk'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -200,6 +200,12 @@ def builderdash(id):
         countproj = cursor1.execute('SELECT * FROM images WHERE uid = % s',(id,))
         cursor1.execute('SELECT * FROM images WHERE uid = % s ORDER BY RAND() LIMIT 6',(id,))
         project = cursor1.fetchall()
+        data = []
+        for row in project:
+            build_type = row['build_type']
+            location1 = row['location']
+            status = row['status']
+            data.append((build_type, location1, status))
         cursor2.execute('SELECT * FROM users ORDER BY RAND() LIMIT 4')
         user = cursor2.fetchall()
         data_list = []
@@ -211,7 +217,7 @@ def builderdash(id):
             my_string1 = image_data.decode('utf-8')
             my_string_without_prefix1 = my_string1.strip("'")
             data_list.append((id, name, location, my_string_without_prefix1))
-        return render_template('navprof.html', user = data_list, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
+        return render_template('navprof.html',data = data, user = data_list, project = project, countp = countproj, countu = countuser, name = acc[1], comp=acc[5],location = acc[7], image = my_string_without_prefix, id = uid)
 
 @app.route('/builderprofile/<int:id>', methods=['GET','POST'])
 def builderprofile(id):
@@ -237,7 +243,16 @@ def showuser(id):
     my_string_without_prefix = my_string.strip("'")
     cursor.execute('SELECT * FROM users')
     user = cursor.fetchall()
-    return render_template('seeall.html', user = user, name = name1, comp = comp, image = my_string_without_prefix, id = id)
+    data = []
+    for users in user:
+        id = users['id']
+        name = users['username']
+        location = users['location']
+        image1 = users['image']
+        my_string1 = image1.decode('utf-8')
+        my_string_without_prefix1 = my_string1.strip("'")
+        data.append((id, name, location, my_string_without_prefix1))
+    return render_template('seeall.html', data = data, user = user, name = name1, comp = comp, image = my_string_without_prefix, id = id)
 
 @app.route('/showproject/<int:id>', methods=['GET','POST'])
 def showproject(id):
@@ -383,48 +398,85 @@ def editmaterial(id):
 #     print(data_list)
 #     return render_template('chat.html', acc = data_list, id = id)
 
+@app.route('/sendmessage/<int:id>', methods = ['GET','POST' ])
+def sendmessage(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor.execute('SELECT * FROM users')
+    user = cursor.fetchall()
+    return render_template('chat.html', user = user, name = name1, comp = comp, image = my_string_without_prefix, id = id)
 
-@app.route('/messages/<int:id>', methods = ['GET','POST'])
-def messages(id):
+@app.route('/message/<int:id>/<int:user>', methods=['GET','POST'])
+def message(id, user):
+    msg = ''
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM users')
-    user = cur.fetchone()
-    users = user[0]
-    cur.execute("SELECT * FROM messages WHERE sender_id = %s AND receiver_id = %s",(id, users, ))
-    messages = cur.fetchall()
-    if not id and not users:
-        msg = 'No Message'
-        return render_template('chatbuilder.html', id = id)
-    else:
-        msg = []
-        for row in messages:
-            sender_id = row[1]
-            receiver_id = row[2]
-            message = row[3]
-            timestamp = row[4]
-            msg.append((sender_id, receiver_id, message, timestamp))
-        return render_template("chatbuilder.html", messages=msg, id = id)
+    cur.execute('SELECT * FROM users WHERE id = %s',(user, ))
+    use = cur.fetchone()
+    us = use[1]
+    cursor.execute('SELECT * FROM messages WHERE (sender_id=%s AND receiver_id=%s) OR (sender_id=%s AND  receiver_id=%s) ORDER BY id ASC', (id, user, user, id))
+    message = cursor.fetchall()
+    if request.method == 'POST' and 'message' in request.form:
+        message = request.form['message']
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cursor.execute('INSERT INTO messages VALUES (NULL,%s, %s, %s, %s)', (id, user, message, timestamp))
+        mysql.connection.commit()
+        return redirect(url_for('message', id = id, user = user))
+    return render_template('chatbuilder.html', message = message, id = id, user = user, us = us)
 
-@app.route("/send-message/<int:id>", methods=["GET", "POST"])
-def send_message(id):
-    if 'id' in session:
-        uid = session['id']
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users')
-        user = cursor.fetchall()
-        cursor.execute('SELECT * FROM builder WHERE id = %s', (id, ))
-        builder = cursor.fetchone()
-        builderid = builder[0]
-        if request.method == "POST" and 'message' in request.form:
-            sender_id = builderid
-            receiver_id = uid
-            message = request.form["message"]
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO messages (sender_id, receiver_id, message, timestamp) VALUES (%s, %s, %s, %s)', (sender_id, receiver_id, message, timestamp))
-            mysql.connection.commit()
-            return redirect(url_for("messages", id=id))
-    return render_template("chatb.html", id = id, acc = user)
+@app.route('/usersendmessage/<int:id>', methods = ['GET','POST'])
+def usersendmessage(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    location = row['location']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor.execute('SELECT * FROM builder')
+    builder = cursor.fetchall()
+    return render_template('chatb.html', builder = builder, name = name1, email = email1, location = location, image = my_string_without_prefix, id = id)
+
+@app.route('/usermessage/<int:id>/<int:builder>', methods=['GET','POST'])
+def usermessage(id, builder):
+    msg = ''
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    location = row['location']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM builder WHERE id = %s',(builder, ))
+    use = cur.fetchone()
+    us = use[1]
+    cursor.execute('SELECT * FROM messages WHERE (sender_id=%s AND receiver_id=%s) OR (sender_id=%s AND  receiver_id=%s) ORDER BY id ASC', (id, builder, builder, id))
+    message = cursor.fetchall()
+    if request.method == 'POST' and 'message' in request.form:
+        message = request.form['message']
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cursor.execute('INSERT INTO messages VALUES (NULL,%s, %s, %s, %s)', (id, builder, message, timestamp))
+        mysql.connection.commit()
+        return redirect(url_for('usermessage', id = id, builder = builder))
+    return render_template('chatuser.html', message = message, id = id, builder = builder, us = us)
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
@@ -547,11 +599,22 @@ def userdash():
         cursor.execute('SELECT * FROM users WHERE id = % s', (uid,))    
         cursor.connection.commit()
         acc = cursor.fetchone()
-        id = acc[0]
         image = acc[8]
         my_string = image.decode('utf-8')
         my_string_without_prefix = my_string.strip("'")
-        return render_template('navuser.html',name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = id)
+        cursor.execute('SELECT * FROM builder')
+        builder = cursor.fetchall()
+        data = []
+        for row in builder:
+            id = row[0]
+            name1 = row[1]
+            comp = row[5]
+            location1 = row[7]
+            image = row[10]
+            my_string1 = image.decode('utf-8')
+            my_string_without_prefix1 = my_string1.strip("'")
+            data.append((id, name1, comp, location1,my_string_without_prefix1))
+        return render_template('navuser.html', name = acc[1], email=acc[2], location = acc[5], image = my_string_without_prefix, id = uid, data = data)
     
 @app.route('/userprofile/<int:id>', methods = ['GET','POST'])
 def userprofile(id):
@@ -565,7 +628,38 @@ def userprofile(id):
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
     return render_template('userprofile.html', id = id,location = location,  name = name1, email = email1, image = my_string_without_prefix)
-        
+
+@app.route('/buildviewprof/<int:id>/<int:builderid>', methods=['GET','POST'])
+def buildviewprof(id, builderid):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    location = row['location']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM builder WHERE id = %s', (builderid, ))
+    builder = cursor.fetchone()
+    image2 = builder[10]
+    my_string1 = image2.decode('utf-8')
+    my_string_without_prefix1 = my_string1.strip("'")
+    cursor.execute('SELECT * FROM images WHERE uid = %s',(builderid,))
+    project = cursor.fetchall()
+    data = []
+    for row in project:
+        location1 = row[2]
+        sqft = row[3]
+        build_type = row[4]
+        budget = row[5]
+        room = row[6]
+        proj = row[7]
+        proj1 = proj.decode('utf-8')
+        proj12 = proj1.strip("'")
+        data.append((location1, sqft, build_type, budget, room, proj12))
+    return render_template('viewprof.html',data = data, photo = my_string_without_prefix1, builder = builder, id = id,location = location,  name = name1, email = email1, image = my_string_without_prefix)
     
 @app.route('/userbit/<int:id>', methods=["GET","POST"])
 def userbit(id):  
@@ -633,8 +727,8 @@ def viewquotation(id):
     else:
         return render_template('userview.html',acc = acc, name = name1, email = email1, image = my_string_without_prefix, id = id)
 
-@app.route('/usermessage/<int:id>', methods=['GET','POST'])
-def usermessage(id):
+@app.route('/usermessage1/<int:id>', methods=['GET','POST'])
+def usermessage1(id):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM builder')
     acc = cursor.fetchall()

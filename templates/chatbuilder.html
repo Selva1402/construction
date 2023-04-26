@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Messages</title>
+        <title>{{us}} Chat</title>
     </head>
     <body>
         <h1>Messages</h1>
-			{%if messages %}
-            {% for message in messages %}
-            <p>[({{ message[3] }}) {{ message[0] }} {{ message[1] }}]: {{ message[2] }}</p>
-            {% endfor %}
-			{% else %}
-        <span>
-            <h4>No Message</h4>
-        </span>
+        {% if message %}
+			
+            {% for message in message %}
+
+            {% if (message.sender_id or message.receiver_id) != session.id %}
+            <div class="" style="text-align:left; padding:2px 5px;">
+                <p>
+                    <span class="" style="background-color: #dd92b2;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;"> {{message.message}}</span>
+                </p>
+            </div>
+        {% else %}
+            <div class="" style="text-align:right; padding:2px 5px;">
+                <p>
+                    <span class="" style="background-color: #28a7ab;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;"> {{message.message}}</span>
+                </p>
+            </div>
         {% endif %}
-		<form action="{{ url_for('send_message', id = id) }}" method="post">
+            {% endfor %}
+            {% else %}
+    <span>
+        <h4>No Message found</h4>
+    </span>
+    {% endif %}
+			
+		<form action="{{ url_for('message', id = id, user = user) }}" method="post">
             <label for="message">Message:</label>
             <input type="text" id="message" name="message">
             <button type="submit">Send</button>

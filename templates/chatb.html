@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome</title>
+	<title>Message</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -34,18 +34,18 @@
 	</style>
 </head>
 <body>
+	
 		<ul class="nav nav-tabs nav-justified justify-content-center">
 			<li class="nav-item">
             <h3 class="nav-link active" style="background-color: #1123e6; color: white;"> Builder Chat</h3>
 			</li>
-			
+
 		</ul>
-	</nav>
-	<div class="card" style="width: 100%;">
+		<div class="card" style="width: 100%;">
 		<ul id="channels_lists" class="list-group list-group-flush">
-			{% for user in acc %}
-				<a style="color:black;text-decoration:none;cursor: pointer;" id="{{ user[1] }}" href="{{url_for('messages', id = id)}}">
-                    <li class="list-group-item">{{ user[1] }}</li>
+			{% for builder in builder %}
+				<a style="color:black;text-decoration:none;cursor: pointer;" id="{{ builder.username }}" href="../usermessage/{{ id }}/{{ builder.id }}">
+                    <li class="list-group-item">{{ builder.username }}</li>
                     
 				</a>
 			{% endfor %}
