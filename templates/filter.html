@@ -15,76 +15,76 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="wrapper next-row">
-            <div class="sort-options">
-                <select name="" id="">
-                    <option value="1">By Name</option>
-                    <option value="2">By Rating</option>
-                    <option value="3">By Latest</option>
-                </select>
-            </div>
-            <div class="wid-25 arrange-left">
-                <h3>Filter By Price</h3>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="price-all">
-                    <label class="custom-control-label" for="price-all">All Price</label>
-                    <span class="filter-prod-count">1000</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="0-100">
-                    <label class="custom-control-label" for="0-100">$0 - $100</label>
-                    <span class="filter-prod-count">100</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="100-200">
-                    <label class="custom-control-label" for="100-200">$100 - $200</label>
-                    <span class="filter-prod-count">150</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="200-300">
-                    <label class="custom-control-label" for="200-300">$200 - $300</label>
-                    <span class="filter-prod-count">160</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="300-above">
-                    <label class="custom-control-label" for="300-above">$300 - $above</label>
-                    <span class="filter-prod-count">500</span>
-                </div>
-                <h3>Filter By Location</h3>
-                <div class="custom-control-check">
-                    <input type="input" class="custom-control-input" id="color-all">
-                    <label class="custom-control-label" for="color-all">Location</label>
-                    <span class="filter-prod-count">1000</span>
-                </div>
+    <button id="sidebar-toggle">
+        Button
+    </button>
+    <div class="sidenav" id="sidebar">
+        <div class="wid-25 arrange-left">
+            <h3>Filter By Price</h3>
 
-                <h3>Filter By Size</h3>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="small">
-                    <label class="custom-control-label" for="small">Small</label>
-                    <span class="filter-prod-count">1000</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="m">
-                    <label class="custom-control-label" for="m">Medium</label>
-                    <span class="filter-prod-count">140</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="l">
-                    <label class="custom-control-label" for="l">Large</label>
-                    <span class="filter-prod-count">450</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="xl">
-                    <label class="custom-control-label" for="xl">Extra Large</label>
-                    <span class="filter-prod-count">130</span>
-                </div>
-                <div class="custom-control-check">
-                    <input type="checkbox" class="custom-control-input" checked="" id="xxl">
-                    <label class="custom-control-label" for="xxl">XXL</label>
-                    <span class="filter-prod-count">50</span>
-                </div>
+            <div class="custom-control-check">
+                <label class="custom-control-label" for="300-above">Price</label>
+                <input type="number" class="custom-control-input" id="300-above">
+
             </div>
+            <h3>Filter By Location</h3>
+            <div class="custom-control-check">
+                <label class="custom-control-label" for="color-all">Location</label>
+                <input type="input" class="custom-control-input" id="color-all">
+
+            </div>
+
+            <h3>Filter By Size</h3>
+
+            <div class="custom-control-check">
+                <label class="custom-control-label" for="xxl">Land size</label>
+                <input type="" class="custom-control-input" id="xxl">
+
+            </div>
+            <h3>Rooms</h3>
+
+            <div class="custom-control-check">
+                <label class="custom-control-label" for="xxl">Rooms</label>
+                <input type="number" class="custom-control-input" id="xxl">
+
+            </div>
+            <h3>Filter By Building Type</h3>
+
+            <div class="custom-control-check">
+                <label class="custom-control-label" for="xxl">Building Type</label>
+                <select name="build_type" id="xxl" class="custom-control-input">
+                    <option disabled selected>Select</option>
+                    <option>Residential buildings/Apartments</option>
+                    <option>Commercial buildings</option>
+                    <option>Single-family detached house</option>
+                    <option>Bungalow </option>
+                </select>
+
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        sidebarToggle.addEventListener('click', function () {
+    sidebar.classList.toggle('sidebar-hidden');
+  });
+    </script>
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
 </body>
 
 </html>
