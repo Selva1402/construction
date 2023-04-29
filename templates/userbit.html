@@ -1,5 +1,5 @@
-{% extends 'userdash.html' %}
-{% block content %}
+<!--
+
     <div class="container1">
         <header>User Requirement fields</header>
        
@@ -98,11 +98,11 @@
                             <span class="btnText">Submit</span>
                             <i class="uil uil-navigator"></i>
                         </button>
-                        <!-- <button class="nextBtn1"> -->
+                   
                             <a href="{{ url_for('viewquotation', id=id) }}">
                             <span class="btnText">View Quotation</span>
                             <i class="far fa-eye"></i></a>
-                        <!-- </button> -->
+                     
                     </div>
                 </div>
                     
@@ -110,4 +110,238 @@
             </div>
         </form>
     </div>
-    {% endblock %}
+  -->
+{% extends 'userdash.html' %}
+{% block content %}
+    <div class="container1">
+        <header>Requirement form</header>
+
+        <form action="{{ url_for('userbit', id=id) }}" method="post">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <span>Full Name</span>
+                            <input type="text" placeholder="Enter your name">
+                        </div>
+
+                        <div class="input-field">
+                            <span>Email</span>
+                            <input type="email" placeholder="Enter your email">
+                        </div>
+                        <div class="input-field">
+                            <span>Location</span>
+                            <input type="text" placeholder="Enter your location">
+                        </div>
+
+                        <div class="input-field">
+                            <span>Mobile Number</span>
+                            <input type="number" placeholder="Enter mobile number">
+                        </div>
+
+                        <div class="input-field">
+                            <span>Address</span>
+                            <input type="text" placeholder="Enter your Address" name="address" >
+                        </div>
+
+                        <div class="input-field">
+                            <span>Do you have all permits and approvals?</span>
+                            <select name="approval_status" >
+                                <option disabled selected>Select</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option>On-Process</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <span>Timeline</span>
+                            <select name="timeline">
+                                
+                                <option disabled selected>Select</option>
+                                <option>Within 6 months</option>
+                                <option>Within 1 year</option>
+                                <option>More than 1 year</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <span>Land size in squarefeet</span>
+                            <input type="number" placeholder="Land size in squarefeet" name="sqft">
+                        </div>
+                        <div class="input-field">
+                            <span>Budget</span>
+                            <input type="number" placeholder="Budget" name="budget" >
+                        </div>
+                        <div class="input-field">
+                            <span>Building Type</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Residential buildings/Apartments</option>
+                                <option>Commercial buildings</option>
+                                <option>Single-family detached house</option>
+                                <option>Bungalow </option>
+                            </select>
+                        </div>
+                        
+                        
+                    </div>
+
+                    <button class="nextBtn">
+                        <span class="btnText">Next</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form second">
+                <div class="details address">
+
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <span for="options">How many rooms you want?</span>
+                            <input type="number" placeholder="Rooms" name="room" >
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="details family">
+                    <span class="title">Material Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <span>Bricks</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <span>Steel</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <span>Cement</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <span>Wood</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <span>Plumbing</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <span>Wires and cables</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <span>Flooring</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <span>Wires and cables</span>
+                            <select name="build_type" >
+                                <option disabled selected>Select</option>
+                                <option>Burnt Clay Brick</option>
+                                <option>Concrete Bricks</option>
+                                <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                                <option>Fly Ash Bricks</option>
+                            </select>
+                        </div>
+                        <div class="msg">
+                            <span><span>
+                               <h4>{{msg}}</h4>
+                           </span></span>
+                           </div>
+                    </div>
+
+                    <div class="buttons">
+                        <div class="backBtn">
+                            <i class="uil uil-navigator"></i>
+                            <span class="btnText">Back</span>
+                        </div>
+
+                        <button class="sumbit">
+                            <span class="btnText">Submit</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--<script src="script.js"></script>-->
+    <script>
+        const form = document.querySelector("form"),
+            nextBtn = form.querySelector(".nextBtn"),
+            backBtn = form.querySelector(".backBtn"),
+            allInput = form.querySelectorAll(".first input");
+
+
+        nextBtn.addEventListener("click", () => {
+            allInput.forEach(input => {
+                if (input.value != "") {
+                    form.classList.add('secActive');
+                } else {
+                    form.classList.remove('secActive');
+                }
+            })
+        })
+
+        backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+    </script>
+
+    </body>
+
+    </html>
+{% endblock %}
