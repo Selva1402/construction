@@ -1,122 +1,10 @@
-<!--
 
-    <div class="container1">
-        <header>User Requirement fields</header>
-       
-        <form action="{{ url_for('userbit', id=id) }}" method="post">
-            <div class="form first">
-                <div class="details personal">
-                    <span class="title">Building Details</span>
-
-                    <div class="fields">
-                        <div class="input-field">
-                            <span>Full Name</span>
-                            <input type="text" placeholder="Enter your name" name="name" >
-                        </div>
-
-                        <div class="input-field">
-                            <span>Email</span>
-                            <input type="text" placeholder="Enter your email" name="email" >
-                        </div>
-
-                        <div class="input-field">
-                            <span>Location</span>
-                            <input type="text" placeholder="Enter your location" name="location" >
-                        </div>
-
-                        <div class="input-field">
-                            <span>Address</span>
-                            <input type="text" placeholder="Enter your Address" name="address" >
-                        </div>
-
-                        <div class="input-field">
-                            <span>Mobile Number</span>
-                            <input type="number" placeholder="Enter mobile number" name="phone" >
-                        </div>
-
-                        <div class="input-field">
-                            <span>Do you have all permits and approvals?</span>
-                            <select name="approval_status" >
-                                <option disabled selected>Select</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>On-Process</option>
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Timeline</span>
-                            <select name="timeline">
-                                
-                                <option disabled selected>Select</option>
-                                <option>Within 6 months</option>
-                                <option>Within 1 year</option>
-                                <option>More than 1 year</option>
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <span>Land size in squarefeet</span>
-                            <input type="number" placeholder="Land size in squarefeet" name="sqft">
-                        </div>
-                        <div class="input-field">
-                            <span>Building Type</span>
-                            <select name="build_type" >
-                                <option disabled selected>Select</option>
-                                <option>Residential buildings/Apartments</option>
-                                <option>Commercial buildings</option>
-                                <option>Single-family detached house</option>
-                                <option>Bungalow </option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <span>Budget</span>
-                            <input type="number" placeholder="Budget" name="budget" >
-                        </div>
-                        <div class="input-field">
-                            <span>Wood work</span>
-                            <select name="wood" >
-                                <option disabled selected>Select</option>
-                                <option>With furniture</option>
-                                <option>Without furniture</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <span for="options">How many rooms you want?</span>
-                            <input type="number" placeholder="Rooms" name="room" >
-                        </div>
-                        <div class="input-field text">
-                            <span for="options">Additional information</span>
-                            <input type="text" placeholder="Write here!!!" name="additional" >
-                        </div>
-                        <div class="msg">
-                         <span><span>
-                            <h4>{{msg}}</h4>
-                        </span></span>
-                        </div>
-                        <button class="nextBtn">
-                            <span class="btnText">Submit</span>
-                            <i class="uil uil-navigator"></i>
-                        </button>
-                   
-                            <a href="{{ url_for('viewquotation', id=id) }}">
-                            <span class="btnText">View Quotation</span>
-                            <i class="far fa-eye"></i></a>
-                     
-                    </div>
-                </div>
-                    
-               
-            </div>
-        </form>
-    </div>
-  -->
 {% extends 'userdash.html' %}
 {% block content %}
 <div class="container1">
     <header>Requirement form</header>
 
-    <form action="{{ url_for('userbit', id=id) }}" method="post">
+    <form action="{{ url_for('userbit', id=id) }}" method="POST" enctype="multipart/form-data">
         <div class="form first">
             <div class="details personal">
                 <span class="title">Personal Details</span>
@@ -124,21 +12,21 @@
                 <div class="fields">
                     <div class="input-field">
                         <span>Full Name</span>
-                        <input type="text" placeholder="Enter your name">
+                        <input type="text" placeholder="Enter your name" name="name">
                     </div>
 
                     <div class="input-field">
                         <span>Email</span>
-                        <input type="email" placeholder="Enter your email">
+                        <input type="email" placeholder="Enter your email" name="email">
                     </div>
                     <div class="input-field">
                         <span>Location</span>
-                        <input type="text" placeholder="Enter your location">
+                        <input type="text" placeholder="Enter your location" name="location">
                     </div>
 
                     <div class="input-field">
                         <span>Mobile Number</span>
-                        <input type="number" placeholder="Enter mobile number">
+                        <input type="number" placeholder="Enter mobile number" name="phone">
                     </div>
 
                     <div class="input-field">
@@ -169,11 +57,11 @@
 
                     <div class="input-field">
                         <span>Land size in squarefeet</span>
-                        <input type="number" placeholder="Land size in squarefeet" name="sqft">
+                        <input type="text" placeholder="Land size in squarefeet" name="sqft">
                     </div>
                     <div class="input-field">
                         <span>Budget</span>
-                        <input type="number" placeholder="Budget" name="budget">
+                        <input type="text" placeholder="Budget" name="budget">
                     </div>
                     <div class="input-field">
                         <span>Building Type</span>
@@ -187,6 +75,11 @@
                     </div>
 
 
+                </div>
+                <div class="msg">
+                    <span><span>
+                            <h4>{{msg}}</h4>
+                        </span></span>
                 </div>
 
                 <button class="nextBtn">
@@ -203,7 +96,7 @@
                 <div class="fields">
                     <div class="input-field">
                         <span for="options">How many rooms you want?</span>
-                        <input type="number" placeholder="Rooms" name="room">
+                        <input type="text" placeholder="Rooms" name="room">
                     </div>
                 </div>
             </div>
@@ -214,7 +107,7 @@
                 <div class="fields">
                     <div class="input-field">
                         <span>Bricks</span>
-                        <select name="build_type">
+                        <select name="bricks">
                             <option disabled selected>Select</option>
                             <option>Burnt Clay Brick</option>
                             <option>Concrete Bricks</option>
@@ -225,83 +118,76 @@
 
                     <div class="input-field">
                         <span>Steel</span>
-                        <select name="build_type">
+                        <select name="steel">
                             <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
+                            <option>TMT Iron500 Steel</option>
+                            <option>JSW Steel</option>
+                            <option>Electro Steel</option>
+                            <option>TATA Steel</option>
+                            <option>Essar Steel</option>
                         </select>
                     </div>
 
                     <div class="input-field">
                         <span>Cement</span>
-                        <select name="build_type">
+                        <select name="cement">
                             <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
+                            <option>Dalmia Cement</option>
+                            <option>Valimai Cement</option>
+                            <option>Maha Cement</option>
+                            <option>Sankar Cement</option>
+                            <option>Ramco Cement</option>
                         </select>
                     </div>
 
                     <div class="input-field">
                         <span>Wood</span>
-                        <select name="build_type">
+                        <select name="wood">
                             <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
+                            <option>Maanji Wood</option>
+                            <option>Country Teakwood</option>
+                            <option>Alder Wood</option>
+                            <option>Oak Wood</option>
                         </select>
                     </div>
 
                     <div class="input-field">
                         <span>Plumbing</span>
-                        <select name="build_type">
+                        <select name="plumb">
                             <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
+                            <option>Astral pipes</option>
+                            <option>Preethi pipes</option>
+                            <option>PVC pipes</option>
                         </select>
                     </div>
 
                     <div class="input-field">
                         <span>Wires and cables</span>
-                        <select name="build_type">
+                        <select name="wires">
                             <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
+                            <option>Plaza Cables</option>
+                            <option>RR Cables</option>
+                            <option>Polycab Cables</option>
+                            <option>Finolex Cables</option>
+                            <option>Kundan-Fybros Cables</option>
+                            <option>Havells Cables</option>
                         </select>
                     </div>
                     <div class="input-field">
                         <span>Flooring</span>
-                        <select name="build_type">
+                        <select name="floor">
                             <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
+                            <option>Bricks Flooring</option>
+                            <option>Cement Concrete Flooring</option>
+                            <option>Tiles Flooring</option>
+                            <option>Wood Flooring</option>
+                            <option>Glass Flooring</option>
+                            <option>Marble Flooring</option>
+                            <option>Plastic Flooring</option>
+
                         </select>
                     </div>
-                    <div class="input-field">
-                        <span>Wires and cables</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
-                        </select>
-                    </div>
-                    <div class="msg">
-                        <span><span>
-                                <h4>{{msg}}</h4>
-                            </span></span>
-                    </div>
+
                 </div>
 
                 <div class="buttons">
@@ -309,7 +195,6 @@
                         <i class="uil uil-navigator"></i>
                         <span class="btnText">Back</span>
                     </div>
-
                     <button class="sumbit">
                         <span class="btnText">Submit</span>
                         <i class="uil uil-navigator"></i>
