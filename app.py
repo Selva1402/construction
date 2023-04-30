@@ -380,14 +380,18 @@ def editmaterial(id):
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
     msg = ''
-    if request.method == 'POST' and 'cement' in request.form and 'steel' in request.form and 'wood' in request.form and 'bricks' in request.form and 'tiles' in request.form and 'paint' in request.form and 'glass' in request.form:
+    if request.method == 'POST' and 'cement' in request.form and 'steel' in request.form and 'wood' in request.form and 'bricks' in request.form and 'floor' in request.form and 'wires' in request.form and 'sand' in request.form and 'plumb' in request.form and 'sanitary' in request.form and 'paint' in request.form and 'glass' in request.form:
         if 'id' in session:
             uid = session['id']
             cement = request.form['cement']
             steel = request.form['steel']
             wood = request.form['wood']
             bricks = request.form['bricks']
-            tiles = request.form['tiles']
+            floor = request.form['floor']
+            wires = request.form['wires']
+            sand = request.form['sand']
+            plumb = request.form['plumb']
+            sanitary = request.form['sanitary']
             paint = request.form['paint']
             glass = request.form['glass']
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -395,15 +399,15 @@ def editmaterial(id):
             account = cursor.fetchone()
             if not account:
                 cursor = mysql.connection.cursor()
-                cursor.execute('INSERT INTO material VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (
-                    uid, cement, steel, wood, bricks, tiles, paint, glass))
+                cursor.execute('INSERT INTO material VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (
+                    uid, cement, steel, wood, bricks, floor, wires, sand, plumb, sanitary, paint, glass))
                 mysql.connection.commit()
                 msg = 'Added Successfully!'
                 return redirect(url_for('material',  id=id, a=msg))
             else:
                 cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-                cursor.execute('UPDATE material SET uid = % s, cement = % s, steel = % s, wood = % s, bricks = % s, tiles = % s, paint = % s, glass = % s WHERE uid = % s', (
-                    uid, cement, steel, wood, bricks, tiles, paint, glass, id))
+                cursor.execute('UPDATE material SET uid = % s,  cement = % s, steel = % s, wood = % s, bricks = % s, floor = % s, wires = % s, sand = % s, plumb = % s, sanitary = % s, paint = % s, glass = % s WHERE uid = % s', (
+                    uid, cement, steel, wood, bricks, floor, wires, sand, plumb, sanitary, paint, glass, id))
                 mysql.connection.commit()
                 msg = 'Updated Successfully!'
                 return redirect(url_for('material', id=id, a=msg))
