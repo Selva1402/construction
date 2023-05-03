@@ -3,7 +3,7 @@
 <div class="container1">
     <header>Building specification</header>
 
-    <form action="{{ url_for('userbit', id=id) }}" method="post">
+    <form action="{{ url_for('userbit', id=id) }}" method="POST" enctype="multipart/form-data">
         <div class="form first">
             <div class="details personal">
                 <span class="title">Personal Details</span>
@@ -11,21 +11,21 @@
                 <div class="fields">
                     <div class="input-field">
                         <span>Full Name</span>
-                        <input type="text" placeholder="Enter your name">
+                        <input type="text" placeholder="Enter your name" name="name">
                     </div>
 
                     <div class="input-field">
                         <span>Email</span>
-                        <input type="email" placeholder="Enter your email">
+                        <input type="email" placeholder="Enter your email" name="email">
                     </div>
                     <div class="input-field">
                         <span>Location</span>
-                        <input type="text" placeholder="Enter your location">
+                        <input type="text" placeholder="Enter your location" name="location">
                     </div>
 
                     <div class="input-field">
                         <span>Mobile Number</span>
-                        <input type="number" placeholder="Enter mobile number">
+                        <input type="number" placeholder="Enter mobile number" name="phone">
                     </div>
 
                     <div class="input-field">
@@ -56,11 +56,11 @@
 
                     <div class="input-field">
                         <span>Land size in squarefeet</span>
-                        <input type="number" placeholder="Land size in squarefeet" name="sqft">
+                        <input type="text" placeholder="Land size in squarefeet" name="sqft">
                     </div>
                     <div class="input-field">
                         <span>Budget</span>
-                        <input type="number" placeholder="Budget" name="budget">
+                        <input type="text" placeholder="Budget" name="budget">
                     </div>
                     <div class="input-field">
                         <span>Building Type</span>
@@ -72,11 +72,16 @@
                             <option>Bungalow </option>
                         </select>
                     </div>
-                        <div class="input-field">
-                            <span for="options">Rooms you want?</span>
-                            <input type="number" placeholder="Rooms" name="room">
-                        </div>
-                    
+                    <div class="input-field">
+                        <span for="options">Rooms you want?</span>
+                        <input type="number" placeholder="Rooms" name="room">
+                    </div>
+                    <div class="msg">
+                        <span><span>
+                                <h4>{{msg}}</h4>
+                            </span></span>
+                    </div>
+
 
                 </div>
 
@@ -88,138 +93,152 @@
         </div>
 
         <div class="form second">
+        <div class="details family">
+            <span class="title">Material Details</span>
 
-
-            <div class="details family">
-                <span class="title">Material Details</span>
-
-                <div class="fields">
-                    <div class="input-field">
-                        <span>Bricks</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>Burnt Clay Brick</option>
-                            <option>Concrete Bricks</option>
-                            <option>Porotherm Smart Bricks Or Eco Bricks</option>
-                            <option>Fly Ash Bricks</option>
-                        </select>
-                    </div>
-
-                    <div class="input-field">
-                        <span>Steel</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>TMT FE 415 GRADE</option>
-                            <option>TMT FE 500 GRADE</option>
-                            <option>TMT FE 550 GRADE</option>
-                            <option>TMT FE 600 GRADE</option>
-                        </select>
-                    </div>
-
-                    <div class="input-field">
-                        <span>Cement</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>JK Cement</option>
-                            <option>UltraTech Cement</option>
-                            <option>Dalmia Cement</option>
-                            <option>Ramco Cement</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <span>Sand</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>M-sand</option>
-                            <option>Pit sand</option>
-                            <option>River sand</option>
-                            <option>Concrete sand</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <span>Wood</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>Hardwoods</option>
-                            <option>Teak wood</option>
-                            <option>Rosewood</option>
-                            <option>Oak wood</option>
-                        </select>
-                    </div>
-
-                    <div class="input-field">
-                        <span>Plumbing</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>Supreme Industries</option>
-                            <option>Astral Pipes</option>
-                            <option>Prince Pipes and Fittings Pvt</option>
-                            <option>Ashirvad pipes Pvt Ltd</option>
-                        </select>
-                    </div>
-
-                    <div class="input-field">
-                        <span>Wires and cables</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>Polycab wires and cables</option>
-                            <option>Finolex cables limited</option>
-                            <option>Havells India limited</option>
-                            <option>Syska Cables & Wires</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <span>Flooring</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>Marble</option>
-                            <option>Ceramic Tiles</option>
-                            <option>Plastic Flooring</option>
-                            <option>Wood Flooring</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <span>Sanitary Items</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>kohler</option>
-                            <option>Jaquar</option>
-                            <option>Parryware</option>
-                            <option>Somany</option>
-                        </select>
-                    </div>
-                    <div class="input-field">
-                        <span>Paint</span>
-                        <select name="build_type">
-                            <option disabled selected>Select</option>
-                            <option>Asian</option>
-                            <option>Nippon</option>
-                            <option>Indigo</option>
-                            <option>Dulex</option>
-                        </select>
-                    </div>
-                    <span style="color: rgb(19, 19, 19); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">(Will be a change of rate if any of the specification changes, may decrease may increase)</span>
-                    <div class="msg">
-                        <span><span>
-                                <h4>{{msg}}</h4>
-                            </span></span>
-                    </div>
+            <div class="fields">
+                <div class="input-field">
+                    <span>Bricks</span>
+                    <select name="bricks">
+                        <option disabled selected>Select</option>
+                        <option>Burnt Clay Brick</option>
+                        <option>Concrete Bricks</option>
+                        <option>Porotherm Smart Bricks Or Eco Bricks</option>
+                        <option>Fly Ash Bricks</option>
+                    </select>
                 </div>
 
-                <div class="buttons">
-                    <div class="backBtn">
-                        <i class="uil uil-navigator"></i>
-                        <span class="btnText">Back</span>
-                    </div>
-
-                    <button class="sumbit">
-                        <span class="btnText">Submit</span>
-                        <i class="uil uil-navigator"></i>
-                    </button>
+                <div class="input-field">
+                    <span>Steel</span>
+                    <select name="steel">
+                        <option disabled selected>Select</option>
+                        <option>JSW Steel</option>
+                        <option>Electro Steel</option>
+                        <option>TATA Steel</option>
+                        <option>Essar Steel</option>
+                        <option>TMT FE 415 GRADE</option>
+                        <option>TMT FE 500 GRADE</option>
+                        <option>TMT FE 550 GRADE</option>
+                        <option>TMT FE 600 GRADE</option>
+                    </select>
                 </div>
+
+                <div class="input-field">
+                    <span>Cement</span>
+                    <select name="cement">
+                        <option disabled selected>Select</option>
+                        <option>Dalmia Cement</option>
+                        <option>Valimai Cement</option>
+                        <option>Maha Cement</option>
+                        <option>Sankar Cement</option>
+                        <option>Ramco Cement</option>
+                        <option>JK Cement</option>
+                        <option>UltraTech Cement</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <span>Sand</span>
+                    <select name="build_type">
+                        <option disabled selected>Select</option>
+                        <option>M-sand</option>
+                        <option>Pit sand</option>
+                        <option>River sand</option>
+                        <option>Concrete sand</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <span>Wood</span>
+                    <select name="wood">
+                        <option disabled selected>Select</option>
+                        <option>Maanji Wood</option>
+                        <option>Country Teakwood</option>
+                        <option>Alder Wood</option>
+                        <option>Oak Wood</option>
+                        <option>Hardwoods</option>
+                        <option>Teak wood</option>
+                        <option>Rosewood</option>
+                        <option>Oak wood</option>
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <span>Plumbing</span>
+                    <select name="plumb">
+                        <option disabled selected>Select</option>
+                        <option>Astral pipes</option>
+                        <option>Preethi pipes</option>
+                        <option>PVC pipes</option>
+                        <option>Supreme Industries</option>
+                        <option>Prince Pipes and Fittings Pvt</option>
+                        <option>Ashirvad pipes Pvt Ltd</option>
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <span>Wires and cables</span>
+                    <select name="wires">
+                        <option disabled selected>Select</option>
+                        <option>Plaza Cables</option>
+                        <option>RR Cables</option>
+                        <option>Polycab Cables</option>
+                        <option>Finolex Cables</option>
+                        <option>Kundan-Fybros Cables</option>
+                        <option>Havells India limited</option>
+                        <option>Syska Cables & Wires</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <span>Flooring</span>
+                    <select name="floor">
+                        <option disabled selected>Select</option>
+                        <option>Bricks Flooring</option>
+                        <option>Cement Concrete Flooring</option>
+                        <option>Tiles Flooring</option>
+                        <option>Wood Flooring</option>
+                        <option>Glass Flooring</option>
+                        <option>Marble Flooring</option>
+                        <option>Plastic Flooring</option>
+
+                    </select>
+                </div>
+                <div class="input-field">
+                    <span>Sanitary Items</span>
+                    <select name="build_type">
+                        <option disabled selected>Select</option>
+                        <option>kohler</option>
+                        <option>Jaquar</option>
+                        <option>Parryware</option>
+                        <option>Somany</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <span>Paint</span>
+                    <select name="build_type">
+                        <option disabled selected>Select</option>
+                        <option>Asian</option>
+                        <option>Nippon</option>
+                        <option>Indigo</option>
+                        <option>Dulex</option>
+                    </select>
+                </div>
+                <span
+                    style="color: rgb(19, 19, 19); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">(Will
+                    be a change of rate if any of the specification changes, may decrease may increase)</span>
+            </div>
+
+            <div class="buttons">
+                <div class="backBtn">
+                    <i class="uil uil-navigator"></i>
+                    <span class="btnText">Back</span>
+                </div>
+                <button class="sumbit">
+                    <span class="btnText">Submit</span>
+                    <i class="uil uil-navigator"></i>
+                </button>
             </div>
         </div>
-    </form>
+</div>
+</form>
 </div>
 
 <!--<script src="script.js"></script>-->
