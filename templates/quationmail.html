@@ -17,7 +17,7 @@
 
         .content {
             
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.5;
             margin-bottom: 20px;
         }
@@ -51,7 +51,18 @@
                  3px 3px 5px #4545ad;
                
   }
+  @media (max-width: 600px) {
+  table {
+    font-size: 14px;
+  }
   
+  table th,
+  table td {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
   table, th, td {
     border:2px solid rgb(9, 13, 22);
     padding: 05px;
@@ -67,8 +78,8 @@
         <img src="/static/logo.png" alt="logo">
         <div class="logoname">Future Haus</div>
         <h3 class="content">Dear {{name}}, <br>
-            You have Successfully send the quotation. <br>
-            The Quatations are listed below, </h3><br>
+            You have Successfully send the Requirements. <br>
+            The Requirements are listed below, </h3><br>
         <table>
             <tr>
                 <td>Name</td>
@@ -103,17 +114,56 @@
                 <td>{{budget}}</td>
             </tr>
             <tr>
-                <td>Wood Type</td>
-                <td>{{wood}}</td>
-            </tr>
-            <tr>
                 <td>Rooms</td>
                 <td>{{room}}</td>
             </tr>
         </table>
+        <h3 class="content">Materials You want :</h3>
+        <table>
+            <tr>
+                <td>Bricks</td>
+                <td>{{bricks}}</td>
+            </tr>
+            <tr>
+                <td>Wood Type</td>
+                <td>{{wood}}</td>
+            </tr>
+            <tr>
+                <td>Steel</td>
+                <td>{{steel}}</td>
+            </tr>
+            <tr>
+                <td>Cement</td>
+                <td>{{cement}}</td>
+            </tr>
+            <tr>
+                <td>Sand</td>
+                <td>{{sand}}</td>
+            </tr>
+            <tr>
+                <td>Plumbing</td>
+                <td>{{plimb}}</td>
+            </tr>
+            <tr>
+                <td>Wires and Cables</td>
+                <td>{{wires}}</td>
+            </tr>
+            <tr>
+                <td>Flooring</td>
+                <td>{{floor}}</td>
+            </tr>
+            <tr>
+                <td>Sanitary Items</td>
+                <td>{{sanitary}}</td>
+            </tr>
+            <tr>
+                <td>Paints</td>
+                <td>{{paints}}</td>
+            </tr>
+        </table>
         <br>
-        <h3 class="content">The Plans are given by the Engineer that are shown in the Bitting Page. <br>
-            Please check the Bitting page for choosing the best Engineer.</h3>
+        <h3 class="content">The Plans are given by the Engineer that are shown in the Bidding Page. <br>
+            Please check the Bidding page for selecting the Best Engineer.</h3>
         <br><br>
         <p class="content">Best regards,</p>
         <p class="content">Future Haus Team</p>
