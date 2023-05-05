@@ -18,14 +18,14 @@ app.secret_key = 'a'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Raja@123'
+app.config['MYSQL_PASSWORD'] = 'selva2002'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abcdefghijklmn0'
+app.config['MAIL_PASSWORD'] = 'dgcbdayybzcxdmvk'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -520,6 +520,41 @@ def usermessage(id, builder):
         return redirect(url_for('usermessage', id=id, builder=builder))
     return render_template('chatuser.html', message=message, id=id, builder=builder, us=us)
 
+@app.route('/viewbid/<int:id>', methods = ['GET', 'POST'])
+def viewbid(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute("SELECT * FROM bid")
+    cur.connection.commit()
+    acc = cur.fetchall()
+    return render_template('builderbit.html', id = id, name=name1, comp=comp, image=my_string_without_prefix, acc = acc)
+    
+@app.route('/checkbid/<int:id>/<int:acc>', methods = ['GET', 'POST'])
+def checkbid(id, acc):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    comp = row['companyname']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM bid WHERE id = %s', (acc, ))
+    acc1 = cur.fetchone()
+    print(acc1)
+    return render_template('buildbit.html', id = id, name=name1, comp=comp, image=my_string_without_prefix, acc1 = acc1)
+
+
+
 
 @app.route('/userinfo', methods=['GET', 'POST'])
 def userinfo():
@@ -733,7 +768,7 @@ def userbit(id):
     msg = ''
     keys = request.form.keys()
     print(keys)
-    if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'location' in request.form and 'phone' in request.form and 'address' in request.form and 'approval_status' in request.form and 'timeline' in request.form and 'sqft' in request.form and 'budget' in request.form and 'build_type' in request.form and 'room' in request.form and 'bricks' in request.form and 'steel' in request.form and 'cement' in request.form and 'wood' in request.form and 'plumb' in request.form and 'wires' in request.form and 'floor' in request.form:
+    if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'location' in request.form and 'phone' in request.form and 'address' in request.form and 'approval_status' in request.form and 'timeline' in request.form and 'sqft' in request.form and 'budget' in request.form and 'build_type' in request.form and 'room' in request.form and 'bricks' in request.form and 'steel' in request.form and 'cement' in request.form and 'sand' in request.form and 'wood' in request.form and 'plumb' in request.form and 'wires' in request.form and 'floor' in request.form and 'sanitary' in request.form and 'paint' in request.form:
         uid = id
         name = request.form['name']
         email = request.form['email']
@@ -749,13 +784,16 @@ def userbit(id):
         bricks = request.form['bricks']
         steel = request.form['steel']
         cement = request.form['cement']
+        sand = request.form['sand']
         wood = request.form['wood']
         plumb = request.form['plumb']
         wires = request.form['wires']
         floor = request.form['floor']
+        sanitary = request.form['sanitary']
+        paint = request.form['paint']
         cursor1 = mysql.connection.cursor()
-        cursor1.execute('INSERT INTO bid VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (
-            uid, name, email, location, phone, address, approval_status, timeline, sqft, budget, build_type, room, bricks, steel, cement, wood, plumb, wires, floor, ))
+        cursor1.execute('INSERT INTO bid VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (
+            uid, name, email, location, phone, address, approval_status, timeline, sqft, budget, build_type, room, bricks, steel, cement, sand, wood, plumb, wires, floor, sanitary, paint, ))
         mysql.connection.commit()
         html = render_template('quationmail.html', name=name, email=email, location=location, phone=phone,
                                approval_status=approval_status, timeline=timeline, sqft=sqft, budget=budget, wood=wood, room=room)

@@ -1,1 +1,43 @@
-c
+{% extends 'builderdash.html' %}
+{% block content %}
+
+<div class="table">
+    
+    <table>
+
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Phone Number</th>
+            <th>Timeline</th>
+            <th>Land size</th>
+            <th>Building Type</th>
+            <th>Budget</th>
+            <th>Rooms</th>
+            <th>Bid</th>
+        </thead>
+
+        <tbody>
+            {% for row in acc: %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.email}}</td>
+                <td>{{ row.location}}</td>
+                <td>{{ row.phone }}</td>
+                <td>{{ row.timeline}}</td>
+                <td>{{ row.sqft}}</td>
+                <td>{{ row.build_type}}</td>
+                <td>{{ row.budget}}</td>
+                <td>{{ row.room}}</td>
+                <td> <a href="../checkbid/{{ id }}/{{ row.id }}"> See All </a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
