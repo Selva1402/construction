@@ -1,0 +1,118 @@
+{%extend 'builderdash.html' %}
+{% block content %}
+
+<div class="popup">
+    <form class="form">
+        <div class="icon">
+            <span>Requirement form</span>
+        </div>
+        <div class="sub">
+            <div class="branch">
+                <div class="note">
+                    <label class="title">Name</label>
+                    <span>{{name}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Email</label>
+                    <span>{{email}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Location</label>
+                    <span>{{location}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Mobile Number</label>
+                    <span>{{mobilenumber}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Address</label>
+                    <span>{{address}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Approval</label>
+                    <span>{{approval}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Timeline</label>
+                    <span>{{Timeline}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Land size in squarefeet</label>
+                    <span>{{landsize}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Budget</label>
+                    <span>{{budget}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Building Type</label>
+                    <span>{{buildingtype}}</span>
+                </div>
+            </div>
+            <div class="branch1">
+                <div class="note">
+                    <label class="title">Rooms Count</label>
+                    <span>{{Rooms}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Bricks</label>
+                    <span>{{bricks}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Steel</label>
+                    <span>{{steel}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Cement</label>
+                    <span>{{cement}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Sand</label>
+                    <span>{{sand}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Wood</label>
+                    <span>{{wood}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Plumbing</label>
+                    <span>{{plumbing}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Wires and cables</label>
+                    <span>{{wires}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Flooring</label>
+                    <span>{{flooring}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Sanitary Items</label>
+                    <span>{{sanitary items}}</span>
+                </div>
+                <div class="note">
+                    <label class="title">Paint</label>
+                    <span>{{paint}}</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="bit">
+            <label class="title">Bid :</label>
+            <label class="search-label">
+                <input type="number" name="bitamount" required="" placeholder="Enter your amount...">
+            </label>
+        </div>
+        <button class="submit">Proceed to Bit</button>
+    </form>
+</div>
+<script>
+    const submitBtn = document.querySelector('.submit');
+    const bitElement = document.querySelector('.bit');
+
+    submitBtn.addEventListener('click', () => {
+        bitElement.style.display = 'block';
+    });
+
+</script>
+{% endblock %}
