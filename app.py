@@ -16,9 +16,9 @@ app.secret_key = secrets.token_hex(16)
 
 app.secret_key = 'a'
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'selva2002'
+app.config['MYSQL_HOST'] = 'database-1.c3uqbgd0mbrv.ap-south-1.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'admin'
+app.config['MYSQL_PASSWORD'] = 'mariselvam'
 app.config['MYSQL_DB'] = 'haus'
 mysql = MySQL(app)
 
