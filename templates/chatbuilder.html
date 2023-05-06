@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>{{us}} Chat</title>
-    </head>
-    <body>
+
+<head>
+    <title>{{us}} Chat</title>
+    <link rel="stylesheet" href="/static/message.css">
+</head>
+
+<body>
+    <div class="messagebox">
         <h1>Messages</h1>
         {% if message %}
-			
-            {% for message in message %}
 
-            {% if (message.sender_id or message.receiver_id) != session.id %}
-            <div class="" style="text-align:left; padding:2px 5px;">
-                <p>
-                    <span class="" style="background-color: #dd92b2;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;"> {{message.message}}</span>
-                </p>
-            </div>
+        {% for message in message %}
+
+        {% if (message.sender_id or message.receiver_id) != session.id %}
+        <div class="" style="text-align:left; padding:2px 5px;">
+            <p>
+                <span class=""
+                    style="background-color: #dd92b2;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">
+                    {{message.message}}</span>
+            </p>
+        </div>
         {% else %}
-            <div class="" style="text-align:right; padding:2px 5px;">
-                <p>
-                    <span class="" style="background-color: #28a7ab;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;"> {{message.message}}</span>
-                </p>
-            </div>
+        <div class="" style="text-align:right; padding:2px 5px;">
+            <p>
+                <span class=""
+                    style="background-color: #28a7ab;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">
+                    {{message.message}}</span>
+            </p>
+        </div>
         {% endif %}
-            {% endfor %}
-            {% else %}
-    <span>
-        <h4>No Message found</h4>
-    </span>
-    {% endif %}
-			
-		<form action="{{ url_for('message', id = id, user = user) }}" method="post">
+        {% endfor %}
+        {% else %}
+        <span>
+            <h4>No Message found</h4>
+        </span>
+        {% endif %}
+
+        <form action="{{ url_for('message', id = id, user = user) }}" method="post">
             <label for="message">Message:</label>
-            <input type="text" id="message" name="message">
+            <input type="text" class="input" id="message" name="message">
             <button type="submit">Send</button>
         </form>
-    </body>
+    </div>
+
+</body>
+
 </html>
