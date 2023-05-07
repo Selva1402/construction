@@ -538,6 +538,7 @@ def viewbid(id):
     
 @app.route('/checkbid/<int:id>/<int:acc>', methods = ['GET', 'POST'])
 def checkbid(id, acc):
+    msg =''
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("SELECT * FROM builder WHERE id = %s", (id, ))
     row = cursor.fetchone()
@@ -550,10 +551,13 @@ def checkbid(id, acc):
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM bid WHERE id = %s', (acc, ))
     acc1 = cur.fetchone()
-    print(acc1)
-    return render_template('buildbit.html', id = id, name=name1, comp=comp, image=my_string_without_prefix, acc1 = acc1)
-
-
+    name = acc1[2]
+    if request.method == 'POST' and 'bid' in request.form:
+        bid = request.form['bid']
+        cursor.execute('INSERT INTO bidd VALUES(%s, %s, %s, %s)', (acc, name1, name, bid))
+        mysql.connection.commit()
+        msg = 'Successfully bid your opinion. Waiting for Customer response'
+    return render_template('buildbit.html',msg = msg, acc = acc, id = id, name=name1, comp=comp, image=my_string_without_prefix, acc1 = acc1)
 
 
 @app.route('/userinfo', methods=['GET', 'POST'])

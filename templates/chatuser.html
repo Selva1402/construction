@@ -14,7 +14,7 @@
         {% if message %}
         {% for message in message %}
         {% if (message.sender_id or message.receiver_id) != session.id %}
-        <div class="" style="text-align:right; padding:2px 5px;">
+        <div class="" style="text-align:left; padding:2px 5px;">
             <p>
                 <span class=""
                     style="background-color: #01772e;color: #d2cdcd;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">
@@ -22,7 +22,7 @@
             </p>
         </div>
         {% else %}
-        <div class="" style="text-align:left; padding:2px 5px;">
+        <div class="" style="text-align:right; padding:2px 5px;">
             <p>
                 <span class=""
                     style="background-color: #c61b04;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">

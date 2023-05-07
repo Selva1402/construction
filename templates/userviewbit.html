@@ -17,7 +17,7 @@
             <th class="bitrow">Building Type</th>
             <th class="bitrow">Budget</th>
             <th class="bitrow">Rooms</th>
-            <th class="bitrow">Requirements</th>
+            <th class="bitrow">Builder's Opinion</th>
 
 
         </thead>
@@ -35,7 +35,7 @@
                 <td class="bitrow">{{ row.build_type}}</td>
                 <td class="bitrow">{{ row.budget}}</td>
                 <td class="bitrow">{{ row.room}}</td>
-                <td class="bitrow"> <a class="bitrow" href="../checkbid/{{ id }}/{{ row.id }}" style="border: none;"> See All </a></td>
+                <td class="bitrow"> <a class="bitrow" href="../checkbid/{{ id }}/{{ row.id }}" style="border: none;">((row.bud))</a></td>
 
             </tr>
             {% endfor %}

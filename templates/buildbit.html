@@ -1,105 +1,106 @@
 {% extends 'builderdash.html' %}
 {% block content %}
 <div class="popup1">
-    <form class="builderbit">
+    <form class="builderbit" action="/checkbid/{{ id }}/{{ acc }}" method="post">
         <div class="popup2">
             <span class="req">Requirement form</span>
         </div>
         <div class="subform">
             <div class="subform1">
                 <div class="note1">
-                    <h4 class="title1">Name : </h4>
+                    <h4 class="title1">Name: </h4>
                     <span>{{acc1[2]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Email : </h4>
+                    <h4 class="title1">Email: </h4>
                     <span>{{acc1[3]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Location : </h4>
+                    <h4 class="title1">Location: </h4>
                     <span>{{acc1[4]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Mobile Number : </h4>
+                    <h4 class="title1">Mobile Number: </h4>
                     <span>{{acc1[5]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Address : </h4>
+                    <h4 class="title1">Address: </h4>
                     <span>{{acc1[6]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Approval : </h4>
+                    <h4 class="title1">Approval: </h4>
                     <span>{{acc1[7]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Timeline : </h4>
+                    <h4 class="title1">Timeline: </h4>
                     <span>{{acc1[8]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Land size in squarefeet : </h4>
+                    <h4 class="title1">Land size in squarefeet: </h4>
                     <span>{{acc1[9]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Budget : </h4>
+                    <h4 class="title1">Budget: </h4>
                     <span>{{acc1[10]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Building Type : </h4>
+                    <h4 class="title1">Building Type: </h4>
                     <span>{{acc1[11]}}</span>
                 </div>
+                <span style="size: 5px;">{{msg}}</span>
             </div>
             <div class="subform2">
                 <div class="note1">
-                    <h4 class="title1">Rooms Count : </h4>
+                    <h4 class="title1">Rooms Count: </h4>
                     <span>{{acc1[12]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Bricks : </h4>
+                    <h4 class="title1">Bricks: </h4>
                     <span>{{acc1[13]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Steel : </h4>
+                    <h4 class="title1">Steel: </h4>
                     <span>{{acc1[14]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Cement : </h4>
+                    <h4 class="title1">Cement: </h4>
                     <span>{{acc1[15]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Sand : </h4>
+                    <h4 class="title1">Sand: </h4>
                     <span>{{acc1[16]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Wood : </h4>
+                    <h4 class="title1">Wood: </h4>
                     <span>{{acc1[17]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Plumbing : </h4>
+                    <h4 class="title1">Plumbing: </h4>
                     <span>{{acc1[18]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Wires and cables : </h4>
+                    <h4 class="title1">Wires: </h4>
                     <span>{{acc1[19]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Flooring : </h4>
+                    <h4 class="title1">Flooring: </h4>
                     <span>{{acc1[20]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Sanitary Items : </h4>
+                    <h4 class="title1">Sanitary Items: </h4>
                     <span>{{acc1[21]}}</span>
                 </div>
                 <div class="note1">
-                    <h4 class="title1">Paint : </h4>
+                    <h4 class="title1">Paint: </h4>
                     <span>{{acc1[22]}}</span>
                 </div>
+                   
             </div>
-
         </div>
         <div class="bit">
             <h4 class="title1">Bid :</h4>
             <span class="bit-label">
-                <input type="number" name="bidamount" required placeholder="Enter your amount...">
+                <input type="text" name="bid" required placeholder="Enter your amount...">
             </span>
         </div>
         <button class="bitbutton">Proceed to Bit</button>
