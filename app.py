@@ -864,8 +864,17 @@ def usergallery(id):
                          room, my_string_without_prefix1))
     return render_template('usergallery.html', data=data_list, name=name1, email=email1, image=my_string_without_prefix, id=id)
 
-@app.route('/userviewbit/<int:id>' ,methods=['GET','POST']):
-def user
+@app.route('/userviewbid/<int:id>' ,methods=['GET','POST'])
+def userviewbid(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    return render_template('userviewbit.html', id = id, name=name1, email=email1, image=my_string_without_prefix)
 
 @app.route('/logout')
 def logout():
