@@ -17,6 +17,7 @@
             <th class="bitrow">Building Type</th>
             <th class="bitrow">Budget</th>
             <th class="bitrow">Rooms</th>
+            <th class="bitrow">Builder Details</th>
             <th class="bitrow">Builder's Opinion</th>
 
 
@@ -35,6 +36,7 @@
                 <td class="bitrow">{{ row.build_type}}</td>
                 <td class="bitrow">{{ row.budget}}</td>
                 <td class="bitrow">{{ row.room}}</td>
+                <td class="bitrow"><a href="../buildviewprof/{{row.userid}}/{{row.builderid}}">{{row.buildername}}</a></td>
                 <td class="bitrow">{{ row.bid }}</td>
             </tr>
             {% endfor %}
