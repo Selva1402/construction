@@ -169,3 +169,16 @@
   -webkit-appearance: none;
   margin: 0;
   }
+
+  /* css for builderbittable */
+
+  .buildertable{
+    margin-left: 250px;
+  }
+  .bittabletable, .bitrow{
+    border:1px solid black;
+    padding: 10px;
+    background: linear-gradient(0deg, #e9e9eb 0%, #56a9ed 100%);
+    
+    
+  }

@@ -864,6 +864,8 @@ def usergallery(id):
                          room, my_string_without_prefix1))
     return render_template('usergallery.html', data=data_list, name=name1, email=email1, image=my_string_without_prefix, id=id)
 
+@app.route('/userviewbit/<int:id>' ,methods=['GET','POST']):
+def user
 
 @app.route('/logout')
 def logout():
