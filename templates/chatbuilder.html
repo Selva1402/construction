@@ -3,6 +3,7 @@
 
 <head>
     <title>{{us}} Chat</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="/static/message.css">
 </head>
 
@@ -17,7 +18,7 @@
         <div class="" style="text-align:left; padding:2px 5px;">
             <p>
                 <span class=""
-                    style="background-color: #dd92b2;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">
+                style="background-color: #01772e;color: #dcd8d8;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">
                     {{message.message}}</span>
             </p>
         </div>
@@ -25,7 +26,7 @@
         <div class="" style="text-align:right; padding:2px 5px;">
             <p>
                 <span class=""
-                    style="background-color: #28a7ab;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">
+                style="background-color: #c61b04;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;">
                     {{message.message}}</span>
             </p>
         </div>
@@ -38,9 +39,9 @@
         {% endif %}
 
         <form action="{{ url_for('message', id = id, user = user) }}" method="post">
-            <label for="message">Message:</label>
-            <input type="text" class="input" id="message" name="message">
-            <button type="submit">Send</button>
+           
+            <input type="text" class="input2" id="message" name="message">
+            <button class="msg3" type="submit"><i class="las la-paper-plane"></i></button>
         </form>
     </div>
 
