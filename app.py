@@ -552,9 +552,10 @@ def checkbid(id, acc):
     cur.execute('SELECT * FROM bid WHERE id = %s', (acc, ))
     acc1 = cur.fetchone()
     name = acc1[2]
+    userid = acc1[1]
     if request.method == 'POST' and 'bid' in request.form:
         bid = request.form['bid']
-        cursor.execute('INSERT INTO bidd VALUES(%s, %s, %s, %s)', (acc, name1, name, bid))
+        cursor.execute('INSERT INTO bidd VALUES(%s, %s, %s, %s, %s, %s)', (acc, id, name1, userid, name, bid))
         mysql.connection.commit()
         msg = 'Successfully bid your opinion. Waiting for Customer response'
     return render_template('buildbit.html',msg = msg, acc = acc, id = id, name=name1, comp=comp, image=my_string_without_prefix, acc1 = acc1)
@@ -878,7 +879,9 @@ def userviewbid(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    return render_template('userviewbit.html', id = id, name=name1, email=email1, image=my_string_without_prefix)
+    cursor.execute('SELECT * FROM bid RIGHT JOIN bidd ON bid.id=bidd.bid_id WHERE uid = %s', (id, ))
+    bid = cursor.fetchall()
+    return render_template('userviewbit.html', id = id, name=name1, email=email1, image=my_string_without_prefix, bid = bid)
 
 @app.route('/logout')
 def logout():

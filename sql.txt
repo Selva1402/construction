@@ -1,1 +1,4 @@
 mysqldump --host=localhost --user=root --port=3306 --password=selva2002 haus > D:\backup_all_databases.sql
+
+
+SELECT * FROM bid RIGHT JOIN bidd ON bid.id=bidd.bid_id;
