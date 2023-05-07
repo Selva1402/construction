@@ -25,7 +25,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = 'abce'
+app.config['MAIL_PASSWORD'] = '  '
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -795,7 +795,7 @@ def userbit(id):
         cursor1.execute('INSERT INTO bid VALUES (NULL, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s, % s)', (
             uid, name, email, location, phone, address, approval_status, timeline, sqft, budget, build_type, room, bricks, steel, cement, sand, wood, plumb, wires, floor, sanitary, paint, ))
         mysql.connection.commit()
-        html = render_template('quationmail.html', name=name, email=email, location=location, phone=phone,
+        html = render_template('quationmail.html', name=name, email=email, location=location, phone=phone, bricks=bricks, steel=steel, sand=sand, cement= cement, plumb=plumb, wires=wires, floor=floor, paint=paint, sanitary=sanitary,
                                approval_status=approval_status, timeline=timeline, sqft=sqft, budget=budget, wood=wood, room=room)
         msg = 'You have successfully registered your Requirements'
         TEXT = Message('Hello, Mail form Future Haus',
@@ -805,7 +805,7 @@ def userbit(id):
         cursor.execute('SELECT email FROM builder')
         emails = cursor.fetchall()
         for emails in emails:
-            html1 = render_template('quotationengin.html', name=name, email=email, location=location, phone=phone,
+            html1 = render_template('quotationengin.html', name=name, email=email, location=location, phone=phone, bricks=bricks, steel=steel, sand=sand, cement= cement, plumb=plumb, wires=wires, floor=floor, paint=paint, sanitary=sanitary,
                                     approval_status=approval_status, timeline=timeline, sqft=sqft, budget=budget, wood=wood, room=room)
             TEXT1 = Message('Hello, Mail from Future Haus',
                             sender='futurehaus2022@gmail.com', recipients=[emails['email']])
