@@ -38,9 +38,9 @@
         {% endif %}
 
         <form action="{{ url_for('message', id = id, user = user) }}" method="post">
-            <label for="message">Message:</label>
+           
             <input type="text" class="input" id="message" name="message">
-            <button type="submit">Send</button>
+            <button class="msg2" type="submit"><i class="las la-paper-plane"></i></button>
         </form>
     </div>
 

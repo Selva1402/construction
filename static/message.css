@@ -31,7 +31,7 @@
     width: 70%;
     height: 600px;
     overflow: scroll;
-    scrollbar-width: none;
+    scrollbar: none;
     top: 10%;
     left: 20%;
     position: fixed;
@@ -56,3 +56,10 @@
     color: green;
     font-size: 24px;
     }
+
+
+    
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  display: none;
+}
