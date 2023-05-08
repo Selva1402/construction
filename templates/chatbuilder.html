@@ -49,7 +49,8 @@
 <body>
     {%include 'builderdash.html'%}
     <div class="messagebox">
-        <button class="back"><i class="las la-arrow-circle-left"></i></button>
+        <a href="{{ url_for('sendmessage', id = id)}}">
+        <button class="back"><i class="las la-arrow-circle-left"></i></button></a>
         <h1>{{us}}</h1>
         
         {% if message %}

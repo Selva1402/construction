@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, json
 from flask_mysqldb import MySQL
 import hashlib
 import secrets
@@ -8,6 +8,7 @@ import os
 from datetime import datetime
 import random
 import re
+import time
 
 
 app = Flask(__name__)
@@ -485,6 +486,24 @@ def message(id, user):
         mysql.connection.commit()
         return redirect(url_for('message', id=id, user=user))
     return render_template('chatbuilder.html', message=message, id=id, user=user, us=us,  name=name1, comp=comp, image=my_string_without_prefix)
+
+last_checked_timestamp = time.time()
+
+@app.route('/new_messages/<int:id>')
+def get_new_messages(id):
+    global last_checked_timestamp
+    cursor = mysql.connection.cursor()
+    # Fetch messages from database since last checked timestamp
+    query = "SELECT message FROM messages WHERE timestamp > %s and id = %s"
+    values = (last_checked_timestamp, id, )
+    cursor.execute(query, values)
+    new_messages = [row[0] for row in cursor.fetchall()]
+
+    # Update the last checked timestamp
+    last_checked_timestamp = time.time()
+    print(new_messages)
+    # Return the new messages as JSON
+    return render_template('chat.html', id = id, new_messages = new_messages)
 
 
 @app.route('/usersendmessage/<int:id>', methods=['GET', 'POST'])

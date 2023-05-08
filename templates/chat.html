@@ -47,6 +47,29 @@
 			border-radius: 50px;
 		}
 	</style>
+	<script>
+		const notificationIcon = document.getElementById('notification-icon');
+		const notificationCount = document.getElementById('notification-count');
+	  
+		function fetchNewMessages() {
+		  const xhr = new XMLHttpRequest();
+		  xhr.open('GET', '/new_messages/{{ id }}');
+		  xhr.onload = function() {
+			if (xhr.status === 200) {
+			  const newMessages = JSON.parse(xhr.responseText);
+			  if (newMessages.length > 0) {
+				// Update the notification icon and count
+				notificationIcon.style.display = 'block';
+				notificationCount.textContent = newMessages.length;
+			  }
+			}
+		  };
+		  xhr.send();
+		}
+	  
+		// Call the fetchNewMessages function every 10 seconds
+		setInterval(fetchNewMessages, 10000);
+	  </script>
 </head>
 
 <body>
@@ -61,8 +84,9 @@
 		<div class="card" style="width: 100%;">
 			<ul id="channels_lists" class="list-group list-group-flush">
 				{% for name in user %}
-				<div style="display: flex; padding: 5px;">
+				<div style="display: flex; padding: 5px;" id="notification-icon">
 					<img class="prfimg" src="/static/images/{{ name[2] }}" alt="profile">
+					<span id="notification-count">{{new_messages}}</span>
 					<a style="color:black;text-decoration:none;cursor: pointer;" id="{{ name[1] }}"
 						href="../message/{{ id }}/{{ name[0] }}">
 						<li class="list-group-item">{{ name[1] }}</li>
