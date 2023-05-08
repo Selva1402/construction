@@ -42,7 +42,8 @@
 
       <div class="buttons">
         <button class="button">{{location}}</button>
-        <button class="button">Message</button>
+        <a href="{{ url_for('usersendmessage', id = id) }}">
+        <button class="button">Message</button></a>
       </div>
 
 </body>

@@ -42,9 +42,10 @@
       </div>
 
       <div class="buttons">
-        <a href="{{ url_for('buildergallery', id=id) }}">
-        <button class="button">&nbsp&nbsp &nbsp Edit &nbsp &nbsp&nbsp</button></a>
-        <button class="button">Message</button>
+        <a href="{{ url_for('viewgallery', id=id) }}">
+        <button class="button">&nbsp&nbsp &nbsp Projects &nbsp &nbsp&nbsp</button></a>
+        <a href="{{ url_for('sendmessage', id = id)}}">
+        <button class="button">Message</button></a>
       </div>
 
 </body>
