@@ -11,15 +11,18 @@
     {%include 'builderdash.html'%}
     <div class="buildprof">
         <center>
-            <header>
-                <h1>Builder Profile</h1>
-            </header>
+            
+                <h3 class="head">Builder Profile</h3>
+           
             <div class="profile">
-                <img class="profile" src="/static/images/{{ photo }}" alt="Profile Picture" id="profile-picture">
-                <div class="overlay" id="overlay">
-                    <p>Name: {{builder[1]}}</p>
-                    <p>Company Name : {{builder[5]}}</p>
-                </div>
+                <img  src="/static/images/{{ photo }}" alt="Profile Picture" id="profile-picture">
+                    <div class="text-data">
+                        <span class="name">Name: {{builder[1]}}</span>
+                        <span class="name">Company Name : {{builder[5]}}</span>
+                    </div>
+            </div>
+                
+            
         </center>
         <br><br><br><br>
 
