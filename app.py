@@ -482,7 +482,7 @@ def message(id, user):
                        (id, user, message, timestamp))
         mysql.connection.commit()
         return redirect(url_for('message', id=id, user=user))
-    return render_template('chatbuilder.html', message=message, id=id, user=user, us=us)
+    return render_template('chatbuilder.html', message=message, id=id, user=user, us=us,  name=name1, comp=comp, image=my_string_without_prefix)
 
 
 @app.route('/usersendmessage/<int:id>', methods=['GET', 'POST'])
@@ -534,7 +534,7 @@ def usermessage(id, builder):
                        (id, builder, message, timestamp))
         mysql.connection.commit()
         return redirect(url_for('usermessage', id=id, builder=builder))
-    return render_template('chatuser.html', message=message, id=id, builder=builder, us=us)
+    return render_template('chatuser.html', message=message, id=id, builder=builder, us=us, name=name1, email=email1, location=location, image=my_string_without_prefix)
 
 @app.route('/viewbid/<int:id>', methods = ['GET', 'POST'])
 def viewbid(id):
