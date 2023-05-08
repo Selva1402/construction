@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    {%include 'userdash.html'%}
     <div class="messagebox">
         <h1>Messages</h1>
 
@@ -43,6 +44,15 @@
             <button class="msg2" type="submit"><i class="las la-paper-plane"></i></button>
         </form>
     </div>
+    <script>
+        window.onload = function() {
+          // Get the message box element
+          const messageBox = document.querySelector('.messagebox');
+      
+          // Scroll to the bottom of the message box
+          messageBox.scrollTop = messageBox.scrollHeight;
+        };
+      </script>
 
 </body>
 

@@ -8,8 +8,9 @@
 </head>
 
 <body>
+    {%include 'builderdash.html'%}
     <div class="messagebox">
-        <h1>Messages</h1>
+        <h1 style="color : white"> {{us}}</h1>
         {% if message %}
 
         {% for message in message %}
@@ -44,6 +45,15 @@
             <button class="msg3" type="submit"><i class="las la-paper-plane"></i></button>
         </form>
     </div>
+    <script>
+        window.onload = function() {
+          // Get the message box element
+          const messageBox = document.querySelector('.messagebox');
+      
+          // Scroll to the bottom of the message box
+          messageBox.scrollTop = messageBox.scrollHeight;
+        };
+      </script>
 
 </body>
 

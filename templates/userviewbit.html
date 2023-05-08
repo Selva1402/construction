@@ -2,23 +2,23 @@
 {% block content %}
 
 <!-- css in builderbit -->
-<div class="buildertable">
+<div class="buildertable2">
     
-    <table class="bittable">
+    <table class="bittable2">
 
         <thead>
-            <th class="bitrow">ID</th>
-            <th class="bitrow">Name</th>
-            <th class="bitrow">Email</th>
-            <th class="bitrow">Location</th>
-            <th class="bitrow">Phone Number</th>
-            <th class="bitrow">Timeline</th>
-            <th class="bitrow">Land size</th>
-            <th class="bitrow">Building Type</th>
-            <th class="bitrow">Budget</th>
-            <th class="bitrow">Rooms</th>
-            <th class="bitrow">Builder Details</th>
-            <th class="bitrow">Builder's Opinion</th>
+            <th class="bitrow2">ID</th>
+            <th class="bitrow2">Name</th>
+            <th class="bitrow2">Email</th>
+            <th class="bitrow2">Location</th>
+            <th class="bitrow2">Phone Number</th>
+            <th class="bitrow2">Timeline</th>
+            <th class="bitrow2">Land size</th>
+            <th class="bitrow2">Building Type</th>
+            <th class="bitrow2">Budget</th>
+            <th class="bitrow2">Rooms</th>
+            <th class="bitrow2">Builder Details</th>
+            <th class="bitrow2">Builder's Opinion</th>
 
 
         </thead>
@@ -26,18 +26,18 @@
         <tbody>
             {% for row in bid: %}
             <tr>
-                <td class="bitrow">{{ row.id }}</td>
-                <td class="bitrow">{{ row.name }}</td>
-                <td class="bitrow">{{ row.email}}</td>
-                <td class="bitrow">{{ row.phone }}</td>
-                <td class="bitrow">{{ row.timeline}}</td>
-                <td class="bitrow">{{ row.location}}</td>
-                <td class="bitrow">{{ row.sqft}}</td>
-                <td class="bitrow">{{ row.build_type}}</td>
-                <td class="bitrow">{{ row.budget}}</td>
-                <td class="bitrow">{{ row.room}}</td>
-                <td class="bitrow"><a href="../buildviewprof/{{row.userid}}/{{row.builderid}}">{{row.buildername}}</a></td>
-                <td class="bitrow">{{ row.bid }}</td>
+                <td class="bitrow2">{{ row.id }}</td>
+                <td class="bitrow2">{{ row.name }}</td>
+                <td class="bitrow2">{{ row.email}}</td>
+                <td class="bitrow2">{{ row.phone }}</td>
+                <td class="bitrow2">{{ row.timeline}}</td>
+                <td class="bitrow2">{{ row.location}}</td>
+                <td class="bitrow2">{{ row.sqft}}</td>
+                <td class="bitrow2">{{ row.build_type}}</td>
+                <td class="bitrow2">{{ row.budget}}</td>
+                <td class="bitrow2">{{ row.room}}</td>
+                <td class="bitrow2"><a href="../buildviewprof/{{row.userid}}/{{row.builderid}}">{{row.buildername}}</a></td>
+                <td class="bitrow2" style="border: none; padding-top: 30px;">{{ row.bid }}</td>
             </tr>
             {% endfor %}
         </tbody>

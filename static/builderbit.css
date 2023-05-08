@@ -3,6 +3,14 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Roboto+Slab:wght@500&display=swap');
 
+::-webkit-scrollbar {
+  display: none;
+}
+  
+body
+{
+  background-color: red;
+}
 .popup1 {
     position: relative;
     width: 820px;
@@ -173,7 +181,9 @@
   /* css for builderbittable */
 
   .buildertable{
-    margin-left: 250px;
+    margin-top: 20px;
+    margin-left: 180px;
+    margin-right: 50px;
   }
   .bittabletable, .bitrow{
     border:1px solid black;

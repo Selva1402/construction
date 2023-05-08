@@ -1,10 +1,10 @@
 body{
-  background-color: #0b0b0b;
+  background-color: #cfcccc;
 }
 .input {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
     font-weight: 500;
-    font-size: .8vw;
+    font-size: 1vw;
     color: #fff;
     background-color: rgb(28,28,30);
     box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
@@ -12,12 +12,14 @@ body{
     border: none;
     outline: none;
     padding: 0.4vw;
-    width: 800px;
-    margin: 0px 50px;
+    width: 1020px;
+    height: 40px;
+    
     transition: .4s;
     position: fixed;
-    bottom: 119px;
+    bottom: 25px;
     z-index: 500;
+
   }
   
   .input:hover {
@@ -25,13 +27,13 @@ body{
   }
   
   .input:focus {
-    box-shadow: 0 0 0 .15vw skyblue;
+    box-shadow: 0 0 0 .15vw rgb(219, 7, 7);
   }
 
   .input2 {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
     font-weight: 500;
-    font-size: .8vw;
+    font-size: 1vw;
     color: #fff;
     background-color: rgb(28,28,30);
     box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
@@ -39,11 +41,12 @@ body{
     border: none;
     outline: none;
     padding: 0.4vw;
-    width: 800px;
-    margin: 0px 50px;
+    width: 1020px;
+    height: 40px;
+    
     transition: .4s;
     position: fixed;
-    bottom: 100px;
+    bottom: 25px;
     z-index: 500;
   }
   
@@ -60,8 +63,9 @@ body{
     background-color: aquamarine;
     width: 70%;
     height: 600px;
-    overflow: scroll;
+    /* overflow: scroll; */
     scrollbar: none;
+    overflow-y: auto;
     border-radius: 5px;
     background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
     top: 10%;
@@ -74,13 +78,15 @@ body{
   width: fit-content;
   display: flex;
   align-items: center;
-  bottom: 15%;
-  right: 18%;
+  bottom: 24px;
+  right: 159px;
   z-index: 99;
   position: fixed;
+  height: 43px;
   transition: all 0.3s;
   background-color: rgb(29, 29, 29);
   background-image: radial-gradient(at 95% 89%, rgb(15, 15, 15) 0px, transparent 50%), radial-gradient(at 0% 100%, rgb(17, 17, 17) 0px, transparent 50%), radial-gradient(at 0% 0%, rgb(29, 29, 29) 0px, transparent 50%);
+  padding: 0px 12px;
 }
 .msg2 .las{
     color: green;
@@ -88,19 +94,20 @@ body{
     }
 
 .msg3{
-      border-radius: 10px;
-      text-shadow: 0px 0px 20px #4b4b4b;
-      width: 40px;
-      display: flex;
-      align-items: center;
-      bottom: 13%;
-      right: 21%;
-      height: 30px;
-      z-index: 99;
-      position: fixed;
-      transition: all 0.3s;
-      background-color: rgba(29, 29, 29, 0.919);
-      background-image: radial-gradient(at 95% 89%, rgb(15, 15, 15) 0px, transparent 50%), radial-gradient(at 0% 100%, rgb(17, 17, 17) 0px, transparent 50%), radial-gradient(at 0% 0%, rgb(29, 29, 29) 0px, transparent 50%);
+  border-radius: 10px;
+  text-shadow: 0px 0px 20px #4b4b4b;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  bottom: 24px;
+  right: 159px;
+  z-index: 99;
+  position: fixed;
+  height: 43px;
+  transition: all 0.3s;
+  background-color: rgb(29, 29, 29);
+  background-image: radial-gradient(at 95% 89%, rgb(15, 15, 15) 0px, transparent 50%), radial-gradient(at 0% 100%, rgb(17, 17, 17) 0px, transparent 50%), radial-gradient(at 0% 0%, rgb(29, 29, 29) 0px, transparent 50%);
+  padding: 0px 12px;
     }
 .msg3 .las{
         color: rgb(5, 175, 5);
