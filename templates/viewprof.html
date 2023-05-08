@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    {%include 'builderdash.html'%}
+    {%include 'userdash.html'%}
     <div class="buildprof">
         <center>
             
@@ -18,6 +18,9 @@
                 <img  src="/static/images/{{ photo }}" alt="Profile Picture" id="profile-picture">
                     <div class="text-data">
                         <span class="name">Name: {{builder[1]}}</span>
+                        <span class="name">Email: {{builder[2]}}</span>
+                        <span class="name">Phone: {{builder[8]}}</span>
+                        <span class="name">Location: {{builder[7]}}</span>
                         <span class="name">Company Name : {{builder[5]}}</span>
                     </div>
             </div>
