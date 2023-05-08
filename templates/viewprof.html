@@ -8,45 +8,59 @@
 </head>
 
 <body>
-    <center>
-        <header>
-            <h1>Builder Profile</h1>
-        </header>
-        <div class="profile">
-            <img class="profile" src="/static/images/{{ photo }}" alt="Profile Picture" id="profile-picture">
-            <div class="overlay" id="overlay">
-                <p>Name: {{builder[1]}}</p>
-                <p>Company Name : {{builder[5]}}</p>
-            </div>
-    </center>
-    <br><br><br><br>
-
-    <div class="posts">
+    {%include 'builderdash.html'%}
+    <div class="buildprof">
         <center>
-            <h3>Projects</h3>
+            <header>
+                <h1>Builder Profile</h1>
+            </header>
+            <div class="profile">
+                <img class="profile" src="/static/images/{{ photo }}" alt="Profile Picture" id="profile-picture">
+                <div class="overlay" id="overlay">
+                    <p>Name: {{builder[1]}}</p>
+                    <p>Company Name : {{builder[5]}}</p>
+                </div>
         </center>
-        {% if data%}
-        {% for project in data:%}
-        <div class="post">
-            <img src="/static/image/{{ project[5] }}" alt="Post">
-            <ul>
-                <li><p>Building Type : {{ project[2] }}</p></li>
-                <li><p>Square Feet : {{ project[1] }}</p></li>
-                <li><p>Budget : {{project[3]}}</p></li>
-                <li><p>Rooms : {{project[4]}}</p></li>
-                <li><p>Location : {{project[0]}}</p></li>
-            </ul>
+        <br><br><br><br>
+
+        <div class="posts">
+            <center>
+                <h3>Projects</h3>
+            </center>
+            {% if data%}
+            {% for project in data:%}
+            <div class="post">
+                <img src="/static/image/{{ project[5] }}" alt="Post">
+                <ul>
+                    <li>
+                        <p>Building Type : {{ project[2] }}</p>
+                    </li>
+                    <li>
+                        <p>Square Feet : {{ project[1] }}</p>
+                    </li>
+                    <li>
+                        <p>Budget : {{project[3]}}</p>
+                    </li>
+                    <li>
+                        <p>Rooms : {{project[4]}}</p>
+                    </li>
+                    <li>
+                        <p>Location : {{project[0]}}</p>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        {% else %}
+        <span>
+            <center>
+                <h4>No Projects Uploaded</h4>
+            </center>
+        </span>
+        {% endif %}
     </div>
-    {% else %}
-    <span>
-        <center>
-        <h4>No Projects Uploaded</h4>
-    </center>
-    </span>
-    {% endif %}
     </div>
+
 </body>
 
 </html>
