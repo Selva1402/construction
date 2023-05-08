@@ -446,7 +446,15 @@ def sendmessage(id):
     my_string_without_prefix = my_string.strip("'")
     cursor.execute('SELECT * FROM users')
     user = cursor.fetchall()
-    return render_template('chat.html', user=user, name=name1, comp=comp, image=my_string_without_prefix, id=id)
+    user1 = []
+    for row1 in user:
+        uid = row1['id']
+        name = row1['username']
+        img = row1['image']
+        my_string1 = img.decode('utf-8')
+        my_string_without_prefix1 = my_string1.strip("'")
+        user1.append((uid, name, my_string_without_prefix1))
+    return render_template('chat.html', user=user1, name=name1, comp=comp, image=my_string_without_prefix, id=id)
 
 
 @app.route('/message/<int:id>/<int:user>', methods=['GET', 'POST'])
@@ -490,7 +498,15 @@ def usersendmessage(id):
     my_string_without_prefix = my_string.strip("'")
     cursor.execute('SELECT * FROM builder')
     builder = cursor.fetchall()
-    return render_template('chatb.html', builder=builder, name=name1, email=email1, location=location, image=my_string_without_prefix, id=id)
+    user1 = []
+    for row1 in builder:
+        uid = row1['id']
+        name = row1['username']
+        img = row1['image']
+        my_string1 = img.decode('utf-8')
+        my_string_without_prefix1 = my_string1.strip("'")
+        user1.append((uid, name, my_string_without_prefix1))
+    return render_template('chatb.html', builder=user1, name=name1, email=email1, location=location, image=my_string_without_prefix, id=id)
 
 
 @app.route('/usermessage/<int:id>/<int:builder>', methods=['GET', 'POST'])
