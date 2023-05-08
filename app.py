@@ -478,6 +478,8 @@ def message(id, user):
     if request.method == 'POST' and 'message' in request.form:
         message = request.form['message']
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        if not message:
+            return redirect(url_for('message', id=id, user=user))
         cursor.execute('INSERT INTO messages VALUES (NULL,%s, %s, %s, %s)',
                        (id, user, message, timestamp))
         mysql.connection.commit()
@@ -530,6 +532,8 @@ def usermessage(id, builder):
     if request.method == 'POST' and 'message' in request.form:
         message = request.form['message']
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        if not message:
+            return redirect(url_for('usermessage', id=id, builder=builder))
         cursor.execute('INSERT INTO messages VALUES (NULL,%s, %s, %s, %s)',
                        (id, builder, message, timestamp))
         mysql.connection.commit()
