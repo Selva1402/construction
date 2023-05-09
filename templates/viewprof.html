@@ -11,21 +11,24 @@
     {%include 'userdash.html'%}
     <div class="buildprof">
         <center>
-            
-                <h3 class="head">Builder Profile</h3>
-           
+
+            <h3 class="head">Builder Profile</h3>
+
             <div class="profile">
-                <img  src="/static/images/{{ photo }}" alt="Profile Picture" id="profile-picture">
-                    <div class="text-data">
-                        <span class="name">Name: {{builder[1]}}</span>
-                        <span class="name">Email: {{builder[2]}}</span>
-                        <span class="name">Phone: {{builder[8]}}</span>
-                        <span class="name">Location: {{builder[7]}}</span>
-                        <span class="name">Company Name : {{builder[5]}}</span>
-                    </div>
+                <img src="/static/images/{{ photo }}" alt="Profile Picture" id="profile-picture">
+                <div class="text-data">
+                    <span class="name">Name: {{builder[1]}}</span>
+                    <span class="name">Email: {{builder[2]}}</span>
+                    <span class="name">Phone: {{builder[8]}}</span>
+                    <span class="name">Location: {{builder[7]}}</span>
+                    <span class="name">Company Name : {{builder[5]}}</span>
+                </div>
+                <button data-label="Register" class="rainbow-hover">
+                    <span class="sp" id="sp">Show Materials</span>
+                </button>
             </div>
-                
-            
+
+
         </center>
         <br><br><br><br>
 
@@ -64,9 +67,104 @@
             </center>
         </span>
         {% endif %}
-    </div>
+        <div class="wrapper">
+            <h1 class="mater">Materials Used In Construction</h1>
+            <table>
+                <tr>
+                    <td>
+                        <p>Cement</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{cement}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Steel</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{steel}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Wood</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{wood}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Bricks</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{bricks}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Flooring</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{floor}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Wires/Cables</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{wires}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Sand</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{sand}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Plumbing</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{plumb}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Sanitary</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{sanitary}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Paints</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{paint}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Glass</p>
+                    </td>
+                    <td style="border: none;margin-top: 10px;">{{glass}}</td>
+                </tr>
+                
+            </table>
+        </div>
     </div>
 
+    <script>
+        const button = document.getElementById('sp');
+		const wrapper = document.querySelector('.wrapper');
+		const posts = document.querySelector('.posts');
+
+		function togglePosts() {
+    if (wrapper.style.display === 'block') {
+        wrapper.style.display = 'none';
+        posts.style.display = 'block';
+        button.textContent = 'Show Material';
+    } else {
+        wrapper.style.display = 'block';
+        posts.style.display = 'none';
+        button.textContent = 'Show Project';
+    }
+}
+
+
+		button.addEventListener('click', togglePosts);
+
+        
+
+
+    </script>
 </body>
 
 </html>
