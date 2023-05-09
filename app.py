@@ -1,7 +1,6 @@
 from flask import Flask, make_response, render_template, request, redirect, url_for, session, flash, json
 from flask_mysqldb import MySQL
 import hashlib
-import pdfkit
 import secrets
 import MySQLdb.cursors
 from flask_mail import Mail, Message
@@ -11,6 +10,7 @@ from datetime import datetime
 import random
 import re
 import time
+import pdfkit
 
 
 app = Flask(__name__)
@@ -927,6 +927,10 @@ def userviewbid(id):
     bid = cursor.fetchall()
     return render_template('userviewbit.html', id = id, name=name1, email=email1, image=my_string_without_prefix, bid = bid)
 
+@app.route('/pdf')
+def pdf():
+    return render_template('document.html')
+
 @app.route('/generate_document/<int:id>/<int:builderid>')
 def generate_document(id, builderid):
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -941,8 +945,20 @@ def generate_document(id, builderid):
     bidd = cursor.fetchone()
     cursor.execute('SELECT *FROM bid WHERE uid = %s', (id, ))
     bid = cursor.fetchone()
-
-    return render_template('document.html', user = user, builder=builder, mat=material, bid=bid, bidd=bidd, date=timestamp)
+    html = render_template('document.html', user = user, builder=builder, mat=material, bid=bid, bidd=bidd, date=timestamp)
+    options = {
+        'page-size': 'Letter',
+        'margin-top': '0.75in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.75in',
+        'margin-left': '0.75in',
+    }
+    path_wkhtmltopdf = 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'  # Set the path to wkhtmltopdf
+    pdf = pdfkit.from_string(html, False, options=options, configuration=pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf))
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename=Agreement.pdf'
+    return response
 
 
 @app.route('/logout')
