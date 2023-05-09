@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, json
+from flask import Flask, make_response, render_template, request, redirect, url_for, session, flash, json
 from flask_mysqldb import MySQL
 import hashlib
+import pdfkit
 import secrets
 import MySQLdb.cursors
 from flask_mail import Mail, Message
 import os
+import jinja2
 from datetime import datetime
 import random
 import re
@@ -13,6 +15,7 @@ import time
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 app.secret_key = 'a'
@@ -923,6 +926,24 @@ def userviewbid(id):
     cursor.execute('SELECT * FROM bid RIGHT JOIN bidd ON bid.id=bidd.bid_id WHERE uid = %s', (id, ))
     bid = cursor.fetchall()
     return render_template('userviewbit.html', id = id, name=name1, email=email1, image=my_string_without_prefix, bid = bid)
+
+@app.route('/generate_document/<int:id>/<int:builderid>')
+def generate_document(id, builderid):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT *FROM users WHERE id = %s', (id,))
+    user = cursor.fetchone()
+    cursor.execute('SELECT * FROM builder WHERE id = %s', (builderid, ))
+    builder = cursor.fetchone()
+    cursor.execute('SELECT *FROM material WHERE uid = %s', (builderid, ))
+    material = cursor.fetchone()
+    cursor.execute('SELECT *FROM bidd WHERE builderid = %s', (builderid, ))
+    bidd = cursor.fetchone()
+    cursor.execute('SELECT *FROM bid WHERE uid = %s', (id, ))
+    bid = cursor.fetchone()
+
+    return render_template('document.html', user = user, builder=builder, mat=material, bid=bid, bidd=bidd, date=timestamp)
+
 
 @app.route('/logout')
 def logout():

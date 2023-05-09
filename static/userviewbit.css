@@ -3,13 +3,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Roboto+Slab:wght@500&display=swap');
 
-
   /* css for builderbittable */
 
   .buildertable2{
     margin-top: -500px;
     margin-left: 180px;
     margin-right: 50px;
+    width: 100vw;
   }
   .bittabletable2, .bitrow2{
     border:1px solid black;
