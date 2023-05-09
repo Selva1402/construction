@@ -501,9 +501,8 @@ def get_new_messages(id):
 
     # Update the last checked timestamp
     last_checked_timestamp = time.time()
-    print(new_messages)
     # Return the new messages as JSON
-    return render_template('chat.html', id = id, new_messages = new_messages)
+    return new_messages
 
 
 @app.route('/usersendmessage/<int:id>', methods=['GET', 'POST'])
