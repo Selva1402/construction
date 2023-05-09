@@ -927,9 +927,6 @@ def userviewbid(id):
     bid = cursor.fetchall()
     return render_template('userviewbit.html', id = id, name=name1, email=email1, image=my_string_without_prefix, bid = bid)
 
-@app.route('/pdf')
-def pdf():
-    return render_template('document.html')
 
 @app.route('/generate_document/<int:id>/<int:builderid>')
 def generate_document(id, builderid):
