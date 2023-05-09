@@ -784,6 +784,9 @@ def buildviewprof(id, builderid):
     my_string_without_prefix1 = my_string1.strip("'")
     cursor.execute('SELECT * FROM images WHERE uid = %s', (builderid,))
     project = cursor.fetchall()
+    cursor.execute('SELECT * FROM material WHERE uid = %s', (builderid, ))
+    material = cursor.fetchone()
+    print(material)
     data = []
     for row in project:
         location1 = row[2]
@@ -795,7 +798,7 @@ def buildviewprof(id, builderid):
         proj1 = proj.decode('utf-8')
         proj12 = proj1.strip("'")
         data.append((location1, sqft, build_type, budget, room, proj12))
-    return render_template('viewprof.html', data=data, photo=my_string_without_prefix1, builder=builder, id=id, location=location,  name=name1, email=email1, image=my_string_without_prefix)
+    return render_template('viewprof.html', data=data, photo=my_string_without_prefix1, builder=builder, id=id, location=location,  name=name1, email=email1, image=my_string_without_prefix, mat = material)
 
 
 @app.route('/userbit/<int:id>', methods=["POST", "GET"])
