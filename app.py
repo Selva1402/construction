@@ -13,6 +13,7 @@ import time
 import pdfkit
 
 
+
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
