@@ -943,15 +943,8 @@ def generate_document(id, builderid):
     cursor.execute('SELECT *FROM bid WHERE uid = %s', (id, ))
     bid = cursor.fetchone()
     html = render_template('document.html', user = user, builder=builder, mat=material, bid=bid, bidd=bidd, date=timestamp)
-    options = {
-        'page-size': 'Letter',
-        'margin-top': '0.75in',
-        'margin-right': '0.75in',
-        'margin-bottom': '0.75in',
-        'margin-left': '0.75in',
-    }
     path_wkhtmltopdf = 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'  # Set the path to wkhtmltopdf
-    pdf = pdfkit.from_string(html, False, options=options, configuration=pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf))
+    pdf = pdfkit.from_string(html, False, configuration=pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf))
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename=Agreement.pdf'
