@@ -46,23 +46,7 @@
     </table>
 
 </div>
-<script>
-    var isTimerExpired = localStorage.getItem("isTimerExpired");
-  if (isTimerExpired) {
-    var anchor = document.getElementById("edit-bid-btn");
-    anchor.innerHTML = "Time Over";
-    anchor.removeAttribute("href");
-    anchor.removeAttribute("onclick");
-  } else {
-    setTimeout(function() {
-      var anchor = document.getElementById("edit-bid-btn");
-      anchor.innerHTML = "Time Over";
-      anchor.removeAttribute("href");
-      anchor.removeAttribute("onclick");
-      localStorage.setItem("isTimerExpired", true);
-    }, 60000); // 1 minute = 60,000 milliseconds
-  }
-  </script>
+
 
 
 {% endblock %}

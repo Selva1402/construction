@@ -5,7 +5,7 @@
 <div class="buildertable2">
     
     <table class="bittable2">
-
+      {% if bid %}
         <thead>
             <th class="bitrow2">ID</th>
             <th class="bitrow2">Name</th>
@@ -20,16 +20,17 @@
             <th class="bitrow2">Bid Price</th>
             <th class="bitrow2">Message</th>
             <th class="bitrow2">Show Agreement</th>
+            <th class="bitrow2">Select</th>
         </thead>
 
         <tbody>
+          
             {% for row in bid: %}
             <tr>
                 <td class="bitrow2">{{ row.id }}</td>
                 <td class="bitrow2">{{ row.name }}</td>
                 <td class="bitrow2">{{ row.email}}</td>
                 <td class="bitrow2">{{ row.location }}</td>
-                
                 <td class="bitrow2">{{ row.phone}}</td>
                 <td class="bitrow2">{{ row.sqft}}</td>
                 <td class="bitrow2">{{ row.build_type}}</td>
@@ -82,10 +83,62 @@
                         perspective: 600px;
                         transition: transform 0.1s;
                         margin-top: 1px;
-                      ">Download</button></a></td>
-            </tr>
+                      ">Download</button></a></td>`
+                    <td class="bitrow2">
+                        {% if  row.selects  == 'not selected' %}
+                        <a href="../selbuilder/{{row.userid}}">
+                        <button style="font-size: 16px;
+                            font-weight: 700;
+                            color: #030fae;
+                            background-color: #d0d1d4;
+                            border: none;
+                            outline: none;
+                            cursor: pointer;
+                            padding: 10px 24px;
+                            position: relative;
+                            line-height: 24px;
+                            border-radius: 9px;
+                            box-shadow: 0px 1px 2px #2B3044,
+                              0px 4px 16px #2B3044;
+                            transform-style: preserve-3d;
+                            transform: scale(var(--s, 1)) perspective(600px)
+                              rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+                            perspective: 600px;
+                            transition: transform 0.1s;
+                            margin-top: 1px;">
+                            {{ row.selects }}</button></a>
+                          {% else %}
+                            <button style="font-size: 16px;
+                            font-weight: 700;
+                            color: #030fae;
+                            background-color: #d0d1d4;
+                            border: none;
+                            outline: none;
+                            cursor: pointer;
+                            padding: 10px 24px;
+                            position: relative;
+                            line-height: 24px;
+                            border-radius: 9px;
+                            box-shadow: 0px 1px 2px #2B3044,
+                              0px 4px 16px #2B3044;
+                            transform-style: preserve-3d;
+                            transform: scale(var(--s, 1)) perspective(600px)
+                              rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+                            perspective: 600px;
+                            transition: transform 0.1s;
+                            margin-top: 1px;">{{row.selects}}</button>
+                          {% endif %}
+                        </td>
+                      </tr>
             {% endfor %}
+            
+          
         </tbody>
+        {% else %}
+            <tr>
+            <span>You have no Records <a href="{{ url_for('userbit', id=id) }}">Click Here</a> to bid for your house </span>
+          </tr>
+            {% endif %}
     </table>
 
 </div>

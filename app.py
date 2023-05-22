@@ -30,7 +30,7 @@ mysql = MySQL(app)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'Futurehaus2022@gmail.com'
-app.config['MAIL_PASSWORD'] = '  '
+app.config['MAIL_PASSWORD'] = 'dgcbdayybzcxdmvk'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -222,6 +222,7 @@ def builderdash(id):
         countuser = cursor2.execute('SELECT * FROM users')
         countproj = cursor1.execute(
             'SELECT * FROM images WHERE uid = % s', (id,))
+        order = cursor1.execute('SELECT * FROM bidd WHERE builderid = %s', (id, ))
         cursor1.execute(
             'SELECT * FROM images WHERE uid = % s ORDER BY RAND() LIMIT 6', (id,))
         project = cursor1.fetchall()
@@ -235,14 +236,14 @@ def builderdash(id):
         user = cursor2.fetchall()
         data_list = []
         for row in user:
-            id = row['id']
+            Uid = row['id']
             name = row['username']
             location = row['location']
             image_data = row['image']
             my_string1 = image_data.decode('utf-8')
             my_string_without_prefix1 = my_string1.strip("'")
-            data_list.append((id, name, location, my_string_without_prefix1))
-        return render_template('navprof.html', data=data, user=data_list, project=project, countp=countproj, countu=countuser, name=acc[1], comp=acc[5], location=acc[7], image=my_string_without_prefix, id=uid)
+            data_list.append((Uid, name, location, my_string_without_prefix1))
+        return render_template('navprof.html',order = order, data=data, user=data_list, project=project, countp=countproj, countu=countuser, name=acc[1], comp=acc[5], location=acc[7], image=my_string_without_prefix, id=uid)
 
 
 @app.route('/builderprofile/<int:id>', methods=['GET', 'POST'])
@@ -272,13 +273,13 @@ def showuser(id):
     user = cursor.fetchall()
     data = []
     for users in user:
-        id = users['id']
+        Uid = users['id']
         name = users['username']
         location = users['location']
         image1 = users['image']
         my_string1 = image1.decode('utf-8')
         my_string_without_prefix1 = my_string1.strip("'")
-        data.append((id, name, location, my_string_without_prefix1))
+        data.append((Uid, name, location, my_string_without_prefix1))
     return render_template('seeall.html', data=data, user=user, name=name1, comp=comp, image=my_string_without_prefix, id=id)
 
 
@@ -421,22 +422,6 @@ def editmaterial(id):
             msg = 'Please fill the form!'
             return render_template('buildermater.html', name=name1, comp=comp, image=my_string_without_prefix, id=id, a=msg)
     return render_template('buildermater.html', name=name1, comp=comp, image=my_string_without_prefix, id=id, a=msg)
-
-# @app.route('/buildermessage/<int:id>', methods=['GET','POST'])
-# def buildermessage(id):
-#     cursor = mysql.connection.cursor()
-#     cursor.execute('SELECT * FROM users')
-#     acc = cursor.fetchall()
-#     data_list = []
-#     for row in acc:
-#         id = row[0]
-#         name = row[1]
-#         image_data = row[8]
-#         my_string1 = image_data.decode('utf-8')
-#         my_string_without_prefix1 = my_string1.strip("'")
-#         data_list.append((id, name, my_string_without_prefix1))
-#     print(data_list)
-#     return render_template('chat.html', acc = data_list, id = id)
 
 
 @app.route('/sendmessage/<int:id>', methods=['GET', 'POST'])
@@ -597,7 +582,7 @@ def checkbid(id, acc):
     userid = acc1[1]
     if request.method == 'POST' and 'bid' in request.form:
         bid = request.form['bid']
-        cursor.execute('INSERT INTO bidd VALUES(%s, %s, %s, %s, %s, %s)', (acc, id, name1, userid, name, bid))
+        cursor.execute('INSERT INTO bidd VALUES(%s, %s, %s, %s, %s, %s, %s)', (acc, id, name1, userid, name, bid, 'not selected'))
         mysql.connection.commit()
         msg = 'Successfully bid your opinion. Waiting for Customer response'
     return render_template('buildbit.html',msg = msg, acc = acc, id = id, name=name1, comp=comp, image=my_string_without_prefix, acc1 = acc1)
@@ -876,7 +861,7 @@ def viewquotation(id):
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT * FROM bit WHERE uid = %s", (id, ))
+    cursor.execute("SELECT * FROM bid WHERE uid = %s", (id, ))
     cursor.connection.commit()
     acc = cursor.fetchall()
     if not acc:
@@ -924,10 +909,43 @@ def userviewbid(id):
     image = row['image']
     my_string = image.decode('utf-8')
     my_string_without_prefix = my_string.strip("'")
-    cursor.execute('SELECT * FROM bid RIGHT JOIN bidd ON bid.id=bidd.bid_id WHERE uid = %s', (id, ))
+    cursor.execute('SELECT DISTINCT * FROM bid RIGHT JOIN bidd ON bid.id=bidd.bid_id WHERE uid = %s', (id, ))
     bid = cursor.fetchall()
     return render_template('userviewbit.html', id = id, name=name1, email=email1, image=my_string_without_prefix, bid = bid)
 
+@app.route('/selbuilder/<int:id>', methods = ['GET', 'POST'])
+def selbuilder(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT DISTINCT * FROM bid RIGHT JOIN bidd ON bid.id=bidd.bid_id WHERE uid = %s', (id, ))
+    bidd = cur.fetchone()
+    select = bidd[29]
+    builderid = bidd[24]
+    bid_id = bidd[0]  
+    if select == 'not selected':  
+        cursor.execute('UPDATE bidd SET selects = %s WHERE bid_id = %s', ('Selected', bid_id))
+        mysql.connection.commit()
+        cursor.execute('DELETE FROM bidd WHERE builderid NOT IN (%s)', (builderid, ))
+        mysql.connection.commit()
+        return redirect(url_for('userviewbid', id = id))
+    else:
+        return redirect(url_for('userviewbid', id = id))
+
+@app.route('/see_requirements/<int:id>', methods = ['GET', 'POST'])
+def see_requirements(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    name1 = row['username']
+    email1 = row['email']
+    image = row['image']
+    my_string = image.decode('utf-8')
+    my_string_without_prefix = my_string.strip("'")
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM bid WHERE uid = %s', (id, ))
+    bid = cur.fetchone()
+    print(bid)
+    return render_template('userbids.html', id = id, name=name1, email=email1, image=my_string_without_prefix, acc1 = bid)
 
 @app.route('/generate_document/<int:id>/<int:builderid>')
 def generate_document(id, builderid):

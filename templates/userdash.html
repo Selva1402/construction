@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/static/userviewbit.css">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/builderbit.css">
     <title>User Dashboard</title>
   <link rel="stylesheet" href="/static/navd.css">
   <link rel="stylesheet" href="/static/userbit.css">
@@ -75,13 +76,13 @@
         </a>
         <span class="tooltip">Order</span>
       </li>
-      <!-- <li>
-        <a href="#">
+      <li>
+        <a href="{{ url_for('viewquotation', id=id) }}">
           <i class='bx bx-heart'></i>
-          <span class="links_name">Saved</span>
+          <span class="links_name">View Requirements</span>
         </a>
-        <span class="tooltip">Saved</span>
-      </li> -->
+        <span class="tooltip">View Requirements</span>
+      </li>
       <li class="mode">
         <div class="sun-moon">
             <i class='bx bx-moon icon moon'></i>
